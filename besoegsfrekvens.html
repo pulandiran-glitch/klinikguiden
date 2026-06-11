@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hvornår skal du til tandlægen? | KlinikGuiden</title>
+  <meta name="description" content="Hvor ofte skal du til tandlægen? Hvad er normalt? Og hvilke tegn betyder du bør ringe i dag? Læs svaret her." />
+  <meta name="keywords" content="tandlægebesøg, tandlægefrekvens, tandpleje, tandlæge, tandkontrol" />
+  <meta property="og:title" content="Hvornår skal du til tandlægen?" />
+  <meta property="og:description" content="Hvor ofte skal du til tandlægen? Hvad er normalt? Og hvilke tegn betyder du bør ringe i dag?" />
+  <link rel="canonical" href="https://klinikguiden.netlify.app/besoegsfrekvens.html" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f9f9f7;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --accent: #2d6a4f;
+      --accent-light: #e8f5ef;
+      --warn: #7a3b1e;
+      --warn-bg: #fdf1eb;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 32px 56px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 32px;
+    }
+
+    .content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 40px 0 20px;
+      line-height: 1.3;
+    }
+
+    .content p {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+
+    .content ul, .content ol {
+      margin: 20px 0 20px 20px;
+      color: var(--text-muted);
+    }
+
+    .content li {
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    .callout {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn);
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 4px;
+    }
+
+    .callout strong {
+      color: var(--warn);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 32px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: white; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 16px; }
+      .nav-links { display: none; }
+      .hero { padding: 40px 16px 32px; }
+      .content { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">KlinikGuiden</a>
+    <ul class="nav-links">
+      <li><a href="index.html#guides">Guides</a></li>
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#om-os">Om os</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <a href="index.html#guides" class="back-link">← Tilbage til alle guides</a>
+    <span class="eyebrow">Patientguide</span>
+    <h1>Hvornår skal du egentlig til tandlægen?</h1>
+    <p>Hvert halve år? Hvert år? Og hvilke tegn betyder du bør ringe i dag frem for at vente?</p>
+    <div class="meta">
+      <span>⏱ 4 minutters læsning</span>
+      <span>✍️ Skrevet af Sophia, tandklinikassistent</span>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2>Det normale besøgsmønster</h2>
+    <p>For de fleste mennesker anbefaler tandlæger et besøg <strong>hvert halve år</strong> – altså to gange om året. Dette er standardanbefalingen i Danmark og er baseret på, at de fleste mennesker har behov for regelmæssig kontrol og tandstensfjernelse.</p>
+
+    <h2>Hvem skal komme oftere?</h2>
+    <p>Nogle mennesker har behov for hyppigere besøg:</p>
+    <ul>
+      <li><strong>Mennesker med tandkødssygdom:</strong> Hvis du har parodontitis, kan du have behov for besøg hver 3-4 måned</li>
+      <li><strong>Mennesker med meget tandsten:</strong> Nogle mennesker får tandsten hurtigt og skal renses oftere</li>
+      <li><strong>Mennesker med dårlig mundpleje:</strong> Hvis du har svært ved at passe på dine tænder, kan hyppigere besøg hjælpe</li>
+      <li><strong>Rygere:</strong> Rygning øger risikoen for tandkødssygdom</li>
+      <li><strong>Mennesker med diabetes:</strong> Diabetes påvirker tandkødet negativt</li>
+    </ul>
+
+    <h2>Hvem kan komme sjældnere?</h2>
+    <p>Hvis du har meget god mundpleje og ingen tandproblemer, kan nogle tandlæger anbefale besøg kun én gang om året. Dette skal dog altid aftales med din tandlæge.</p>
+
+    <h2>Tegn på at du skal ringe i dag</h2>
+    <div class="callout">
+      <strong>⚠️ Ring til tandlægen samme dag hvis:</strong>
+    </div>
+    <ul>
+      <li><strong>Stærk tandsmerte</strong> – især hvis det gør ondt at tygge</li>
+      <li><strong>Hævelse i ansigtet eller gummer</strong> – kan være tegn på infektion</li>
+      <li><strong>Blødning fra gummerne</strong> – især hvis det ikke stopper</li>
+      <li><strong>En tand er løs eller bevæger sig</strong></li>
+      <li><strong>Du har slået en tand ud</strong> – tid er vigtig her!</li>
+      <li><strong>Hvidt eller gult plet på tanden</strong> – kan være tegn på karies eller infektion</li>
+      <li><strong>Dårlig smag i munden eller feber</strong> – kan være tegn på infektion</li>
+    </ul>
+
+    <h2>Tegn på at du skal booke en tid inden for en uge</h2>
+    <ul>
+      <li>Mild tandsmerte der ikke går væk</li>
+      <li>Følsomhed over for koldt eller varmt der varer længere end normalt</li>
+      <li>Blødning fra gummerne når du børster tænder</li>
+      <li>Synlige huller i tænderne</li>
+      <li>Dårlig ånde der ikke forsvinder</li>
+    </ul>
+
+    <h2>Hvordan husker du at komme til tiden?</h2>
+    <p>Mange tandklinikker sender påmindelser via SMS eller email. Hvis din klinik ikke gør det, kan du:</p>
+    <ul>
+      <li>Skrive det i din kalender når du forlader klinikken</li>
+      <li>Sætte en påmindelse på din telefon</li>
+      <li>Spørge klinikken om de kan sende dig en påmindelse</li>
+    </ul>
+
+    <h2>Hvad hvis du har været væk længere tid?</h2>
+    <p>Hvis du ikke har været til tandlægen i mere end et år, er det vigtig at komme til en kontrol. Din tandlæge vil tage røntgenbilleder for at se, om der er udviklet problemer. Det er ikke noget at være skamfuld over – mange mennesker kommer væk fra tandlægen, og det er aldrig for sent at komme tilbage.</p>
+
+    <h2>Børn og unge</h2>
+    <p>Børn og unge under 18 år bør også komme hvert halve år. For børn under 12 år er det endda gratis i Danmark. Regelmæssige besøg hjælper med at etablere gode tandvaner fra starten.</p>
+
+    <h2>Spørgsmål du kan stille tandlægen</h2>
+    <ul>
+      <li>Hvor ofte skal jeg komme baseret på min mundstatus?</li>
+      <li>Hvad kan jeg gøre derhjemme for at forbedre min mundpleje?</li>
+      <li>Skal jeg bruge tandtråd? Og hvordan gør jeg det rigtigt?</li>
+      <li>Hvornår skal jeg skifte tandenbørste?</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© 2025 KlinikGuiden. Tandpleje forklaret af dem der kender den.</p>
+    <p style="margin-top: 16px; font-size: 0.85rem; opacity: 0.5;">
+      <a href="index.html">Hjem</a> | <a href="index.html#guides">Guides</a> | <a href="index.html#shop">Shop</a> | <a href="mailto:hej@klinikguiden.dk">Kontakt</a>
+    </p>
+  </footer>
+</body>
+</html>

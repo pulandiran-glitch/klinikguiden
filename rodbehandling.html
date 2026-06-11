@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rodbehandling – Hvad sker der egentlig? | KlinikGuiden</title>
+  <meta name="description" content="Trin for trin forklaring af rodbehandling. Hvad tandlægen gør, hvorfor det kan gøre ondt, og hvad du kan forvente bagefter." />
+  <meta name="keywords" content="rodbehandling, tandlæge, tandbehandling, tandsmerte, endodonti" />
+  <meta property="og:title" content="Rodbehandling – Hvad sker der egentlig?" />
+  <meta property="og:description" content="Trin for trin forklaring af rodbehandling. Hvad tandlægen gør, hvorfor det kan gøre ondt, og hvad du kan forvente bagefter." />
+  <link rel="canonical" href="https://klinikguiden.netlify.app/rodbehandling.html" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f9f9f7;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --accent: #2d6a4f;
+      --accent-light: #e8f5ef;
+      --warn: #7a3b1e;
+      --warn-bg: #fdf1eb;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 32px 56px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 32px;
+    }
+
+    .content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 40px 0 20px;
+      line-height: 1.3;
+    }
+
+    .content p {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+
+    .content ul, .content ol {
+      margin: 20px 0 20px 20px;
+      color: var(--text-muted);
+    }
+
+    .content li {
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    .callout {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn);
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 4px;
+    }
+
+    .callout strong {
+      color: var(--warn);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 32px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: white; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 16px; }
+      .nav-links { display: none; }
+      .hero { padding: 40px 16px 32px; }
+      .content { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">KlinikGuiden</a>
+    <ul class="nav-links">
+      <li><a href="index.html#guides">Guides</a></li>
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#om-os">Om os</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <a href="index.html#guides" class="back-link">← Tilbage til alle guides</a>
+    <span class="eyebrow">Patientguide</span>
+    <h1>Hvad sker der egentlig ved en rodbehandling?</h1>
+    <p>Trin for trin – hvad tandlægen gør, hvorfor det kan gøre ondt (eller ej), og hvad du kan forvente bagefter.</p>
+    <div class="meta">
+      <span>⏱ 5 minutters læsning</span>
+      <span>✍️ Skrevet af Jonathan, tandklinikassistent</span>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2>Hvad er en rodbehandling?</h2>
+    <p>En rodbehandling (også kaldet endodonti) er en behandling, hvor tandlægen fjerner det indre væv i tanden – det såkaldte tandnerve eller pulpa. Denne behandling bliver nødvendig, når nerven er inficeret eller beskadiget, typisk på grund af dybkaries eller tandtraumer.</p>
+
+    <h2>Hvorfor gør det ondt?</h2>
+    <p>Det vigtigste at vide er: <strong>Det gør ikke ondt under behandlingen</strong>. Tandlægen giver dig bedøvelse, så du ikke føler smerte. Hvad du måske føler, er:</p>
+    <ul>
+      <li><strong>Tryk og vibrationer</strong> – fra instrumenterne</li>
+      <li><strong>Lyd</strong> – som kan virke ubehagelig</li>
+      <li><strong>Følelse af aktivitet</strong> – men ikke smerte</li>
+    </ul>
+    <p>Hvis du føler smerte under behandlingen, skal du straks fortælle tandlægen – der er altid mulighed for mere bedøvelse.</p>
+
+    <h2>Trin for trin – hvad der sker</h2>
+    <ol>
+      <li><strong>Røntgen og vurdering:</strong> Tandlægen tager et røntgenbillede for at se nervens størrelse og form.</li>
+      <li><strong>Bedøvelse:</strong> Du får en indsprøjtning omkring tanden. Det kan prikke lidt, men det går hurtigt.</li>
+      <li><strong>Isolering:</strong> Tanden isoleres med en gummiduk (kaldet "rubber dam"), så der ikke kommer spyt ind.</li>
+      <li><strong>Åbning:</strong> Tandlægen laver et lille hul i tanden for at få adgang til nervekammeret.</li>
+      <li><strong>Fjernelse af nerven:</strong> Ved hjælp af små filer fjernes det beskadigede nervevæv.</li>
+      <li><strong>Rensning og fylding:</strong> Kanalen renses grundigt og fyldes med et specielt materiale (guttaperka).</li>
+      <li><strong>Lukning:</strong> Hullet lukkes med en midlertidig eller permanent fyldning.</li>
+    </ol>
+
+    <h2>Hvad kan du forvente bagefter?</h2>
+    <p>Efter rodbehandlingen er det normalt at opleve:</p>
+    <ul>
+      <li><strong>Ømhed:</strong> Tanden kan være øm i nogle dage – det er helt normalt.</li>
+      <li><strong>Følsomhed:</strong> Tanden kan være følsom over for koldt og varmt i kort tid.</li>
+      <li><strong>Mild smerte:</strong> Hvis der er mild smerte, hjælper almindelig smertestillende.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>⚠️ Søg tandlægen hvis:</strong> Du har stærk smerte, hævelse i ansigtet, eller hvis symptomerne ikke forbedres efter en uge.
+    </div>
+
+    <h2>Hvor længe holder en rodbehandling?</h2>
+    <p>En vellykket rodbehandling kan holde hele livet. Tanden er dog ikke længere "levende" og kan blive mere skør over tid. Mange tandlæger anbefaler at sætte en krone på tanden for at beskytte den.</p>
+
+    <h2>Vigtige tips</h2>
+    <ul>
+      <li>Fortæl tandlægen hvis du er nervøs – der kan gives ekstra tid og pauser</li>
+      <li>Undgå at tygge på tanden, mens den er under behandling</li>
+      <li>Følg tandlægens instruktioner om mundpleje bagefter</li>
+      <li>Møde til opfølgningsaftaler – det er vigtig for at sikre behandlingen holder</li>
+    </ul>
+
+    <h2>Spørgsmål du kan stille tandlægen</h2>
+    <ul>
+      <li>Hvor mange behandlinger skal der til?</li>
+      <li>Hvad er prisen, og hvad dækker det offentlige?</li>
+      <li>Skal der sættes en krone på tanden bagefter?</li>
+      <li>Hvad er risikoen for, at behandlingen ikke lykkes?</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© 2025 KlinikGuiden. Tandpleje forklaret af dem der kender den.</p>
+    <p style="margin-top: 16px; font-size: 0.85rem; opacity: 0.5;">
+      <a href="index.html">Hjem</a> | <a href="index.html#guides">Guides</a> | <a href="index.html#shop">Shop</a> | <a href="mailto:hej@klinikguiden.dk">Kontakt</a>
+    </p>
+  </footer>
+</body>
+</html>

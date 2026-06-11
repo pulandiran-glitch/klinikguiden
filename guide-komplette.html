@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forstå din tandlæge – Den komplette guide | KlinikGuiden</title>
+  <meta name="description" content="Din komplette håndbog til at forstå tandlægen, behandlinger og dine rettigheder som patient i Danmark. 40+ siders PDF-guide med ordliste, tjekliste og patientrettigheder." />
+  <meta name="keywords" content="tandlæge guide, patient guide, tandbehandling, tandrettigheder, PDF guide" />
+  <meta property="og:title" content="Forstå din tandlæge – Den komplette guide" />
+  <meta property="og:description" content="Din komplette håndbog til at forstå tandlægen, behandlinger og dine rettigheder som patient i Danmark." />
+  <link rel="canonical" href="https://klinikguiden.netlify.app/guide-komplette.html" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F5F0E8; --warm-white: #FDFAF5; --sage: #7A9E8A;
+      --sage-light: #A8C4B4; --sage-dark: #4E7A62; --charcoal: #2C2C2C;
+      --muted: #7A7A72; --border: #E2DDD4; --accent: #C9956A;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--warm-white); color: var(--charcoal); font-size: 16px; line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(253,250,245,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--charcoal); text-decoration: none; }
+    .nav-logo span { color: var(--sage-dark); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--charcoal); }
+    .hero { padding: 140px 2rem 100px; max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 1.2rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem,5vw,3.2rem); line-height: 1.15; font-weight: 600; margin-bottom: 1.4rem; }
+    .hero h1 em { font-style: italic; color: var(--sage-dark); }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); font-weight: 300; margin-bottom: 2.4rem; max-width: 420px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--sage-dark); color: white; padding: 0.85rem 1.8rem; border-radius: 100px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-block; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: var(--charcoal); padding: 0.85rem 1.8rem; border-radius: 100px; font-size: 0.9rem; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--sage); }
+    .hero-image { background: var(--cream); border-radius: 20px; padding: 2rem; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 1.5rem; }
+    .price-tag { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 600; color: var(--sage-dark); }
+    .price-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .includes { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .includes li { font-size: 0.95rem; color: var(--muted); padding-left: 1.5rem; position: relative; }
+    .includes li::before { content: '✓'; position: absolute; left: 0; color: var(--sage-dark); font-weight: 600; font-size: 1.1rem; }
+    .badge { display: inline-block; background: var(--sage-dark); color: white; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1rem; }
+    section { padding: 80px 2rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { color: var(--muted); font-weight: 300; max-width: 600px; margin-bottom: 3rem; line-height: 1.8; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; margin-top: 3rem; }
+    .feature-card { background: var(--cream); border-radius: 16px; padding: 2rem; border: 1px solid var(--border); }
+    .feature-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+    .feature-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; }
+    .feature-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+    .testimonial { background: var(--cream); border-radius: 16px; padding: 2rem; border-left: 4px solid var(--sage-dark); margin: 2rem 0; }
+    .testimonial p { font-style: italic; color: var(--muted); margin-bottom: 1rem; }
+    .testimonial-author { font-weight: 500; color: var(--charcoal); }
+    footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 3rem 2rem; text-align: center; }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; }
+    footer a:hover { color: white; }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 120px 1.2rem 60px; }
+      .nav-links { display: none; }
+      section { padding: 56px 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Klinik<span>Guiden</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#guides">Guides</a></li>
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#om-os">Om os</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding:0;">
+    <div class="hero">
+      <div>
+        <p class="hero-eyebrow">Bestseller Guide</p>
+        <h1>Forstå din tandlæge – <em>Den komplette guide</em></h1>
+        <p class="hero-sub">Din komplette håndbog til at forstå tandlægen, behandlinger og dine rettigheder som patient i Danmark. Skrevet af fagfolk, for dig.</p>
+        <div class="hero-actions">
+          <a href="#order" class="btn-primary">Køb nu – 99 kr.</a>
+          <a href="index.html" class="btn-secondary">Tilbage til forsiden</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <span class="badge">Bestseller</span>
+        <div class="price-tag">99 kr.</div>
+        <p class="price-sub">Engangskøb – livstidsadgang</p>
+        <ul class="includes">
+          <li>40+ siders PDF-guide</li>
+          <li>Ordliste over fagtermer</li>
+          <li>Tjekliste til hvert besøg</li>
+          <li>Dine rettigheder som patient</li>
+          <li>Opdateret 2025</li>
+        </ul>
+        <a href="#order" class="btn-primary" style="text-align:center;">Hent guide nu</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <p class="section-eyebrow">Hvad får du?</p>
+      <h2 class="section-title">Alt hvad du behøver at vide om tandlægen</h2>
+      <p class="section-sub">En komplet guide der forklarer det hele – fra første besøg til komplekse behandlinger.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🦷</div>
+          <h3>Behandlinger forklaret</h3>
+          <p>Trin-for-trin forklaringer af alle almindelige tandbehandlinger. Hvad sker der, hvorfor, og hvad kan du forvente.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧾</div>
+          <h3>Regninger og priser</h3>
+          <p>Forstå dine tandlægeregninger. Hvad betyder koderne? Hvad dækker det offentlige? Hvornår skal du få prisoverslag?</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚖️</div>
+          <h3>Dine rettigheder</h3>
+          <p>Hvad kan du kræve? Hvornår kan du klage? Og hvad skal tandlægen fortælle dig på forhånd?</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Tjekliste til besøg</h3>
+          <p>En praktisk tjekliste du kan tage med til tandlægen. Spørgsmål du skal stille, og ting du skal huske.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Faglig ordliste</h3>
+          <p>Alle de kryptiske fagtermer forklaret på dansk. Så du forstår hvad tandlægen siger.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✓</div>
+          <h3>Opdateret 2025</h3>
+          <p>Alle nye regler, takster og rettigheder er inkluderet. Guiden bliver opdateret løbende.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--cream);">
+    <div class="section-inner">
+      <p class="section-eyebrow">Hvad siger kunderne?</p>
+      <h2 class="section-title">Hundredvis af tilfredse patienter</h2>
+      <div class="testimonial">
+        <p>"Jeg forstod endelig hvad tandlægen mente med alle de koder på min regning. Guiden er præcis det jeg havde brug for!"</p>
+        <p class="testimonial-author">– Maria, København</p>
+      </div>
+      <div class="testimonial">
+        <p>"Som person med tandlægeangst var det enormt hjælpsomt at læse hvad der faktisk sker ved behandlingerne. Det tog meget af frygten."</p>
+        <p class="testimonial-author">– Henrik, Aarhus</p>
+      </div>
+      <div class="testimonial">
+        <p>"Jeg brugte tjeklisten til mit seneste besøg og stillede meget bedre spørgsmål end før. Værd hver øre!"</p>
+        <p class="testimonial-author">– Søren, Odense</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <div class="section-inner" style="max-width: 600px;">
+      <p class="section-eyebrow">Køb nu</p>
+      <h2 class="section-title">Få adgang til guiden</h2>
+      <p class="section-sub">Udfyld formularen nedenfor, og du modtager guiden på email inden for 24 timer.</p>
+      <form style="display: flex; flex-direction: column; gap: 1rem;">
+        <input type="email" placeholder="Din email" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;" />
+        <input type="text" placeholder="Dit navn" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;" />
+        <button type="submit" class="btn-primary" style="text-align: center; padding: 1rem; font-size: 1rem;">Køb guide – 99 kr.</button>
+      </form>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-top: 1.5rem; text-align: center;">Sikker betaling • Livstidsadgang • Ingen skjulte gebyrer</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 KlinikGuiden. Tandpleje forklaret af dem der kender den.</p>
+    <div style="margin-top: 1.5rem;">
+      <a href="index.html">Hjem</a> | <a href="index.html#guides">Guides</a> | <a href="index.html#shop">Shop</a> | <a href="mailto:hej@klinikguiden.dk">Kontakt</a>
+    </div>
+  </footer>
+</body>
+</html>
