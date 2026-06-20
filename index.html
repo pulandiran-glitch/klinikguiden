@@ -294,14 +294,14 @@
   <section style="padding: 80px 2rem; background: white;">
     <div class="section-inner">
       <p class="section-eyebrow">Transformation</p>
-      <h2 class="section-title">Foer og efter - Forsta din regning</h2>
-      <p class="section-sub">Se hvordan vores guide goer en uoverskuelig tandlaegeregning til noget du rent faktisk forstar.</p>
+      <h2 class="section-title">Før og efter – Forstå din regning</h2>
+      <p class="section-sub">Se hvordan vores guide gør en uoverskuelig tandlægeregning til noget du rent faktisk forstår.</p>
       
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: center;">
         <div>
-          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--charcoal);">FOER: Uoverskuelig</h3>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--charcoal);">FØR: Uoverskuelig</h3>
           <div style="background: #FBF2EA; border: 2px solid #E2DDD4; border-radius: 12px; padding: 1.5rem; font-family: monospace; font-size: 0.9rem; color: var(--muted); line-height: 1.8;">
-            <div style="margin-bottom: 0.8rem;"><strong>Tandlaegeregning</strong></div>
+            <div style="margin-bottom: 0.8rem;"><strong>Tandlægeregning</strong></div>
             <div style="margin-bottom: 0.5rem;">1101 ........................ 450 kr</div>
             <div style="margin-bottom: 0.5rem;">1401 ........................ 680 kr</div>
             <div style="margin-bottom: 0.5rem;">2110 ........................ 920 kr</div>
@@ -314,9 +314,9 @@
         <div>
           <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--sage-dark);">EFTER: Klar og simpel</h3>
           <div style="background: #F0F7F3; border: 2px solid var(--sage-dark); border-radius: 12px; padding: 1.5rem; font-size: 0.95rem; color: var(--muted); line-height: 1.8;">
-            <div style="margin-bottom: 1rem;"><strong style="color: var(--sage-dark);">Din tandlaegeregning forklaret:</strong></div>
+            <div style="margin-bottom: 1rem;"><strong style="color: var(--sage-dark);">Din tandlægeregning forklaret:</strong></div>
             <div style="margin-bottom: 0.8rem;">
-              <strong>Undersoegelse</strong> (1101): 450 kr<br/>
+              <strong>Undersøgelse</strong> (1101): 450 kr<br/>
               <span style="font-size: 0.85rem; color: var(--muted);">Almindeligt tandeftersyn</span>
             </div>
             <div style="margin-bottom: 0.8rem;">
@@ -328,8 +328,8 @@
               <span style="font-size: 0.85rem; color: var(--muted);">Reparation af hul i tand</span>
             </div>
             <div style="margin-bottom: 1rem;">
-              <strong>Roentgen</strong> (1301): 380 kr<br/>
-              <span style="font-size: 0.85rem; color: var(--muted);">Billede af dine taender</span>
+              <strong>Røntgen</strong> (1301): 380 kr<br/>
+              <span style="font-size: 0.85rem; color: var(--muted);">Billede af dine tænder</span>
             </div>
             <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--sage-dark);">
               <strong>Du betaler: 2.430 kr</strong><br/>
@@ -417,8 +417,8 @@
           <input type="email" id="order-email" placeholder="Din email" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;" />
           <input type="text" id="order-name" placeholder="Dit navn" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;" />
           <select id="order-guide" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;">
-            <option value="">Vaelg guide</option>
-            <option value="komplette">Forsta din tandlaege - den komplette guide (99 kr.)</option>
+            <option value="">Vælg guide</option>
+            <option value="komplette">Forstå din tandlæge - den komplette guide (99 kr.)</option>
             <option value="boern">Bornenes tandplejeguide (79 kr.)</option>
             <option value="venteliste">Tilmeld venteliste - Tandplejekurset</option>
           </select>
@@ -542,7 +542,7 @@
       const price = parseFloat(document.getElementById('price-input').value) || 0;
       
       if (!treatment || price <= 0) {
-        alert('Venligst vaelg behandling og indtast en pris');
+        alert('Venligst vælg behandling og indtast en pris');
         return;
       }
       
