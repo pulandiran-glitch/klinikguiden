@@ -1,0 +1,158 @@
+(function () {
+  const endpoint = 'https://script.google.com/macros/s/AKfycbyezQI9c6rX15R9PMnvf5gsSDFo8g_Yv81Yvc88zFiClzOI1iXvYmx1YwOVZMVNbGRbPA/exec';
+  const consentKey = 'klinikguiden_analytics_consent';
+  const sessionKey = 'klinikguiden_session_id';
+  const visitorKey = 'klinikguiden_visitor_seen';
+
+  function getConsent() {
+    return localStorage.getItem(consentKey);
+  }
+
+  function hasConsent() {
+    return getConsent() === 'accepted';
+  }
+
+  function createSessionId() {
+    if (crypto.randomUUID) return crypto.randomUUID();
+    return 'kg-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+  }
+
+  function getSessionId() {
+    if (!hasConsent()) return '';
+    const existing = localStorage.getItem(sessionKey);
+    if (existing) return existing;
+
+    const sessionId = createSessionId();
+    localStorage.setItem(sessionKey, sessionId);
+    return sessionId;
+  }
+
+  function getPageName() {
+    const path = window.location.pathname.replace(/^\/|\/$/g, '');
+    return path || 'forside';
+  }
+
+  function getTrafficSource() {
+    const referrer = document.referrer || '';
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get('utm_source');
+
+    if (utmSource) return utmSource.toLowerCase();
+    if (!referrer) return 'direkte';
+    if (/google\./i.test(referrer)) return 'google';
+    if (/bing\./i.test(referrer)) return 'bing';
+    if (/facebook\.|instagram\.|t\.co|twitter\.|linkedin\.|pinterest\.|tiktok\./i.test(referrer)) return 'sociale medier';
+    if (/klinikguiden\./i.test(referrer)) return 'intern';
+    return 'henvisning';
+  }
+
+  function getVisitorType() {
+    return localStorage.getItem(visitorKey) ? 'tilbagevendende' : 'ny';
+  }
+
+  function markVisitorSeen() {
+    localStorage.setItem(visitorKey, '1');
+  }
+
+  function trackEvent(eventName, details = {}) {
+    if (!hasConsent()) return;
+
+    const visitorType = getVisitorType();
+
+    const payload = new URLSearchParams({
+      type: 'event',
+      event: eventName,
+      page: details.page || getPageName(),
+      path: window.location.pathname,
+      referrer: document.referrer || '',
+      sessionId: getSessionId(),
+      timestamp: new Date().toISOString(),
+      name: '',
+      email: '',
+      guide: details.guide || eventName,
+      product: details.product || '',
+      price: details.price || '',
+      value: details.value || '',
+      trafficSource: details.trafficSource || getTrafficSource(),
+      visitorType: details.visitorType || visitorType,
+      isReturning: details.isReturning || (visitorType === 'tilbagevendende' ? 'TRUE' : 'FALSE'),
+      screenSize: details.screenSize || `${window.innerWidth}x${window.innerHeight}`,
+      errorMessage: details.errorMessage || '',
+      details: JSON.stringify(details)
+    });
+
+    if (eventName === 'page_view') markVisitorSeen();
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(endpoint, payload);
+      return;
+    }
+
+    fetch(endpoint, { method: 'POST', mode: 'no-cors', body: payload }).catch(() => {});
+  }
+
+  function setConsent(value) {
+    localStorage.setItem(consentKey, value);
+    const banner = document.querySelector('[data-consent-banner]');
+    if (banner) banner.remove();
+    if (value === 'accepted') trackEvent('analytics_consent_accepted');
+  }
+
+  function injectConsentBanner() {
+    if (getConsent()) return;
+
+    const banner = document.createElement('div');
+    banner.setAttribute('data-consent-banner', 'true');
+    banner.style.cssText = 'position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:9999;max-width:760px;margin:0 auto;background:#FDFAF5;border:1px solid #E2DDD4;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;font-family:Inter,system-ui,sans-serif;color:#2C2C2C;';
+    banner.innerHTML = '<p style="margin:0;max-width:520px;font-size:0.9rem;line-height:1.5;color:#4F4F49;">Vi bruger anonym statistik til at se, hvilke guides og funktioner der hjælper. Formularer virker også, hvis du siger nej.</p><div style="display:flex;gap:0.6rem;flex-wrap:wrap;"><button type="button" data-consent-decline style="border:1px solid #E2DDD4;background:transparent;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Nej tak</button><button type="button" data-consent-accept style="border:0;background:#4E7A62;color:white;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Accepter statistik</button></div>';
+    document.body.appendChild(banner);
+    banner.querySelector('[data-consent-accept]').addEventListener('click', () => setConsent('accepted'));
+    banner.querySelector('[data-consent-decline]').addEventListener('click', () => setConsent('declined'));
+  }
+
+  function initAutoTracking() {
+    document.querySelectorAll('[data-track]').forEach((element) => {
+      element.addEventListener('click', () => {
+        trackEvent(element.dataset.track, {
+          product: element.dataset.product || '',
+          price: element.dataset.price || '',
+          text: element.textContent.trim(),
+          href: element.getAttribute('href') || ''
+        });
+      });
+    });
+
+    trackEvent('page_view');
+  }
+
+  window.KGAnalytics = {
+    endpoint,
+    getPageName,
+    getSessionId,
+    getTrafficSource,
+    getVisitorType,
+    hasConsent,
+    trackEvent,
+    initAutoTracking,
+    injectConsentBanner
+  };
+
+  window.addEventListener('DOMContentLoaded', () => {
+    injectConsentBanner();
+    initAutoTracking();
+  });
+
+  window.addEventListener('error', (event) => {
+    trackEvent('site_error', {
+      errorMessage: event.message || 'Ukendt fejl',
+      source: event.filename || '',
+      line: event.lineno ? String(event.lineno) : ''
+    });
+  });
+
+  window.addEventListener('unhandledrejection', (event) => {
+    trackEvent('site_error', {
+      errorMessage: event.reason && event.reason.message ? event.reason.message : 'Unhandled promise rejection'
+    });
+  });
+})();

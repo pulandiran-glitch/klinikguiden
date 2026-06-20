@@ -1,0 +1,7 @@
+timestamp,type,event,page,path,name,email,guide,product,price,value,sessionId,referrer,trafficSource,visitorType,isReturning,screenSize,errorMessage,details
+2026-06-18T12:00:00.000Z,event,page_view,forside,/,,,,,,,demo-session,,direkte,ny,FALSE,1440x900,,{}
+2026-06-18T12:01:10.000Z,event,hero_free_guides,forside,/,,,,,,,demo-session,,direkte,tilbagevendende,TRUE,1440x900,,{"href":"#guides"}
+2026-06-18T12:02:42.000Z,event,quiz_answer_selected,forside,/,,,Forstå din tandlægeregning,,,,demo-session,,direkte,tilbagevendende,TRUE,1440x900,,{"value":"price"}
+2026-06-18T12:03:20.000Z,lead,newsletter_signup,forside,/,Eksempel,eksempel@email.dk,Nyhedsbrev - Tjekliste,,,,demo-session,,direkte,tilbagevendende,TRUE,1440x900,,{}
+2026-06-18T12:04:00.000Z,event,checkout_started,forside,/,Eksempel,eksempel@email.dk,komplette,komplette,99,,demo-session,,direkte,tilbagevendende,TRUE,1440x900,,{"provider":"stripe"}
+2026-06-18T12:04:30.000Z,order,order_form_submit,forside,/,Eksempel,eksempel@email.dk,komplette,komplette,99,,demo-session,,direkte,tilbagevendende,TRUE,1440x900,,{}

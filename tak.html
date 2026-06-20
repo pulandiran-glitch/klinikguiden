@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tak | KlinikGuiden</title>
+  <meta name="description" content="Tak for din henvendelse til KlinikGuiden." />
+  <meta name="theme-color" content="#4E7A62" />
+  <link rel="canonical" href="https://klinikguiden.com/tak.html" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream:#F5F0E8; --warm-white:#FDFAF5; --sage-dark:#4E7A62; --charcoal:#2C2C2C; --muted:#7A7A72; --border:#E2DDD4; }
+    body { align-items: center; background: var(--warm-white); color: var(--charcoal); display: flex; font-family: Inter, sans-serif; min-height: 100vh; padding: 2rem; }
+    main { margin: 0 auto; max-width: 680px; }
+    .card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: clamp(2rem, 6vw, 4rem); }
+    .eyebrow { color: var(--sage-dark); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; margin-bottom: 1rem; text-transform: uppercase; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 6vw, 3.5rem); line-height: 1.15; margin-bottom: 1rem; }
+    p { color: var(--muted); line-height: 1.75; }
+    a { background: var(--sage-dark); border-radius: 100px; color: white; display: inline-block; margin-top: 2rem; padding: 0.85rem 1.6rem; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+      <p class="eyebrow" id="thanksEyebrow">Modtaget</p>
+      <h1 id="thanksTitle">Tak, vi har modtaget din henvendelse</h1>
+      <p id="thanksText">Hvis du har sendt en bestilling eller skrevet dig op til en guide, vender vi tilbage på email. Du kan roligt lukke siden eller gå tilbage til forsiden.</p>
+      <a href="/">Til forsiden</a>
+    </div>
+  </main>
+  <script src="analytics.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const checkout = params.get('checkout');
+      const product = params.get('product') || '';
+      const sessionId = params.get('session_id') || '';
+
+      if (checkout === 'success') {
+        document.getElementById('thanksEyebrow').textContent = 'Betaling modtaget';
+        document.getElementById('thanksTitle').textContent = 'Tak for dit køb';
+        document.getElementById('thanksText').textContent = 'Din betaling er gennemført. Vi sender guiden og næste trin til den email, du brugte i betalingen.';
+        KGAnalytics.trackEvent('checkout_success_returned', { page: 'tak', product, checkoutSessionId: sessionId });
+        return;
+      }
+
+      KGAnalytics.trackEvent('thank_you_page_view', { page: 'tak' });
+    });
+  </script>
+</body>
+</html>

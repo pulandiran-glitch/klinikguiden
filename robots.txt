@@ -1,11 +1,4 @@
-# KlinikGuiden robots.txt
-# Tillader alle søgemaskiner at crawle siden
-
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://klinikguiden.netlify.app/sitemap.xml
-
-# Crawl delay (valgfrit - hjælper med at reducere server-belastning)
-Crawl-delay: 1
+Sitemap: https://klinikguiden.com/sitemap.xml

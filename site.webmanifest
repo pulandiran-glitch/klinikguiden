@@ -1,0 +1,19 @@
+{
+  "name": "KlinikGuiden",
+  "short_name": "KlinikGuiden",
+  "description": "Danske tandlægeguides, tjeklister og forklaringer skrevet i et roligt og forståeligt sprog.",
+  "lang": "da",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFAF5",
+  "theme_color": "#4E7A62",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

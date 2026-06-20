@@ -10,8 +10,11 @@
   <meta property="og:title" content="KlinikGuiden – Forstå din tandlæge" />
   <meta property="og:description" content="Klare forklaringer på tandbehandlinger, regninger og tandlægeangst. Skrevet af tandklinikassistenter." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://klinikguiden.netlify.app/" />
-  <link rel="canonical" href="https://klinikguiden.netlify.app/" />
+  <meta property="og:url" content="https://klinikguiden.com/" />
+  <meta name="theme-color" content="#4E7A62" />
+  <link rel="canonical" href="https://klinikguiden.com/" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,12 +22,14 @@
       --cream: #F5F0E8; --warm-white: #FDFAF5; --sage: #7A9E8A;
       --sage-light: #A8C4B4; --sage-dark: #4E7A62; --charcoal: #2C2C2C;
       --muted: #7A7A72; --border: #E2DDD4; --accent: #C9956A;
+      --accent-light: #FBF2EA;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background-color: var(--warm-white); color: var(--charcoal); font-size: 16px; line-height: 1.7; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(253,250,245,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--charcoal); text-decoration: none; }
-    .nav-logo span { color: var(--sage-dark); }
+    .nav-logo { align-items: center; color: var(--charcoal); display: inline-flex; font-family: 'Playfair Display', serif; font-size: 1.2rem; gap: 0.55rem; text-decoration: none; }
+    .brand-mark { align-items: center; background: var(--cream); border: 1px solid var(--sage-dark); border-radius: 9px; color: var(--sage-dark); display: inline-flex; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; height: 32px; justify-content: center; letter-spacing: 0.02em; width: 32px; }
+    .brand-word span { color: var(--sage-dark); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--charcoal); }
@@ -46,6 +51,8 @@
     .tooth.healthy { border-color: var(--sage-light); background: #F0F7F3; color: var(--sage-dark); }
     .tooth.check { border-color: var(--accent); background: #FBF2EA; color: var(--accent); }
     .hero-card-stat { display: flex; justify-content: space-between; align-items: flex-end; }
+    .hero-card-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .hero-card-text { font-size: 0.78rem; color: var(--muted); max-width: 150px; line-height: 1.4; }
     .stat-big { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 600; color: var(--sage-dark); line-height: 1; }
     .trust-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.4rem 2rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
     .trust-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--muted); }
@@ -62,6 +69,13 @@
     .guide-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
     .guide-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
     .guide-tag { display: inline-block; margin-top: 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sage-dark); font-weight: 500; }
+    .start-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 1rem; }
+    .start-card { background: white; border: 1px solid var(--border); border-radius: 12px; color: inherit; display: flex; flex-direction: column; gap: 0.7rem; min-height: 210px; padding: 1.4rem; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+    .start-card:hover, .start-card:active { border-color: var(--sage-light); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .start-icon { align-items: center; background: var(--cream); border: 1px solid var(--border); border-radius: 10px; color: var(--sage-dark); display: flex; font-family: 'Playfair Display', serif; font-size: 1.25rem; height: 42px; justify-content: center; width: 42px; }
+    .start-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; line-height: 1.25; }
+    .start-card p { color: var(--muted); font-size: 0.86rem; line-height: 1.6; }
+    .start-link { color: var(--sage-dark); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; margin-top: auto; text-transform: uppercase; }
     .shop-bg { background: var(--cream); }
     .shop-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; }
     .product-card { background: white; border-radius: 16px; padding: 2rem; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 1rem; }
@@ -73,16 +87,29 @@
     .product-includes { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
     .product-includes li { font-size: 0.82rem; color: var(--muted); padding-left: 1.2rem; position: relative; }
     .product-includes li::before { content: '✓'; position: absolute; left: 0; color: var(--sage-dark); font-weight: 600; }
-    .om-os-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .om-os-text p { color: var(--muted); line-height: 1.85; margin-bottom: 1rem; font-weight: 300; }
-    .profiles { display: flex; flex-direction: column; gap: 1rem; }
-    .profile-card { background: var(--cream); border-radius: 14px; padding: 1.4rem; border: 1px solid var(--border); display: flex; gap: 1rem; align-items: flex-start; }
-    .profile-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--sage-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-    .profile-info h4 { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.2rem; }
-    .profile-info p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+    .product-note { background: #F0F7F3; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-size: 0.85rem; color: var(--sage-dark); text-align: center; font-weight: 500; }
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; margin-top: 2rem; }
+    .process-step { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; }
+    .process-step strong { color: var(--sage-dark); display: block; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .process-step p { color: var(--muted); font-size: 0.86rem; line-height: 1.65; }
+    .proof-strip { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 1rem; margin-top: 2rem; }
+    .proof-item { border-left: 3px solid var(--sage-dark); padding-left: 1rem; }
+    .proof-item strong { display: block; font-size: 1.15rem; margin-bottom: 0.2rem; }
+    .proof-item span { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+    .om-os-grid { display: grid; grid-template-columns: minmax(0,0.9fr) minmax(0,1.1fr); gap: 3rem; align-items: start; }
+    .om-os-text { border-left: 4px solid var(--sage-dark); padding-left: 1.5rem; }
+    .om-os-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-weight: 300; }
+    .mission-note { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; color: var(--charcoal) !important; font-size: 1rem; padding: 1.2rem; }
+    .profiles { display: grid; gap: 1rem; }
+    .profile-card { background: white; border-radius: 12px; padding: 1.4rem; border: 1px solid var(--border); display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 1rem; align-items: flex-start; }
+    .profile-avatar { width: 52px; height: 52px; border-radius: 12px; background: var(--cream); border: 1px solid var(--sage-light); color: var(--sage-dark); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; font-weight: 600; flex-shrink: 0; }
+    .profile-info h4 { color: var(--charcoal); font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; }
+    .profile-role { color: var(--sage-dark); display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; margin-bottom: 0.55rem; text-transform: uppercase; }
+    .profile-info p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
     footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 3rem 2rem; text-align: center; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 0.5rem; }
-    .footer-logo span { color: var(--sage-light); }
+    .footer-logo { align-items: center; color: white; display: inline-flex; font-family: 'Playfair Display', serif; font-size: 1.3rem; gap: 0.55rem; justify-content: center; margin-bottom: 0.5rem; }
+    .footer-logo .brand-mark { background: rgba(255,255,255,0.08); border-color: var(--sage-light); color: var(--sage-light); }
+    .footer-logo span span { color: var(--sage-light); }
     .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
     footer a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; }
     footer a:hover { color: white; }
@@ -101,17 +128,67 @@
     .calculator-input { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; }
     .calculator-input label { font-weight: 500; min-width: 150px; }
     .calculator-input input, .calculator-input select { flex: 1; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; }
+    .treatment-explainer { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; margin: 1rem 0; padding: 1rem; }
+    .treatment-explainer h3 { color: var(--sage-dark); font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
+    .treatment-explainer p { color: var(--muted); font-size: 0.86rem; line-height: 1.6; margin-bottom: 0.45rem; }
+    .treatment-explainer p:last-child { margin-bottom: 0; }
     .calculator-result { background: var(--cream); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; display: none; }
     .calculator-result.show { display: block; animation: slideIn 0.3s ease; }
     .calculator-result h3 { color: var(--sage-dark); margin-bottom: 1rem; }
     .result-row { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
     .result-row:last-child { border-bottom: none; }
     .result-row strong { color: var(--charcoal); }
+    .result-total { background: var(--accent-light); padding: 1rem; margin: 1rem -1.5rem -1.5rem; border-radius: 0 0 12px 12px; }
+    .result-emphasis { color: var(--sage-dark); font-size: 1.1rem; }
+    .coverage-note { background: white; border-left: 3px solid var(--sage-dark); border-radius: 8px; color: var(--muted); font-size: 0.85rem; line-height: 1.6; margin-top: 1rem; padding: 0.9rem; }
+    .calculator-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .calculator-actions button, .calculator-actions a { border: 1px solid var(--border); border-radius: 100px; cursor: pointer; font: inherit; font-size: 0.85rem; padding: 0.7rem 1rem; text-decoration: none; }
+    .calculator-actions button { background: white; color: var(--charcoal); }
+    .calculator-actions a { background: transparent; color: var(--sage-dark); }
+    .calculator-faq { margin: 1.5rem auto 0; max-width: 600px; }
+    .calculator-faq details { background: white; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.7rem; padding: 0.9rem 1rem; }
+    .calculator-faq summary { color: var(--charcoal); cursor: pointer; font-weight: 500; }
+    .calculator-faq p { color: var(--muted); font-size: 0.86rem; line-height: 1.6; margin-top: 0.6rem; }
+    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: center; }
+    .example-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--charcoal); }
+    .example-title.good { color: var(--sage-dark); }
+    .bill-before, .bill-after { border-radius: 12px; padding: 1.5rem; line-height: 1.8; }
+    .bill-before { background: #FBF2EA; border: 2px solid #E2DDD4; font-family: monospace; font-size: 0.9rem; color: var(--muted); }
+    .bill-after { background: #F0F7F3; border: 2px solid var(--sage-dark); font-size: 0.95rem; color: var(--muted); }
+    .bill-line { margin-bottom: 0.8rem; }
+    .bill-total { border-top: 1px solid #E2DDD4; padding-top: 0.8rem; margin-top: 0.8rem; }
+    .bill-warning { color: #7a3b1e; margin-top: 0.5rem; font-size: 0.85rem; }
+    .bill-label { font-size: 0.85rem; color: var(--muted); }
+    .bill-summary { background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--sage-dark); }
+    .download-section { padding: 80px 2rem; background: var(--sage-dark); color: white; }
+    .download-panel { max-width: 700px; }
+    .download-panel .section-eyebrow { color: var(--sage-light); }
+    .download-panel .section-title { color: white; margin-bottom: 1rem; }
+    .download-copy { color: rgba(255,255,255,0.9); margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.7; }
+    .form-stack { display: flex; flex-direction: column; gap: 1rem; }
+    .newsletter-form { margin-bottom: 1.5rem; }
+    .form-field { width: 100%; padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font: inherit; font-size: 0.95rem; background: white; color: var(--charcoal); }
+    .newsletter-form .form-field { border-color: transparent; }
+    .form-field:focus { outline: 3px solid rgba(78,122,98,0.18); border-color: var(--sage-dark); }
+    .form-button { width: 100%; text-align: center; border: none; cursor: pointer; font-size: 0.95rem; }
+    .newsletter-button { background: var(--accent); color: white; padding: 0.85rem; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .newsletter-button:hover { background: #b5825b; }
+    .privacy-note { font-size: 0.85rem; color: rgba(255,255,255,0.76); }
+    .contact-form-wrap { max-width: 500px; margin: 0 auto; }
+    .contact-note { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; text-align: center; }
+    .form-status { border-radius: 8px; display: none; font-size: 0.85rem; line-height: 1.5; padding: 0.85rem; }
+    .form-status.show { display: block; }
+    .form-status.info { background: white; color: var(--muted); border: 1px solid var(--border); }
+    .form-status.success { background: #F0F7F3; color: var(--sage-dark); }
+    .form-status.error { background: var(--accent-light); color: #7a3b1e; }
     @media (max-width: 768px) {
       .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 120px 1.2rem 60px; }
       .om-os-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .nav-links { display: none; }
+      nav { height: auto; min-height: 64px; padding: 0.8rem 1.2rem; align-items: flex-start; flex-direction: column; gap: 0.7rem; }
+      .nav-links { display: flex; gap: 1rem; overflow-x: auto; width: 100%; padding-bottom: 0.2rem; }
+      .nav-links a { white-space: nowrap; }
       section { padding: 56px 1.2rem; }
+      .comparison-grid { grid-template-columns: 1fr; gap: 2rem; }
       .calculator-input { flex-direction: column; }
       .calculator-input label { min-width: auto; }
     }
@@ -119,11 +196,12 @@
 </head>
 <body>
   <nav>
-    <a href="index.html" class="nav-logo">Klinik<span>Guiden</span></a>
+    <a class='nav-logo' href='/' aria-label="KlinikGuiden forside"><span class="brand-mark">KG</span><span class="brand-word">Klinik<span>Guiden</span></span></a>
     <ul class="nav-links">
       <li><a href="#guides">Guides</a></li>
+      <li><a href="vidensbase.html">Vidensbase</a></li>
       <li><a href="#shop">Shop</a></li>
-      <li><a href="om-os.html">Om os</a></li>
+      <li><a href="#om-os">Om os</a></li>
       <li><a href="#shop" class="nav-cta">Se guides</a></li>
     </ul>
   </nav>
@@ -135,8 +213,8 @@
         <h1>Forstå din tandlæge – <em>før</em> du sætter dig i stolen</h1>
         <p class="hero-sub">Klare forklaringer på alt det tandlægen siger – men aldrig forklarer. Skrevet af mennesker der kender klinikken indefra.</p>
         <div class="hero-actions">
-          <a href="#guides" class="btn-primary">Se gratis guides</a>
-          <a href="#shop" class="btn-secondary">Se vores produkter</a>
+          <a href="#guides" class="btn-primary" data-track="hero_free_guides">Se gratis guides</a>
+          <a href="vidensbase.html" class="btn-secondary" data-track="hero_knowledge_base">Se vidensbasen</a>
         </div>
       </div>
       <div>
@@ -149,8 +227,8 @@
             <div class="tooth healthy">OK</div><div class="tooth check">Tjek</div>
           </div>
           <div class="hero-card-stat">
-            <div><div class="stat-big">3,2M</div><div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">danskere besøger tandlæge hvert år</div></div>
-            <div style="font-size:0.78rem;color:var(--muted);max-width:140px;line-height:1.4;">De fleste forstår ikke halvdelen af det de får at vide.</div>
+            <div><div class="stat-big">Ofte</div><div class="hero-card-note">handler uro om forklaring, ikke kun behandling</div></div>
+            <div class="hero-card-text">Vi hjælper dig med at forstå ordene, valgene og regningen.</div>
           </div>
         </div>
       </div>
@@ -159,20 +237,55 @@
 
   <div class="trust-bar">
     <div class="trust-item"><div class="trust-dot"></div>Skrevet af tandklinikassistenter</div>
-    <div class="trust-item"><div class="trust-dot"></div>Fagligt gennemgået indhold</div>
+    <div class="trust-item"><div class="trust-dot"></div>Skrevet ud fra klinisk hverdag</div>
     <div class="trust-item"><div class="trust-dot"></div>Gratis grundguides</div>
     <div class="trust-item"><div class="trust-dot"></div>Ingen reklamer. Bare viden.</div>
+    <div class="trust-item"><div class="trust-dot"></div>Dansk side for danske patienter</div>
   </div>
+
+  <section id="start-her" style="background: var(--cream);">
+    <div class="section-inner">
+      <p class="section-eyebrow">Start her</p>
+      <h2 class="section-title">Hvad fylder mest lige nu?</h2>
+      <p class="section-sub">Vælg den vej der passer bedst til dit spørgsmål. Så sender vi dig direkte til en rolig forklaring, uden at du skal lede rundt i hele siden.</p>
+      <div class="start-grid">
+        <a class="start-card" href="hvad-gor-man-ved-tandlaegeskraek.html" data-track="start_anxiety">
+          <div class="start-icon">1</div>
+          <h3>Nervøs for tandlægen?</h3>
+          <p>Få konkrete råd til pauser, stoptegn, bedøvelse og hvordan du fortæller klinikken, at du er bange.</p>
+          <span class="start-link">Læs om tandlægeskræk</span>
+        </a>
+        <a class="start-card" href="regningen.html" data-track="start_bill">
+          <div class="start-icon">2</div>
+          <h3>Forvirret over en regning?</h3>
+          <p>Forstå koder, tilskud og de poster der får en tandlægeregning til at ligne et fremmedsprog.</p>
+          <span class="start-link">Forstå regningen</span>
+        </a>
+        <a class="start-card" href="boern.html" data-track="start_children">
+          <div class="start-icon">3</div>
+          <h3>Spørgsmål om dit barns tænder?</h3>
+          <p>Læs om første tandlægebesøg, gode vaner og hvordan du gør tandpleje mindre dramatisk derhjemme.</p>
+          <span class="start-link">Læs børneguiden</span>
+        </a>
+        <a class="start-card" href="vidensbase.html" data-track="start_care">
+          <div class="start-icon">4</div>
+          <h3>Vil du lære mere om tandpleje?</h3>
+          <p>Gå til vidensbasen med korte svar om huller, tandbørstning, fluor, tandsten og behandlinger.</p>
+          <span class="start-link">Se vidensbasen</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section style="padding: 80px 2rem; background: var(--warm-white);">
     <div class="section-inner">
-      <p class="section-eyebrow">Interaktiv værktøj</p>
+      <p class="section-eyebrow">Interaktivt værktøj</p>
       <h2 class="section-title">Hvad har du brug for?</h2>
       <p class="section-sub">Svar på et par hurtige spørgsmål, og vi finder den rigtige guide til dig.</p>
       
       <div class="quiz-container">
         <div class="quiz-question">
-          <p style="font-weight: 500; margin-bottom: 1rem;">Hvad er dit største bekymring lige nu?</p>
+          <p style="font-weight: 500; margin-bottom: 1rem;">Hvad er din største bekymring lige nu?</p>
           <label><input type="radio" name="concern" value="price" /> Jeg forstår ikke min tandlægeregning</label>
           <label><input type="radio" name="concern" value="anxiety" /> Jeg er nervøs for tandlægen</label>
           <label><input type="radio" name="concern" value="treatment" /> Jeg vil forstå en kommende behandling</label>
@@ -189,7 +302,7 @@
     </div>
   </section>
 
-  <section style="padding: 80px 2rem; background: var(--cream);">
+  <section id="calculator" style="padding: 80px 2rem; background: var(--cream);">
     <div class="section-inner">
       <p class="section-eyebrow">Beregner</p>
       <h2 class="section-title">Hvad får du tilbage fra Sygeforsikringen?</h2>
@@ -198,7 +311,7 @@
       <div class="calculator-container">
         <div class="calculator-input">
           <label for="treatment-select">Behandling:</label>
-          <select id="treatment-select">
+          <select id="treatment-select" onchange="updateTreatmentExplainer()">
             <option value="">Vælg behandling</option>
             <option value="cleaning">Tandrensning/Scaling (1401)</option>
             <option value="filling-1">Enkeltfladet fyldning (2100)</option>
@@ -207,6 +320,11 @@
             <option value="xray">Røntgenbillede (1301)</option>
             <option value="exam">Undersøgelse (1101)</option>
           </select>
+        </div>
+
+        <div class="treatment-explainer" id="treatmentExplainer">
+          <h3>Vælg en behandling</h3>
+          <p>Når du vælger behandling, forklarer vi kort hvad den typisk dækker, og hvad beregningen tager udgangspunkt i.</p>
         </div>
         
         <div class="calculator-input">
@@ -227,20 +345,45 @@
         
         <div class="calculator-result" id="calculatorResult">
           <h3>Dit tilskud</h3>
+          <p id="resultTreatmentNote" style="font-size:0.86rem;color:var(--muted);margin-bottom:0.8rem;"></p>
           <div class="result-row">
             <span>Pris hos tandlægen:</span>
             <strong id="resultPrice">0 kr.</strong>
           </div>
           <div class="result-row">
-            <span>Dit tilskud:</span>
-            <strong id="resultSubsidy" style="color: var(--sage-dark);">0 kr.</strong>
+            <span>Estimeret tilskud:</span>
+            <strong id="resultSubsidy" class="result-emphasis">0 kr.</strong>
           </div>
-          <div class="result-row" style="background: var(--accent-light); padding: 1rem; margin: 1rem -1.5rem -1.5rem; border-radius: 0 0 12px 12px;">
+          <div class="result-row">
+            <span>Tilskuddet dækker ca.:</span>
+            <strong id="resultCoverage">0%</strong>
+          </div>
+          <div class="result-row result-total">
             <span><strong>Du betaler:</strong></span>
-            <strong id="resultYouPay" style="color: var(--sage-dark); font-size: 1.1rem;">0 kr.</strong>
+            <strong id="resultYouPay" class="result-emphasis">0 kr.</strong>
+          </div>
+          <div class="coverage-note" id="coverageNote">Tilskuddet er vejledende og kan afhænge af ydelseskode, alder, sikringsgruppe, forsikring og klinikkens konkrete pris.</div>
+          <div class="calculator-actions">
+            <button type="button" onclick="shareSubsidyResult()">Del resultat</button>
+            <a href="regningen.html" data-track="calculator_bill_guide">Forstå tandlægeregningen</a>
           </div>
           <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem;">*Dette er en vejledende beregning. Kontakt din tandlæge for præcise tal.</p>
         </div>
+      </div>
+
+      <div class="calculator-faq">
+        <details>
+          <summary>Er beregningen officiel?</summary>
+          <p>Nej. Den er lavet som en enkel forklaring, så du kan forstå forholdet mellem pris, tilskud og egenbetaling. Brug altid klinikkens prisoverslag som det konkrete grundlag.</p>
+        </details>
+        <details>
+          <summary>Hvorfor kan min rigtige pris være anderledes?</summary>
+          <p>Prisen kan afhænge af ydelseskode, antal flader, materialer, røntgen, akut tillæg, alder, forsikring og om der skal laves ekstra behandling.</p>
+        </details>
+        <details>
+          <summary>Hvad betyder “du betaler”?</summary>
+          <p>Det er den del af prisen, der er tilbage efter det estimerede tilskud i beregneren. Det er ikke en garanti for din endelige regning.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -248,16 +391,17 @@
   <section id="guides">
     <div class="section-inner">
       <p class="section-eyebrow">Gratis indhold</p>
-      <h2 class="section-title">Guides der svarer på det du aldrig turde spørge om</h2>
-      <p class="section-sub">Korte, klare tekster skrevet til dig – ikke til andre tandlæger.</p>
+      <h2 class="section-title">Udvalgte guides der svarer på det du aldrig turde spørge om</h2>
+      <p class="section-sub">Korte, klare tekster skrevet til dig – ikke til andre tandlæger. Se hele vidensbasen for flere svar på spørgsmål om tænder, priser og behandlinger.</p>
+      <p style="margin-top:-1.5rem;margin-bottom:2rem;"><a class="btn-secondary" href="vidensbase.html" data-track="guides_knowledge_base">Se alle guides i vidensbasen</a></p>
       <div class="guides-grid">
-        <a href="rodbehandling.html" class="guide-card">
+        <a class='guide-card' href='rodbehandling.html'>
           <div class="guide-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2C10.6 2 3 9.6 3 19c0 8.8 5.2 16.4 12.8 19.6" stroke="#4E7A62" stroke-width="2" stroke-linecap="round"/><path d="M20 2c9.4 0 17 7.6 17 17 0 8.8-5.2 16.4-12.8 19.6" stroke="#4E7A62" stroke-width="2" stroke-linecap="round"/></svg></div>
           <h3>Hvad sker der egentlig ved en rodbehandling?</h3>
           <p>Trin for trin – hvad tandlægen gør, hvorfor det gør ondt (eller ej), og hvad du kan forvente bagefter.</p>
           <span class="guide-tag">→ Læs guide</span>
         </a>
-        <a href="regningen.html" class="guide-card">
+        <a class='guide-card' href='regningen.html'>
           <div class="guide-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="28" height="32" rx="2" stroke="#4E7A62" stroke-width="2"/><line x1="10" y1="10" x2="30" y2="10" stroke="#4E7A62" stroke-width="1.5"/><line x1="10" y1="16" x2="30" y2="16" stroke="#4E7A62" stroke-width="1.5"/><line x1="10" y1="22" x2="25" y2="22" stroke="#4E7A62" stroke-width="1.5"/><line x1="10" y1="28" x2="20" y2="28" stroke="#4E7A62" stroke-width="1.5"/></svg></div>
           <h3>Forstå din tandlægeregning</h3>
           <p>Hvad betyder alle de kryptiske koder? Hvornår dækker det offentlige? Hvad kan du klage over?</p>
@@ -275,7 +419,7 @@
           <p>Hvornår, hvad der sker, og hvordan du forbereder dit barn uden at skabe unødig frygt.</p>
           <span class="guide-tag">→ Læs guide</span>
         </a>
-        <a href="besoegsfrekvens.html" class="guide-card">
+        <a class='guide-card' href='besoegsfrekvens.html'>
           <div class="guide-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="8" width="28" height="24" rx="2" stroke="#4E7A62" stroke-width="2"/><line x1="6" y1="14" x2="34" y2="14" stroke="#4E7A62" stroke-width="1.5"/><circle cx="20" cy="22" r="3" fill="#4E7A62"/></svg></div>
           <h3>Hvornår skal du egentlig til tandlægen?</h3>
           <p>Hvert halve år? Hvert år? Og hvilke tegn betyder du bør ringe i dag frem for at vente?</p>
@@ -294,46 +438,46 @@
   <section style="padding: 80px 2rem; background: white;">
     <div class="section-inner">
       <p class="section-eyebrow">Transformation</p>
-      <h2 class="section-title">Før og efter – Forstå din regning</h2>
+      <h2 class="section-title">Før og efter - forstå din regning</h2>
       <p class="section-sub">Se hvordan vores guide gør en uoverskuelig tandlægeregning til noget du rent faktisk forstår.</p>
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: center;">
+      <div class="comparison-grid">
         <div>
-          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--charcoal);">FØR: Uoverskuelig</h3>
-          <div style="background: #FBF2EA; border: 2px solid #E2DDD4; border-radius: 12px; padding: 1.5rem; font-family: monospace; font-size: 0.9rem; color: var(--muted); line-height: 1.8;">
-            <div style="margin-bottom: 0.8rem;"><strong>Tandlægeregning</strong></div>
-            <div style="margin-bottom: 0.5rem;">1101 ........................ 450 kr</div>
-            <div style="margin-bottom: 0.5rem;">1401 ........................ 680 kr</div>
-            <div style="margin-bottom: 0.5rem;">2110 ........................ 920 kr</div>
-            <div style="margin-bottom: 0.5rem;">1301 ........................ 380 kr</div>
-            <div style="border-top: 1px solid #E2DDD4; padding-top: 0.8rem; margin-top: 0.8rem;"><strong>I alt: 2.430 kr</strong></div>
-            <div style="color: #7a3b1e; margin-top: 0.5rem; font-size: 0.85rem;">Hvad betyder disse koder? Hvad skal jeg betale?</div>
+          <h3 class="example-title">FØR: Uoverskuelig</h3>
+          <div class="bill-before">
+            <div class="bill-line"><strong>Tandlægeregning</strong></div>
+            <div class="bill-line">1101 ........................ 450 kr</div>
+            <div class="bill-line">1401 ........................ 680 kr</div>
+            <div class="bill-line">2110 ........................ 920 kr</div>
+            <div class="bill-line">1301 ........................ 380 kr</div>
+            <div class="bill-total"><strong>I alt: 2.430 kr</strong></div>
+            <div class="bill-warning">Hvad betyder disse koder? Hvad skal jeg betale?</div>
           </div>
         </div>
         
         <div>
-          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--sage-dark);">EFTER: Klar og simpel</h3>
-          <div style="background: #F0F7F3; border: 2px solid var(--sage-dark); border-radius: 12px; padding: 1.5rem; font-size: 0.95rem; color: var(--muted); line-height: 1.8;">
-            <div style="margin-bottom: 1rem;"><strong style="color: var(--sage-dark);">Din tandlægeregning forklaret:</strong></div>
-            <div style="margin-bottom: 0.8rem;">
+          <h3 class="example-title good">EFTER: Klar og simpel</h3>
+          <div class="bill-after">
+            <div class="bill-line"><strong style="color: var(--sage-dark);">Din tandlægeregning forklaret:</strong></div>
+            <div class="bill-line">
               <strong>Undersøgelse</strong> (1101): 450 kr<br/>
-              <span style="font-size: 0.85rem; color: var(--muted);">Almindeligt tandeftersyn</span>
+              <span class="bill-label">Almindeligt tandeftersyn</span>
             </div>
-            <div style="margin-bottom: 0.8rem;">
+            <div class="bill-line">
               <strong>Tandrensning</strong> (1401): 680 kr<br/>
-              <span style="font-size: 0.85rem; color: var(--muted);">Fjernelse af tandsten</span>
+              <span class="bill-label">Fjernelse af tandsten</span>
             </div>
-            <div style="margin-bottom: 0.8rem;">
+            <div class="bill-line">
               <strong>Fyldning</strong> (2110): 920 kr<br/>
-              <span style="font-size: 0.85rem; color: var(--muted);">Reparation af hul i tand</span>
+              <span class="bill-label">Reparation af hul i tand</span>
             </div>
-            <div style="margin-bottom: 1rem;">
+            <div class="bill-line">
               <strong>Røntgen</strong> (1301): 380 kr<br/>
-              <span style="font-size: 0.85rem; color: var(--muted);">Billede af dine tænder</span>
+              <span class="bill-label">Billede af dine tænder</span>
             </div>
-            <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--sage-dark);">
+            <div class="bill-summary">
               <strong>Du betaler: 2.430 kr</strong><br/>
-              <span style="font-size: 0.85rem; color: var(--muted);">Tilskud fra offentlig: ca. 1.200 kr</span>
+              <span class="bill-label">Tilskud fra offentlig: ca. 1.200 kr</span>
             </div>
           </div>
         </div>
@@ -357,9 +501,9 @@
             <li>Tjekliste til hvert besøg</li>
             <li>Rettigheder som patient</li>
           </ul>
-          <div style="background: #F0F7F3; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-size: 0.85rem; color: var(--sage-dark); text-align: center; font-weight: 500;">✓ Opdateret 2025 – Alle nye regler inkluderet</div>
+          <div class="product-note">Opdateret til danske patienter og skrevet i almindeligt sprog</div>
           <div class="product-price">99 kr.<span>engangskøb</span></div>
-          <a href="guide-komplette.html" class="btn-primary" style="text-align:center;">Se mere</a>
+          <a class='btn-primary form-button' href='guide-komplette.html' data-track="product_complete_guide_click" data-product="komplette" data-price="99">Se mere</a>
         </div>
         <div class="product-card">
           <span class="product-badge">Til forældre</span>
@@ -372,7 +516,7 @@
             <li>Hvad du kan spørge tandlægen</li>
           </ul>
           <div class="product-price">79 kr.<span>engangskøb</span></div>
-          <a href="#kontakt" class="btn-primary" style="text-align:center;">Hent guide</a>
+          <a href="#kontakt" class="btn-primary form-button" data-track="product_children_guide_click" data-product="boern" data-price="79">Hent guide</a>
         </div>
         <div class="product-card">
           <span class="product-badge">Kommer snart</span>
@@ -385,25 +529,61 @@
             <li>Livstidsadgang</li>
           </ul>
           <div class="product-price">149 kr.<span>forventes snart</span></div>
-          <a href="#kontakt" class="btn-secondary" style="text-align:center;">Skriv dig på venteliste</a>
+          <a href="#kontakt" class="btn-secondary form-button" data-track="product_course_waitlist_click" data-product="venteliste" data-price="149">Skriv dig på venteliste</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section style="padding: 80px 2rem; background: var(--sage-dark); color: white;">
-    <div class="section-inner" style="max-width: 700px;">
-      <p class="section-eyebrow" style="color: var(--sage-light);">Gratis Download</p>
-      <h2 class="section-title" style="color: white; margin-bottom: 1rem;">Tjekliste til dit næste tandlægebesøg</h2>
-      <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.7;">Få vores gratis PDF-tjekliste, der hjælper dig med at forberede dig optimalt til tandlægen. Tilmeld dig vores nyhedsbrev og modtag den med det samme – plus eksklusive tips og opdateringer.</p>
+  <section style="background: var(--warm-white);">
+    <div class="section-inner">
+      <p class="section-eyebrow">Sådan fungerer det</p>
+      <h2 class="section-title">En enkel vej fra forvirring til overblik</h2>
+      <p class="section-sub">KlinikGuiden skal være let at bruge, også når man allerede er nervøs eller træt af tandlægesprog.</p>
+      <div class="process-grid">
+        <div class="process-step">
+          <strong>1. Find dit emne</strong>
+          <p>Start med en gratis guide eller quizzen, hvis du ikke ved hvilken forklaring du har brug for.</p>
+        </div>
+        <div class="process-step">
+          <strong>2. Få det forklaret</strong>
+          <p>Læs forklaringen i almindeligt dansk, uden unødige fagord og uden reklamepres.</p>
+        </div>
+        <div class="process-step">
+          <strong>3. Tag det med videre</strong>
+          <p>Brug tjeklister, spørgsmål og PDF-guides før dit næste tandlægebesøg.</p>
+        </div>
+      </div>
+      <div class="proof-strip">
+        <div class="proof-item"><strong>Gratis først</strong><span>De vigtigste grundforklaringer kan læses uden betaling.</span></div>
+        <div class="proof-item"><strong>Faglig hverdag</strong><span>Indholdet skrives af mennesker, der kender klinikken indefra.</span></div>
+        <div class="proof-item"><strong>Ingen diagnose</strong><span>Siden hjælper dig med forståelse, men erstatter ikke din tandlæge.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="download-section">
+    <div class="section-inner download-panel">
+      <p class="section-eyebrow">Gratis Download</p>
+      <h2 class="section-title">Tjekliste til dit næste tandlægebesøg</h2>
+      <p class="download-copy">Få vores gratis PDF-tjekliste, der hjælper dig med at forberede dig optimalt til tandlægen. Tilmeld dig vores nyhedsbrev og modtag den med det samme – plus eksklusive tips og opdateringer.</p>
       
-      <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;" onsubmit="submitNewsletter(event)">
-        <input type="email" id="newsletter-email" placeholder="Din email" required style="padding: 0.85rem; border: none; border-radius: 8px; font-size: 0.95rem;" />
-        <input type="text" id="newsletter-name" placeholder="Dit navn" required style="padding: 0.85rem; border: none; border-radius: 8px; font-size: 0.95rem;" />
-        <button type="submit" style="background: var(--accent); color: white; padding: 0.85rem; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background 0.2s;">Hent tjeklisten gratis</button>
+      <form id="newsletterForm" class="form-stack newsletter-form" onsubmit="submitNewsletter(event)">
+        <input class="form-field" type="email" id="newsletter-email" placeholder="Din email" autocomplete="email" required />
+        <input class="form-field" type="text" id="newsletter-name" placeholder="Dit navn" autocomplete="name" required />
+        <button type="submit" class="newsletter-button" data-track="newsletter_submit_click">Hent tjeklisten gratis</button>
+        <div class="form-status" id="newsletterStatus" role="status" aria-live="polite"></div>
       </form>
       
-      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">Vi sender dig tjeklisten på email med det samme. Ingen spam – kun værdifuldt indhold.</p>
+      <p class="privacy-note">Vi sender dig tjeklisten på email med det samme. Ingen spam – kun relevant indhold, og du kan altid skrive for at blive slettet.</p>
+    </div>
+  </section>
+
+  <section id="testimonials" hidden>
+    <div class="section-inner">
+      <p class="section-eyebrow">Patienternes ord</p>
+      <h2 class="section-title">Ægte udtalelser fra læsere</h2>
+      <p class="section-sub">Denne sektion aktiveres, når der er indsamlet 3-5 godkendte citater med samtykke.</p>
     </div>
   </section>
 
@@ -411,20 +591,21 @@
     <div class="section-inner">
       <p class="section-eyebrow">Kontakt</p>
       <h2 class="section-title">Få adgang til guiderne</h2>
-      <p class="section-sub">Udfyld formularen nedenfor, og vi sender din guide direkte til din email.</p>
-      <div style="max-width: 500px; margin: 0 auto;">
-        <form id="orderForm" style="display: flex; flex-direction: column; gap: 1rem;" onsubmit="submitOrder(event)">
-          <input type="email" id="order-email" placeholder="Din email" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;" />
-          <input type="text" id="order-name" placeholder="Dit navn" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;" />
-          <select id="order-guide" required style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;">
+      <p class="section-sub">Udfyld formularen nedenfor. Betalte guides sendes videre til sikker betaling med Stripe, mens ventelisten registreres direkte hos os.</p>
+      <div class="contact-form-wrap">
+        <form id="orderForm" class="form-stack" onsubmit="submitOrder(event)">
+          <input class="form-field" type="email" id="order-email" placeholder="Din email" autocomplete="email" required />
+          <input class="form-field" type="text" id="order-name" placeholder="Dit navn" autocomplete="name" required />
+          <select class="form-field" id="order-guide" required>
             <option value="">Vælg guide</option>
             <option value="komplette">Forstå din tandlæge - den komplette guide (99 kr.)</option>
-            <option value="boern">Bornenes tandplejeguide (79 kr.)</option>
+            <option value="boern">Børnenes tandplejeguide (79 kr.)</option>
             <option value="venteliste">Tilmeld venteliste - Tandplejekurset</option>
           </select>
-          <button type="submit" class="btn-primary" style="text-align: center; border: none; cursor: pointer; font-size: 0.95rem;">Send bestilling</button>
+          <button type="submit" class="btn-primary form-button" data-track="order_submit_click">Fortsæt til betaling</button>
+          <div class="form-status" id="orderStatus" role="status" aria-live="polite"></div>
         </form>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1rem; text-align: center;">Vi sender dig en bekræftelse på email. Du modtager linket til din guide inden for 24 timer.</p>
+        <p class="contact-note">Vi gemmer kun de oplysninger, du sender i formularen, så vi kan svare dig og registrere din interesse.</p>
       </div>
     </div>
   </section>
@@ -434,30 +615,25 @@
       <div class="om-os-grid">
         <div class="om-os-text">
           <p class="section-eyebrow">Om os</p>
-          <h2 class="section-title">Vi kender klinikken indefra</h2>
-          <p>KlinikGuiden er bygget af to mennesker der til daglig arbejder i tandplejen – og som gang på gang har oplevet patienter der forlader stolen mere forvirrede end da de kom.</p>
-          <p>Vi tror på at viden giver tryghed. Og at trygge patienter tager bedre vare på deres tænder.</p>
-          <p>Vi er ikke et mediehus eller et firma. Vi er to fagfolk der skriver det vi selv ville ønske at have vidst.</p>
+          <h2 class="section-title">Tandfaglig viden forklaret i almindeligt sprog</h2>
+          <p class="mission-note">Vores mission er at gøre tandsundhed lettere at forstå. Vi ønsker, at alle patienter skal kunne forstå deres tænder, behandlinger og mundsundhed uden at skulle afkode fagudtryk eller forlade klinikken med ubesvarede spørgsmål.</p>
+          <p>KlinikGuiden samler korte, kildebaserede forklaringer om tandpleje, behandlinger, priser og patientforståelse. Indholdet er skrevet til almindelige patienter og skal gøre det lettere at stille gode spørgsmål hos tandlægen.</p>
         </div>
         <div class="profiles">
           <div class="profile-card">
-            <div class="profile-avatar">👨🏿</div>
+            <div class="profile-avatar">J</div>
             <div class="profile-info">
               <h4>Jonathan</h4>
-              <p>Tandklinikassistent med erfaring inden for kirurgi, røntgen og sterilisation. Læser til tandlæge.</p>
+              <span class="profile-role">Tandklinikassistent</span>
+              <p>Tandklinikassistent med erfaring inden for kirurgi, røntgen og sterilisation. Arbejder dagligt med patienter og har et særligt fokus på at gøre tandfaglig viden mere tilgængelig og forståelig. Er i gang med at uddanne sig til tandlæge.</p>
             </div>
           </div>
           <div class="profile-card">
-            <div class="profile-avatar">👩🏽</div>
+            <div class="profile-avatar">S</div>
             <div class="profile-info">
               <h4>Sophia</h4>
-              <p>Tandklinikassistent med daglig patientkontakt. Læser til tandplejer.</p>
-            </div>
-          </div>
-          <div class="profile-card" style="background:white;">
-            <div class="guide-icon" style="margin:0;flex-shrink:0;">💬</div>
-            <div class="profile-info">
-              <p style="font-style:italic;color:var(--muted);">"Vi vil ikke lyde som en klinik. Vi vil lyde som mennesker der ved hvad de taler om."</p>
+              <span class="profile-role">Tandklinikassistent</span>
+              <p>Tandklinikassistent med daglig patientkontakt. Hun kender selv til nervøsiteten, som nogle patienter oplever før et tandlægebesøg, og interesserer sig særligt for tandlægeangst og patienter, der har svært ved at komme til tandlæge. Hun mener, at viden og forberedelse skaber større tryghed, og at KlinikGuiden hjælper patienter med at forstå, hvad de kan forvente før, under og efter en behandling.</p>
             </div>
           </div>
         </div>
@@ -466,17 +642,20 @@
   </section>
 
   <footer>
-    <div class="footer-logo">Klinik<span>Guiden</span></div>
+    <div class="footer-logo"><span class="brand-mark">KG</span><span>Klinik<span>Guiden</span></span></div>
     <p>Tandpleje forklaret af dem der kender den.</p>
     <div class="footer-links">
       <a href="#guides">Guides</a>
+      <a href="vidensbase.html">Vidensbase</a>
       <a href="#shop">Shop</a>
       <a href="#om-os">Om os</a>
       <a href="mailto:hej@klinikguiden.dk">Kontakt</a>
+      <a href="privatliv.html">Privatliv</a>
     </div>
     <p style="margin-top:2rem;font-size:0.75rem;opacity:0.4;">© 2025 KlinikGuiden. Alle rettigheder forbeholdes.</p>
   </footer>
 
+  <script src="analytics.js"></script>
   <script>
     // Quiz funktionalitet
     const quizRadios = document.querySelectorAll('input[name="concern"]');
@@ -519,6 +698,11 @@
         resultTitle.textContent = answer.title;
         resultText.textContent = answer.text;
         resultLink.href = answer.link;
+        KGAnalytics.trackEvent('quiz_answer_selected', {
+          value: e.target.value,
+          guide: answer.title,
+          href: answer.link
+        });
         quizResult.classList.add('show');
         setTimeout(() => {
           quizResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -527,6 +711,39 @@
     });
 
     // Pris-beregner funktionalitet
+    const treatmentInfo = {
+      cleaning: {
+        title: 'Tandrensning / scaling',
+        description: 'Fjerner plak, tandsten og belægninger, som du ikke selv kan børste væk. Bruges ofte ved almindelig kontrol og ved irriteret tandkød.',
+        coverage: 'Tilskuddet dækker typisk en del af den forebyggende behandling, men ekstra rensning eller parodontal behandling kan have andre ydelser.'
+      },
+      'filling-1': {
+        title: 'Enkeltfladet plastfyldning',
+        description: 'En mindre fyldning på én tandflade, ofte efter et hul eller en mindre reparation. Prisen afhænger af tandens placering og kompleksitet.',
+        coverage: 'Tilskuddet regnes her som en del af selve fyldningen. Bed klinikken forklare, hvis der også er røntgen, bedøvelse eller andre poster.'
+      },
+      'filling-2': {
+        title: 'Tofladet plastfyldning',
+        description: 'En fyldning der involverer to flader på tanden. Den er ofte mere tidskrævende end en enkeltfladet fyldning.',
+        coverage: 'Tilskuddet dækker kun den estimerede del af fyldningsydelsen i denne beregner. Den samlede regning kan indeholde flere poster.'
+      },
+      extraction: {
+        title: 'Tandudtrækning',
+        description: 'Fjernelse af en tand. Det kan være enkelt eller mere kompliceret afhængigt af tandens placering, rødder og infektion.',
+        coverage: 'Tilskuddet tager udgangspunkt i en almindelig udtrækning. Kirurgisk fjernelse, kontrol eller akut behandling kan ændre prisen.'
+      },
+      xray: {
+        title: 'Røntgenbillede',
+        description: 'Et billede tandlægen bruger til at se mellem tænderne, omkring rødderne eller under gamle fyldninger.',
+        coverage: 'Tilskuddet dækker her en estimeret del af billedet. Flere billeder eller særlige optagelser kan koste mere.'
+      },
+      exam: {
+        title: 'Undersøgelse',
+        description: 'En klinisk vurdering af tænder, tandkød, slimhinder, bid og eventuelle symptomer. Kan kombineres med røntgen eller tandrensning.',
+        coverage: 'Tilskuddet dækker kun den estimerede undersøgelsesdel. Andre ydelser på samme besøg lægges normalt oveni.'
+      }
+    };
+
     const subsidyRates = {
       cleaning: { group1: 0.60, group2: 0.50, none: 0 },
       'filling-1': { group1: 0.50, group2: 0.40, none: 0 },
@@ -536,23 +753,58 @@
       exam: { group1: 0.70, group2: 0.60, none: 0 }
     };
 
+    let lastSubsidyResult = null;
+
+    function updateTreatmentExplainer() {
+      const treatment = document.getElementById('treatment-select').value;
+      const info = treatmentInfo[treatment];
+      const explainer = document.getElementById('treatmentExplainer');
+
+      if (!info) {
+        explainer.innerHTML = '<h3>Vælg en behandling</h3><p>Når du vælger behandling, forklarer vi kort hvad den typisk dækker, og hvad beregningen tager udgangspunkt i.</p>';
+        return;
+      }
+
+      explainer.innerHTML = `<h3>${info.title}</h3><p>${info.description}</p><p><strong>Hvad dækker tilskuddet?</strong> ${info.coverage}</p>`;
+    }
+
     function calculateSubsidy() {
       const treatment = document.getElementById('treatment-select').value;
       const insurance = document.getElementById('insurance-select').value;
       const price = parseFloat(document.getElementById('price-input').value) || 0;
       
       if (!treatment || price <= 0) {
-        alert('Venligst vælg behandling og indtast en pris');
+        alert('Vælg behandling og indtast en pris');
         return;
       }
       
       const subsidyRate = subsidyRates[treatment][insurance] || 0;
       const subsidy = Math.round(price * subsidyRate);
       const youPay = price - subsidy;
+      const info = treatmentInfo[treatment];
+      const coveragePercent = Math.round(subsidyRate * 100);
+      lastSubsidyResult = {
+        treatment: info ? info.title : treatment,
+        price,
+        subsidy,
+        youPay,
+        coveragePercent
+      };
+      KGAnalytics.trackEvent('subsidy_calculated', {
+        treatment: treatment,
+        insurance: insurance,
+        price: String(price),
+        subsidy: String(subsidy),
+        youPay: String(youPay),
+        coveragePercent: String(coveragePercent)
+      });
       
       document.getElementById('resultPrice').textContent = price + ' kr.';
       document.getElementById('resultSubsidy').textContent = subsidy + ' kr.';
+      document.getElementById('resultCoverage').textContent = coveragePercent + '%';
       document.getElementById('resultYouPay').textContent = youPay + ' kr.';
+      document.getElementById('resultTreatmentNote').textContent = info ? info.title + ': ' + info.description : '';
+      document.getElementById('coverageNote').textContent = info ? info.coverage + ' Beregningen er stadig vejledende og skal tjekkes mod klinikkens prisoverslag.' : 'Tilskuddet er vejledende og kan afhænge af ydelseskode, alder, sikringsgruppe, forsikring og klinikkens konkrete pris.';
       
       document.getElementById('calculatorResult').classList.add('show');
       setTimeout(() => {
@@ -560,28 +812,129 @@
       }, 100);
     }
 
+    async function shareSubsidyResult() {
+      if (!lastSubsidyResult) {
+        calculateSubsidy();
+      }
+
+      if (!lastSubsidyResult) return;
+
+      const text = `KlinikGuiden beregning: ${lastSubsidyResult.treatment}. Pris: ${lastSubsidyResult.price} kr. Estimeret tilskud: ${lastSubsidyResult.subsidy} kr. Du betaler ca.: ${lastSubsidyResult.youPay} kr.`;
+
+      KGAnalytics.trackEvent('subsidy_result_shared', {
+        treatment: lastSubsidyResult.treatment,
+        price: String(lastSubsidyResult.price),
+        subsidy: String(lastSubsidyResult.subsidy),
+        youPay: String(lastSubsidyResult.youPay)
+      });
+
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Mit vejledende tandlægetilskud',
+          text,
+          url: window.location.href.split('#')[0] + '#calculator'
+        });
+        return;
+      }
+
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(text);
+        alert('Resultatet er kopieret.');
+        return;
+      }
+
+      alert(text);
+    }
+
     document.getElementById('price-input').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') calculateSubsidy();
     });
 
-    // Google Sheets URL
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyezQI9c6rX15R9PMnvf5gsSDFo8g_Yv81Yvc88zFiClzOI1iXvYmx1YwOVZMVNbGRbPA/exec';
+    function getPageName() {
+      return KGAnalytics.getPageName();
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+
+    function setStatus(elementId, message, type) {
+      const status = document.getElementById(elementId);
+      status.textContent = message;
+      status.className = `form-status show ${type}`;
+    }
+
+    function setSubmitting(form, isSubmitting) {
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = isSubmitting;
+      button.style.opacity = isSubmitting ? '0.7' : '1';
+      button.style.cursor = isSubmitting ? 'wait' : 'pointer';
+    }
+
+    async function postToSheet(data) {
+      const visitorType = KGAnalytics.getVisitorType ? KGAnalytics.getVisitorType() : '';
+      const enrichedData = {
+        trafficSource: KGAnalytics.getTrafficSource ? KGAnalytics.getTrafficSource() : '',
+        visitorType: visitorType,
+        isReturning: visitorType === 'tilbagevendende' ? 'TRUE' : 'FALSE',
+        screenSize: `${window.innerWidth}x${window.innerHeight}`,
+        errorMessage: '',
+        ...data
+      };
+      const body = new URLSearchParams(enrichedData);
+      await fetch(KGAnalytics.endpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        body
+      });
+    }
+
+    async function startStripeCheckout({ product, email, name }) {
+      const response = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product, email, name })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || data.stripeError || 'Stripe kunne ikke startes.');
+      }
+
+      KGAnalytics.trackEvent('checkout_started', {
+        product: product,
+        price: product === 'komplette' ? '99' : product === 'boern' ? '79' : '',
+        provider: 'stripe'
+      });
+
+      window.location.href = data.url;
+    }
 
     // Nyhedsbrev-formular
-    function submitNewsletter(event) {
+    async function submitNewsletter(event) {
       event.preventDefault();
+      setSubmitting(event.target, true);
+      setStatus('newsletterStatus', 'Sender din tilmelding...', 'info');
       const email = document.getElementById('newsletter-email').value;
       const name = document.getElementById('newsletter-name').value;
       
-      // Send data til Google Sheets
-      fetch(GOOGLE_SHEETS_URL, {
-        method: 'POST',
-        body: new URLSearchParams({
+      try {
+        await postToSheet({
+          type: 'lead',
+          event: 'newsletter_signup',
+          page: getPageName(),
+          path: window.location.pathname,
+          sessionId: KGAnalytics.getSessionId(),
+          timestamp: new Date().toISOString(),
           name: name,
           email: email,
-          guide: 'Nyhedsbrev - Tjekliste'
-        })
-      }).then(() => {
+          guide: 'Nyhedsbrev - Tjekliste',
+          details: JSON.stringify({ source: 'newsletter_form' })
+        });
+
         // Download PDF
         const link = document.createElement('a');
         link.href = 'tjekliste_tandlaegebesoeg.pdf';
@@ -589,33 +942,65 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        KGAnalytics.trackEvent('pdf_download_started', { guide: 'Tjekliste til tandlægebesøg' });
         
         // Nulstil formularen
         document.getElementById('newsletterForm').reset();
-        alert('Tak for tilmeldingen! Tjeklisten er klar til download.');
-      }).catch(error => console.error('Fejl:', error));
+        setStatus('newsletterStatus', 'Tak for tilmeldingen. Tjeklisten er klar til download.', 'success');
+      } catch (error) {
+        console.error('Fejl:', error);
+        setStatus('newsletterStatus', 'Der opstod en fejl. Prøv igen om lidt, eller skriv til os direkte.', 'error');
+      } finally {
+        setSubmitting(event.target, false);
+      }
     }
 
     // Bestillings-formular
-    function submitOrder(event) {
+    async function submitOrder(event) {
       event.preventDefault();
+      setSubmitting(event.target, true);
+      setStatus('orderStatus', 'Forbereder næste trin...', 'info');
       const email = document.getElementById('order-email').value;
       const name = document.getElementById('order-name').value;
       const guide = document.getElementById('order-guide').value;
       
-      // Send data til Google Sheets
-      fetch(GOOGLE_SHEETS_URL, {
-        method: 'POST',
-        body: new URLSearchParams({
+      try {
+        const guidePrices = {
+          komplette: '99',
+          boern: '79',
+          venteliste: '0'
+        };
+
+        if (guide === 'komplette' || guide === 'boern') {
+          setStatus('orderStatus', 'Sender dig videre til sikker betaling...', 'info');
+          await startStripeCheckout({ product: guide, email, name });
+          return;
+        }
+
+        await postToSheet({
+          type: 'lead',
+          event: 'waitlist_signup',
+          page: getPageName(),
+          path: window.location.pathname,
+          sessionId: KGAnalytics.getSessionId(),
+          timestamp: new Date().toISOString(),
           name: name,
           email: email,
-          guide: guide
-        })
-      }).then(() => {
+          guide: guide,
+          product: guide,
+          price: guidePrices[guide] || '',
+          details: JSON.stringify({ source: 'order_form_waitlist' })
+        });
+
         // Nulstil formularen
         document.getElementById('orderForm').reset();
-        alert('Tak for din bestilling! Vi sender din guide inden for 24 timer.');
-      }).catch(error => console.error('Fejl:', error));
+        setStatus('orderStatus', 'Tak, du er skrevet på listen. Vi giver besked, når kurset er klar.', 'success');
+      } catch (error) {
+        console.error('Fejl:', error);
+        setStatus('orderStatus', 'Stripe er ikke helt sat op endnu. Prøv igen om lidt, eller skriv til os direkte.', 'error');
+      } finally {
+        setSubmitting(event.target, false);
+      }
     }
   </script>
 </body>

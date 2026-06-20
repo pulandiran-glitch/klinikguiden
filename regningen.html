@@ -4,469 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forstå din tandlægeregning | KlinikGuiden</title>
+  <meta name="description" content="Få hjælp til at forstå koder, tilskud og poster på en dansk tandlægeregning." />
+  <meta name="theme-color" content="#4E7A62" />
+  <link rel="canonical" href="https://klinikguiden.com/regningen.html" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #ffffff;
-      --off-white: #f9f9f7;
-      --border: #e8e8e4;
-      --text: #1a1a1a;
-      --text-muted: #6b6b6b;
-      --accent: #2d6a4f;
-      --accent-light: #e8f5ef;
-      --warn: #7a3b1e;
-      --warn-bg: #fdf1eb;
-      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
-
-    body {
-      font-family: var(--font);
-      background: var(--white);
-      color: var(--text);
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 32px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      z-index: 100;
-    }
-
-    .nav-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.92rem;
-      transition: color 0.15s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .hero {
-      background: var(--off-white);
-      border-bottom: 1px solid var(--border);
-      padding: 64px 32px 56px;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      margin-bottom: 18px;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 560px;
-    }
-
-    .hero-meta {
-      margin-top: 28px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .content {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 56px 32px 80px;
-    }
-
-    .intro-box {
-      background: var(--accent-light);
-      border-left: 3px solid var(--accent);
-      border-radius: 6px;
-      padding: 20px 24px;
-      margin-bottom: 48px;
-      font-size: 0.97rem;
-      color: #1f4a35;
-      line-height: 1.65;
-    }
-
-    .section {
-      margin-bottom: 52px;
-    }
-
-    .section h2 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section p {
-      margin-bottom: 14px;
-      color: #2a2a2a;
-    }
-
-    /* KODE TABEL */
-    .kode-liste {
-      list-style: none;
-      margin-top: 8px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .kode-item {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .kode-item:last-child { border-bottom: none; }
-
-    .kode-nr {
-      background: var(--off-white);
-      padding: 14px 16px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--accent);
-      font-family: monospace;
-      display: flex;
-      align-items: center;
-      border-right: 1px solid var(--border);
-    }
-
-    .kode-tekst {
-      padding: 14px 18px;
-    }
-
-    .kode-tekst strong {
-      display: block;
-      font-size: 0.92rem;
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
-
-    .kode-tekst p {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin: 0;
-    }
-
-    /* GRUPPE KORT */
-    .gruppe-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 520px) {
-      .gruppe-grid { grid-template-columns: 1fr; }
-    }
-
-    .gruppe-kort {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px 20px;
-      background: var(--off-white);
-    }
-
-    .gruppe-kort h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .gruppe-kort p {
-      font-size: 0.87rem;
-      color: var(--text-muted);
-      margin: 0;
-    }
-
-    /* CHECKLIST */
-    .checklist {
-      list-style: none;
-      margin-top: 8px;
-    }
-
-    .checklist li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
-    }
-
-    .checklist li:last-child { border-bottom: none; }
-
-    .check-icon {
-      color: var(--accent);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    /* WARN BOX */
-    .warn-box {
-      background: var(--warn-bg);
-      border-left: 3px solid var(--warn);
-      border-radius: 6px;
-      padding: 18px 22px;
-      margin-top: 20px;
-      font-size: 0.93rem;
-      color: #4a2010;
-    }
-
-    .warn-box strong {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .warn-box ul {
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    .warn-box li { margin-bottom: 5px; }
-
-    /* TIP BOX */
-    .tip-box {
-      background: var(--off-white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px 22px;
-      margin-top: 16px;
-      font-size: 0.93rem;
-    }
-
-    .tip-box .label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px;
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    footer a { color: var(--text-muted); }
-
-    @media (max-width: 600px) {
-      nav { padding: 14px 18px; }
-      .nav-links { gap: 16px; }
-      .hero, .content { padding-left: 18px; padding-right: 18px; }
-      .kode-item { grid-template-columns: 68px 1fr; }
-    }
+    :root { --cream:#F5F0E8; --warm-white:#FDFAF5; --sage-dark:#4E7A62; --charcoal:#2C2C2C; --muted:#7A7A72; --border:#E2DDD4; }
+    body { background: var(--warm-white); color: var(--charcoal); font-family: Inter, sans-serif; font-size: 16px; line-height: 1.75; }
+    nav { align-items: center; background: rgba(253,250,245,0.94); border-bottom: 1px solid var(--border); display: flex; height: 64px; justify-content: space-between; padding: 0 2rem; position: sticky; top: 0; z-index: 10; }
+    .nav-logo { color: var(--charcoal); font-family: "Playfair Display", serif; font-size: 1.2rem; text-decoration: none; }
+    .nav-logo span { color: var(--sage-dark); }
+    .back-link { color: var(--sage-dark); font-size: 0.9rem; text-decoration: none; }
+    main { margin: 0 auto; max-width: 760px; padding: 80px 1.5rem; }
+    .eyebrow { color: var(--sage-dark); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; margin-bottom: 1rem; text-transform: uppercase; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.15; margin-bottom: 1.5rem; }
+    h2 { font-family: "Playfair Display", serif; font-size: 1.5rem; margin: 2.4rem 0 0.8rem; }
+    p, li { color: var(--muted); font-weight: 300; }
+    .intro { font-size: 1.08rem; margin-bottom: 2rem; }
+    .note { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; margin: 2rem 0; padding: 1.4rem; }
+    ul { margin: 0.8rem 0 0 1.2rem; }
+    a.button { background: var(--sage-dark); border-radius: 100px; color: white; display: inline-block; margin-top: 2rem; padding: 0.85rem 1.6rem; text-decoration: none; }
+  
+    .related-guides, .source-list { background: white; border: 1px solid var(--border); border-radius: 12px; margin-top: 2rem; padding: 1.2rem; }
+    .related-guides ul, .source-list ul { margin-left: 1.1rem; margin-top: 0.75rem; }
+    .related-guides li, .source-list li { margin-bottom: 0.45rem; }
   </style>
 </head>
 <body>
-
-<nav>
-  <a href="index.html" class="nav-logo">KlinikGuiden</a>
-  <ul class="nav-links">
-    <li><a href="index.html#guides">Guides</a></li>
-    <li><a href="index.html#shop">Shop</a></li>
-    <li><a href="index.html#om-os">Om os</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <span class="eyebrow">🧾 Patientguide</span>
-  <h1>Forstå din tandlægeregning</h1>
-  <p>Hvad betyder de kryptiske koder? Hvornår dækker det offentlige? Og hvad har du krav på at vide på forhånd?</p>
-  <div class="hero-meta">
-    <span>⏱ 4 minutters læsning</span>
-    <span>✍️ Skrevet af Jonathan, tandklinikassistent</span>
-  </div>
-</div>
-
-<div class="content">
-
-  <div class="intro-box">
-    De fleste forlader tandlægen med en regning de ikke rigtig forstår. Tallene er ydelseskoder — et system tandlægen bruger til at registrere hvad der er lavet. Her forklarer vi de mest almindelige, og hvad du som patient har krav på.
-  </div>
-
-  <!-- SEKTION 1 -->
-  <div class="section">
-    <h2>Hvad er en ydelseskode?</h2>
-    <p>Hver behandling hos tandlægen har et nummer — en ydelseskode. Det er ikke tandlægens eget system, men et nationalt system der bruges til at afregne med den offentlige sygesikring og dokumentere hvad der er udført.</p>
-    <p>På din regning ser du typisk koden, en kort beskrivelse og prisen. Det kan se forvirrende ud, men systemet er egentlig logisk når du kender det.</p>
-  </div>
-
-  <!-- SEKTION 2 -->
-  <div class="section">
-    <h2>De mest almindelige koder</h2>
-    <p>Her er de koder du møder oftest som voksen patient:</p>
-
-    <ul class="kode-liste">
-      <li class="kode-item">
-        <span class="kode-nr">1101</span>
-        <div class="kode-tekst">
-          <strong>Undersøgelse</strong>
-          <p>Den almindelige tandeftersyn. Tandlægen gennemgår alle tænder, tandkød og mundhule.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">1111</span>
-        <div class="kode-tekst">
-          <strong>Basisundersøgelse (ny patient)</strong>
-          <p>Mere grundig undersøgelse ved første besøg eller efter lang pause. Tager længere tid end 1101.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">1401</span>
-        <div class="kode-tekst">
-          <strong>Tandrensning / scaling</strong>
-          <p>Fjernelse af tandsten over tandkødslinjen. En af de hyppigste ydelser.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">1403</span>
-        <div class="kode-tekst">
-          <strong>Rodplaning</strong>
-          <p>Dybere rensning under tandkødslinjen ved tandkødssygdom (parodontitis).</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">2100</span>
-        <div class="kode-tekst">
-          <strong>Enkeltfladet fyldning (plast)</strong>
-          <p>Stopning af et hul på én flade af tanden. Jo flere flader, jo højere kode og pris.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">2110</span>
-        <div class="kode-tekst">
-          <strong>Tofladet fyldning (plast)</strong>
-          <p>Hullet går over to flader — fx både tyggeflade og sideflade.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">1701</span>
-        <div class="kode-tekst">
-          <strong>Tandudtrækning</strong>
-          <p>Simpel fjernelse af en tand. Bedøvelse er inkluderet i denne ydelse.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">1301</span>
-        <div class="kode-tekst">
-          <strong>Røntgenbillede (enkelttand)</strong>
-          <p>Lille røntgenbillede af én eller to tænder. Bruges til at se huller og rodsystemet.</p>
-        </div>
-      </li>
-      <li class="kode-item">
-        <span class="kode-nr">1321</span>
-        <div class="kode-tekst">
-          <strong>Panoramaröntgen</strong>
-          <p>Det store røntgenbillede der viser hele kæben på én gang.</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  <!-- SEKTION 3 -->
-  <div class="section">
-    <h2>Hvem betaler hvad?</h2>
-    <p>Det offentlige dækker en del af prisen — men ikke det hele. Hvor meget afhænger af hvilken sikringsgruppe du er i.</p>
-
-    <div class="gruppe-grid">
-      <div class="gruppe-kort">
-        <h3>Sikringsgruppe 1</h3>
-        <p>Du har en fast tandlæge. Prisen på de fleste ydelser er fast og bestemt af overenskomsten. Du ved på forhånd hvad du betaler.</p>
-      </div>
-      <div class="gruppe-kort">
-        <h3>Sikringsgruppe 2</h3>
-        <p>Du kan frit vælge tandlæge. Priserne er ikke faste — tandlægen bestemmer selv. Du kan betale mere, men får et fast tilskud fra det offentlige.</p>
-      </div>
+  <nav>
+    <a class="nav-logo" href="/">Klinik<span>Guiden</span></a>
+    <a class="back-link" href="/#guides">Tilbage til guides</a>
+  </nav>
+  <main>
+    <p class="eyebrow">Gratis guide</p>
+    <h1>Forstå din tandlægeregning</h1>
+    <p class="intro">En tandlægeregning kan se teknisk ud, fordi den ofte består af ydelseskoder, klinikpriser og tilskud. Her er den simple måde at læse den på.</p>
+    <div class="note">
+      <p><strong>Start her:</strong> Kig først på behandlingsnavnet, derefter koden, prisen og om der er fratrukket tilskud.</p>
     </div>
-
-    <div class="tip-box" style="margin-top:16px;">
-      <div class="label">Vidste du</div>
-      Hvis du er under 22 år og født efter 31. december 2003, er tandlægebehandling gratis i Danmark.
-    </div>
-  </div>
-
-  <!-- SEKTION 4 -->
-  <div class="section">
-    <h2>Hvad har du krav på at vide?</h2>
-    <p>Som patient i Danmark har du konkrete rettigheder når det gælder priser og information.</p>
-
-    <ul class="checklist">
-      <li><span class="check-icon">→</span> Prislisten skal være synlig i venteværelset — du behøver ikke spørge om lov til at se den</li>
-      <li><span class="check-icon">→</span> Overstiger din behandling 2.500 kr. har du krav på et skriftligt prisoverslag inden behandlingen går i gang</li>
-      <li><span class="check-icon">→</span> Ændres prisen undervejs skal du have et nyt overslag</li>
-      <li><span class="check-icon">→</span> Du kan altid bede om en specificeret regning der forklarer hver enkelt ydelse</li>
+    <h2>Typiske ting du ser</h2>
+    <ul>
+      <li>En kode for ydelsen, fx undersøgelse, røntgen eller tandrensning.</li>
+      <li>Klinikkens pris for ydelsen.</li>
+      <li>Eventuelt offentligt tilskud eller andet tilskud.</li>
+      <li>Det beløb du selv skal betale.</li>
     </ul>
-
-    <div class="warn-box">
-      <strong>⚠️ Hvis du er i tvivl om din regning:</strong>
+    <h2>Hvad kan du spørge om?</h2>
+    <p>Bed klinikken forklare, hvad hver post betyder, og spørg om der findes alternativer, hvis behandlingen er dyr. Ved større behandlinger bør du bede om et skriftligt overslag.</p>
+    <h2>Hvornår skal du reagere?</h2>
+    <p>Kontakt klinikken, hvis du ser en ydelse du ikke genkender, hvis prisen afviger fra overslaget, eller hvis du ikke forstår tilskuddet.</p>
+<section class="related-guides">
+      <h2>Relaterede guides</h2>
       <ul>
-        <li>Spørg klinikken om en forklaring — det er din ret</li>
-        <li>Du kan sammenligne priser på sundhed.dk under "Tandlægepriser"</li>
-        <li>Er du utilfreds med behandlingen kan du klage til Styrelsen for Patientklager</li>
+        <li><a href="/hvordan-laeser-man-et-tandlaegeoverslag.html">Hvordan læser man et tandlægeoverslag?</a></li>
+        <li><a href="/hvad-daekker-sygesikringen-hos-tandlaegen.html">Hvad dækker sygesikringen hos tandlægen?</a></li>
+        <li><a href="/hvad-koster-en-tandrensning.html">Hvad koster en tandrensning?</a></li>
+        <li><a href="/hvad-koster-en-rodbehandling.html">Hvad koster en rodbehandling?</a></li>
       </ul>
-    </div>
-  </div>
-
-  <!-- SEKTION 5 -->
-  <div class="section">
-    <h2>Hvad gør Sygeforsikringen "danmark"?</h2>
-    <p>Udover den offentlige sygesikring kan du tegne et frivilligt medlemskab i Sygeforsikringen "danmark". Det giver ekstra tilskud oven i det offentlige — fx til fyldninger, kroner og større behandlinger.</p>
-    <p>Er du i tvivl om du er medlem, kan du tjekke det på <strong>sygeforsikring.dk</strong>. Mange har et medlemskab de ikke bruger aktivt.</p>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2025 KlinikGuiden. Skrevet af fagfolk. For dig.</p>
-  <p style="margin-top:6px;"><a href="index.html">← Tilbage til alle guides</a></p>
-</footer>
-
+    </section>
+    <section class="source-list">
+      <h2>Kilder og fagligt grundlag</h2>
+      <p>Guiden er skrevet som generel patientinformation og er faktatjekket mod nedenstående kilder. Den erstatter ikke undersøgelse, diagnose eller konkret rådgivning hos din egen tandlæge.</p>
+      <ul>
+        <li><a href="https://www.nhs.uk/nhs-services/dentists/dental-treatments/" rel="noopener" target="_blank">NHS: Dental treatments</a></li>
+        <li><a href="https://www.nice.org.uk/guidance/cg19" rel="noopener" target="_blank">NICE: Dental recall: recall interval between routine dental examinations</a></li>
+        <li><a href="https://klinikguiden.com/regningen.html" rel="noopener" target="_blank">KlinikGuiden: Forstå din tandlægeregning</a></li>
+      </ul>
+    </section>
+        <a class="button" href="/#kontakt">Få hjælp til at vælge guide</a>
+  </main>
+  <script src="analytics.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      KGAnalytics.trackEvent('guide_page_view', { page: 'regningen', guide: 'Tandlægeregning' });
+    });
+  </script>
 </body>
 </html>
