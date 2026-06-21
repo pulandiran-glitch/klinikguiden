@@ -58,6 +58,7 @@ http://www.klinikguiden.com/* https://klinikguiden.com/:splat 301!
 /guide-komplette /guide-komplette.html 200
 /vidensbase /vidensbase.html 200
 /privatliv /privatliv.html 200
+/privatlivspolitik /privatliv.html 200
 /tak /tak.html 200
 /tjekliste /tjekliste_tandlaegebesoeg.pdf 200
 

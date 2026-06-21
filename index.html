@@ -364,9 +364,12 @@
       <h2 class="section-title">Tjekliste til dit næste tandlægebesøg</h2>
       <p class="download-copy">Få den gratis PDF-tjekliste og korte nyheder fra KlinikGuiden om tandpleje, behandlinger og patientforståelse.</p>
       
-      <form id="newsletterForm" name="newsletter-signup" class="form-stack newsletter-form" method="POST" action="/tak.html" data-netlify="true" netlify-honeypot="bot-field">
+      <form id="newsletterForm" name="newsletter-signup" class="form-stack newsletter-form brevo-newsletter-form" method="POST" action="/tak.html" data-netlify="true" netlify-honeypot="bot-field" data-status-id="newsletterStatus" data-signup-page="/index.html#download" data-signup-form="Forside PDF-download">
         <input type="hidden" name="form-name" value="newsletter-signup" />
         <input type="hidden" name="created_at" class="created-at-field" value="" />
+        <input type="hidden" name="consent_text" value="Jeg accepterer at modtage nyheder og guides fra KlinikGuiden på e-mail. Jeg kan altid afmelde mig igen." />
+        <input type="hidden" name="consent_source" value="KlinikGuiden newsletter-signup" />
+        <input type="hidden" name="double_opt_in_status" value="pending" />
         <p class="honeypot"><label>Udfyld ikke dette felt: <input name="bot-field" /></label></p>
         <input class="form-field" type="text" id="newsletter-name" name="name" placeholder="Dit navn" autocomplete="name" required />
         <input class="form-field" type="email" id="newsletter-email" name="email" placeholder="Din e-mail" autocomplete="email" required />
@@ -378,7 +381,7 @@
         <div class="form-status" id="newsletterStatus" role="status" aria-live="polite"></div>
       </form>
       
-      <p class="privacy-note">Vi bruger kun din e-mail til nyheder fra KlinikGuiden. Du kan afmelde dig når som helst.</p>
+      <p class="privacy-note">Vi bruger kun dit navn og din e-mail til nyheder fra KlinikGuiden. Du kan afmelde dig når som helst.</p>
       <p style="margin-top:1rem;"><a class="btn-secondary" href="tjekliste_tandlaegebesoeg.pdf" data-track="pdf_direct_download">Download tjeklisten direkte</a></p>
     </div>
   </section>
@@ -425,14 +428,18 @@
       <a href="tilskudsberegner.html">Beregner</a>
       <a href="om-os.html">Om os</a>
       <a href="kontakt.html">Kontakt</a>
-      <a href="privatliv.html">Privatliv</a>
+      <a href="privatliv.html">Privatlivspolitik</a>
+      <a href="nyhedsbrev.html">Nyhedsbrev</a>
     </div>
     <div class="footer-newsletter">
       <h2>Få korte guides på e-mail</h2>
       <p>Nyheder og patientvenlige forklaringer fra KlinikGuiden. Du kan altid afmelde dig igen.</p>
-      <form name="newsletter-signup" class="form-stack newsletter-form" method="POST" action="/tak.html" data-netlify="true" netlify-honeypot="bot-field">
+      <form name="newsletter-signup" class="form-stack newsletter-form brevo-newsletter-form" method="POST" action="/tak.html" data-netlify="true" netlify-honeypot="bot-field" data-status-id="footerNewsletterStatus" data-signup-page="/index.html#footer" data-signup-form="Forside footer">
         <input type="hidden" name="form-name" value="newsletter-signup" />
         <input type="hidden" name="created_at" class="created-at-field" value="" />
+        <input type="hidden" name="consent_text" value="Jeg accepterer at modtage nyheder og guides fra KlinikGuiden på e-mail. Jeg kan altid afmelde mig igen." />
+        <input type="hidden" name="consent_source" value="KlinikGuiden newsletter-signup" />
+        <input type="hidden" name="double_opt_in_status" value="pending" />
         <p class="honeypot"><label>Udfyld ikke dette felt: <input name="bot-field" /></label></p>
         <input class="form-field" type="text" name="name" placeholder="Dit navn" autocomplete="name" required />
         <input class="form-field" type="email" name="email" placeholder="Din e-mail" autocomplete="email" required />
@@ -441,7 +448,9 @@
           <span>Jeg accepterer at modtage nyheder og guides fra KlinikGuiden på e-mail. Jeg kan altid afmelde mig igen.</span>
         </label>
         <button type="submit" class="newsletter-button">Tilmeld nyhedsbrev</button>
+        <div class="form-status" id="footerNewsletterStatus" role="status" aria-live="polite"></div>
       </form>
+      <p class="privacy-note">Vi bruger kun dit navn og din e-mail til nyheder fra KlinikGuiden. Du kan afmelde dig når som helst.</p>
     </div>
     <p style="margin-top:2rem;font-size:0.75rem;opacity:0.4;">© 2026 KlinikGuiden. Alle rettigheder forbeholdes.</p>
   </footer>
@@ -717,47 +726,89 @@
       field.value = new Date().toISOString();
     });
 
-    // Nyhedsbrev-formular
-    async function submitNewsletter(event) {
-      event.preventDefault();
-      setSubmitting(event.target, true);
-      setStatus('newsletterStatus', 'Sender din tilmelding...', 'info');
-      const email = document.getElementById('newsletter-email').value;
-      const name = document.getElementById('newsletter-name').value;
-      
-      try {
-        await postToSheet({
-          type: 'lead',
-          event: 'newsletter_signup',
-          page: getPageName(),
-          path: window.location.pathname,
-          sessionId: KGAnalytics.getSessionId(),
-          timestamp: new Date().toISOString(),
-          name: name,
-          email: email,
-          guide: 'Nyhedsbrev - Tjekliste',
-          details: JSON.stringify({ source: 'newsletter_form' })
-        });
+    async function submitNetlifyBackup(form) {
+      const backupData = new FormData(form);
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(backupData).toString()
+      });
+    }
 
-        // Download PDF
-        const link = document.createElement('a');
-        link.href = 'tjekliste_tandlaegebesoeg.pdf';
-        link.download = 'tjekliste_tandlaegebesoeg.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        KGAnalytics.trackEvent('pdf_download_started', { guide: 'Tjekliste til tandlægebesøg' });
-        
-        // Nulstil formularen
-        document.getElementById('newsletterForm').reset();
-        setStatus('newsletterStatus', 'Tak for tilmeldingen. Tjeklisten er klar til download.', 'success');
+    async function submitNewsletterToBrevo(event) {
+      const form = event.target;
+      const statusId = form.dataset.statusId || 'newsletterStatus';
+      const consent = form.querySelector('input[name="consent"]');
+
+      if (!form.checkValidity()) return;
+      event.preventDefault();
+
+      if (!consent || !consent.checked) {
+        setStatus(statusId, 'Du skal aktivt acceptere nyhedsbrevet, før formularen kan sendes.', 'error');
+        return;
+      }
+
+      const createdAt = form.querySelector('input[name="created_at"]');
+      if (createdAt && !createdAt.value) {
+        createdAt.value = new Date().toISOString();
+      }
+
+      setSubmitting(form, true);
+      setStatus(statusId, 'Sender din tilmelding...', 'info');
+
+      const formData = new FormData(form);
+      const payload = {
+        name: formData.get('name') || '',
+        email: formData.get('email') || '',
+        consent: formData.get('consent') || '',
+        consent_text: formData.get('consent_text') || '',
+        consent_source: formData.get('consent_source') || 'KlinikGuiden newsletter-signup',
+        consent_timestamp: formData.get('created_at') || new Date().toISOString(),
+        signup_page: form.dataset.signupPage || window.location.pathname,
+        signup_form: form.dataset.signupForm || 'newsletter-signup',
+        double_opt_in_status: formData.get('double_opt_in_status') || 'pending',
+        'bot-field': formData.get('bot-field') || ''
+      };
+
+      try {
+        const response = await fetch('/.netlify/functions/brevo-newsletter-signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Tilmeldingen kunne ikke gennemføres.');
+        }
+
+        submitNetlifyBackup(form).catch(() => {});
+
+        if (form.id === 'newsletterForm') {
+          const link = document.createElement('a');
+          link.href = 'tjekliste_tandlaegebesoeg.pdf';
+          link.download = 'tjekliste_tandlaegebesoeg.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          KGAnalytics.trackEvent('pdf_download_started', { guide: 'Tjekliste til tandlægebesøg' });
+        }
+
+        form.reset();
+        form.querySelectorAll('.created-at-field').forEach((field) => {
+          field.value = new Date().toISOString();
+        });
+        setStatus(statusId, data.message || 'Tak for tilmeldingen.', 'success');
       } catch (error) {
-        console.error('Fejl:', error);
-        setStatus('newsletterStatus', 'Der opstod en fejl. Prøv igen om lidt, eller skriv til os direkte.', 'error');
+        setStatus(statusId, error.message || 'Der opstod en fejl. Prøv igen om lidt.', 'error');
       } finally {
-        setSubmitting(event.target, false);
+        setSubmitting(form, false);
       }
     }
+
+    document.querySelectorAll('.brevo-newsletter-form').forEach((form) => {
+      form.addEventListener('submit', submitNewsletterToBrevo);
+    });
 
     // Bestillings-formular
     async function submitOrder(event) {

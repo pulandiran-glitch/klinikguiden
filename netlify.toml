@@ -76,6 +76,11 @@
   status = 200
 
 [[redirects]]
+  from = "/privatlivspolitik"
+  to = "/privatliv.html"
+  status = 200
+
+[[redirects]]
   from = "/tak"
   to = "/tak.html"
   status = 200

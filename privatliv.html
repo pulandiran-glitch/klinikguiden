@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privatliv | KlinikGuiden</title>
-  <meta name="description" content="Læs hvordan KlinikGuiden håndterer formularer, statistik og data." />
+  <title>Privatlivspolitik | KlinikGuiden</title>
+  <meta name="description" content="Læs hvordan KlinikGuiden håndterer nyhedsbrev, formularer, samtykke og persondata." />
   <meta name="theme-color" content="#4E7A62" />
   <link rel="canonical" href="https://klinikguiden.com/privatliv.html" />
   <link rel="manifest" href="/site.webmanifest" />
@@ -18,12 +18,14 @@
     .nav-logo { color: var(--charcoal); font-family: "Playfair Display", serif; font-size: 1.2rem; text-decoration: none; }
     .nav-logo span { color: var(--sage-dark); }
     .back-link { color: var(--sage-dark); font-size: 0.9rem; text-decoration: none; }
-    main { margin: 0 auto; max-width: 760px; padding: 80px 1.5rem; }
+    main { margin: 0 auto; max-width: 820px; padding: 80px 1.5rem; }
     h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 1.5rem; }
     h2 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin: 2rem 0 0.6rem; }
     p, li { color: var(--muted); font-weight: 300; }
     ul { margin-left: 1.2rem; }
     .note { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; margin: 2rem 0; padding: 1.3rem; }
+    .links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+    .links a { color: var(--sage-dark); }
   </style>
 </head>
 <body>
@@ -32,28 +34,59 @@
     <a class="back-link" href="/">Til forsiden</a>
   </nav>
   <main>
-    <h1>Privatliv og data</h1>
-    <p>KlinikGuiden bruger data for at forstå, hvilke guides og funktioner der hjælper brugerne. Vi forsøger at holde det enkelt og minimere persondata.</p>
+    <h1>Privatlivspolitik</h1>
+    <p>KlinikGuiden bruger kun de oplysninger, der er nødvendige for at sende nyhedsbrev, svare på henvendelser og drive hjemmesiden. Vi indsamler ikke helbredsoplysninger via nyhedsbrev-formularen.</p>
 
     <div class="note">
-      <p><strong>Kort sagt:</strong> Vi måler kun anonyme klik og sidevisninger, hvis du accepterer statistik. Formularer virker også, hvis du siger nej.</p>
+      <p><strong>Kort sagt:</strong> Nyhedsbrevet indsamler navn, e-mail og samtykkeoplysninger. Samtykke er frivilligt, og du kan altid trække det tilbage.</p>
     </div>
 
-    <h2>Hvad gemmer vi?</h2>
+    <h2>Hvilke oplysninger indsamles?</h2>
     <ul>
-      <li>Anonyme events som sidevisninger, klik, quizvalg og PDF-downloads, hvis du accepterer statistik.</li>
-      <li>En anonym session-id i browseren, hvis du accepterer statistik, så vi kan tælle handlinger fra samme besøg.</li>
-      <li>Navn, email og valgt guide, hvis du selv sender en formular.</li>
+      <li>Navn.</li>
+      <li>E-mailadresse.</li>
+      <li>Samtykke til nyhedsbrev.</li>
+      <li>Den samtykketekst, du accepterede.</li>
+      <li>Tidspunkt for samtykke.</li>
+      <li>Hvilken formular og side tilmeldingen kom fra.</li>
+      <li>Status for double opt-in, hvis det er slået til.</li>
     </ul>
 
-    <h2>Hvorfor gemmer vi det?</h2>
-    <p>For at kunne svare på henvendelser, se hvilke guides folk bruger efter samtykke, og forbedre siden uden at gætte.</p>
+    <h2>Hvorfor indsamles oplysningerne?</h2>
+    <p>Oplysningerne bruges til at sende nyhedsbreve, guides og information om tandbehandlinger, priser, tilskud og patientforståelse. De bruges også til at kunne dokumentere, at du aktivt har givet samtykke.</p>
 
-    <h2>Hvad skal du undgå?</h2>
-    <p>Skriv ikke følsomme helbredsoplysninger i formularerne. Kontakt altid din egen tandlæge ved konkrete symptomer, smerter eller behandlingsspørgsmål.</p>
+    <h2>Retsgrundlag</h2>
+    <p>Retsgrundlaget er dit samtykke. Du giver samtykke ved aktivt at sætte flueben i nyhedsbrev-formularen og sende formularen. Feltet er ikke forhåndsafkrydset.</p>
+
+    <h2>Systemer og databehandlere</h2>
+    <ul>
+      <li>Brevo bruges til nyhedsbrev, kontaktliste, samtykkeoplysninger og e-mailafsendelse.</li>
+      <li>Netlify bruges til hosting, formularer, serverless functions og eventuel backup af tilmeldinger.</li>
+    </ul>
+
+    <h2>Hvor længe gemmes oplysningerne?</h2>
+    <p>Oplysninger gemmes, indtil du afmelder dig nyhedsbrevet, beder om sletning, eller KlinikGuiden ikke længere har brug for oplysningerne til nyhedsbrev og dokumentation af samtykke.</p>
+
+    <h2>Sådan trækker du samtykke tilbage</h2>
+    <p>Du kan trække samtykke tilbage via afmeldingslinket i e-mails fra KlinikGuiden eller ved at kontakte os. Når du afmelder dig, skal du ikke længere modtage nyhedsbreve.</p>
+
+    <h2>Indsigt, rettelse og sletning</h2>
+    <p>Du kan bede om at få indsigt i de oplysninger, vi har om dig. Du kan også bede om at få oplysninger rettet, slettet eller få din e-mail afmeldt nyhedsbrevet.</p>
+
+    <h2>Cookie og tracking</h2>
+    <p>KlinikGuidens hjemmeside bruger ikke Brevo tracking i frontend-koden. Brevo kan teknisk understøtte åbnings- og kliktracking i e-mails, hvis det aktiveres i Brevo. Hvis det bruges, skal det fremgå af e-mailopsætningen og denne politik skal opdateres.</p>
+
+    <h2>Ingen følsomme oplysninger i nyhedsbrev</h2>
+    <p>Nyhedsbrev-formularen beder kun om navn, e-mail og samtykke. Skriv ikke tandproblemer, sygdomme eller andre følsomme oplysninger i formularer på siden. Kontakt altid din egen tandlæge ved konkrete symptomer, smerter eller behandlingsspørgsmål.</p>
 
     <h2>Kontakt</h2>
-    <p>Du kan skrive til os på <a href="mailto:hej@klinikguiden.dk">hej@klinikguiden.dk</a>, hvis du vil have slettet en formularhenvendelse.</p>
+    <p>Du kan skrive til os på <a href="mailto:hej@klinikguiden.dk">hej@klinikguiden.dk</a>, hvis du har spørgsmål om persondata, vil have indsigt, vil rettes, slettes eller afmeldes.</p>
+
+    <div class="links">
+      <a href="/">Forside</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="nyhedsbrev.html">Nyhedsbrev</a>
+    </div>
   </main>
 </body>
 </html>
