@@ -1,5 +1,5 @@
 [build]
-  publish = "outputs/klinikguiden-netlify-upload"
+  publish = "."
   functions = "netlify/functions"
 
 [functions]
