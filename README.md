@@ -74,11 +74,20 @@ Double opt-in aktiveres automatisk i funktionen, når både `BREVO_DOUBLE_OPTIN_
 
 Hvis double opt-in ikke er sat op, oprettes eller opdateres kontakten direkte i Brevo. Velkomstmail sendes kun, hvis `BREVO_WELCOME_TEMPLATE_ID` findes.
 
-Anbefalede værdier:
+Aktuelt sat i Netlify:
 
-1. `BREVO_SENDER_EMAIL`: `nyheder@klinikguiden.com` eller en anden verificeret adresse på domænet.
-2. `BREVO_SENDER_NAME`: `KlinikGuiden`
-3. `BREVO_REDIRECT_URL_AFTER_CONFIRMATION`: `https://klinikguiden.com/tak.html?newsletter=confirmed`
+1. `BREVO_API_KEY`
+2. `BREVO_SENDER_EMAIL=nyheder@klinikguiden.com`
+3. `BREVO_SENDER_NAME=KlinikGuiden`
+4. `BREVO_REDIRECT_URL_AFTER_CONFIRMATION=https://klinikguiden.com/tak.html?newsletter=confirmed`
+
+`nyheder@klinikguiden.com` bør først bruges til rigtige udsendelser, når `klinikguiden.com` er verificeret i Brevo. Hvis domænet ikke er verificeret endnu, kan Brevo afvise afsendelse eller give dårlig leverbarhed. Brug kun `kontakt@klinikguiden.com` midlertidigt, hvis den adresse allerede er verificeret i Brevo.
+
+Mangler stadig:
+
+1. `BREVO_LIST_ID`
+2. `BREVO_WELCOME_TEMPLATE_ID`
+3. `BREVO_DOUBLE_OPTIN_TEMPLATE_ID`
 
 ## Manuel Brevo-opsætning
 
@@ -108,6 +117,7 @@ Double opt-in template:
 5. Kopier template-ID'et.
 6. Sæt værdien som `BREVO_DOUBLE_OPTIN_TEMPLATE_ID` i Netlify.
 7. Sæt `BREVO_REDIRECT_URL_AFTER_CONFIRMATION` til `https://klinikguiden.com/tak.html?newsletter=confirmed`.
+8. Kontroller at `tak.html?newsletter=confirmed` viser beskeden: `Tak. Din e-mail er nu bekræftet, og du er tilmeldt nyheder fra KlinikGuiden.`
 
 Velkomstmail:
 

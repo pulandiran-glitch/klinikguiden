@@ -36,8 +36,17 @@
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const checkout = params.get('checkout');
+      const newsletter = params.get('newsletter');
       const product = params.get('product') || '';
       const sessionId = params.get('session_id') || '';
+
+      if (newsletter === 'confirmed') {
+        document.getElementById('thanksEyebrow').textContent = 'Nyhedsbrev bekræftet';
+        document.getElementById('thanksTitle').textContent = 'Tak. Din e-mail er nu bekræftet, og du er tilmeldt nyheder fra KlinikGuiden.';
+        document.getElementById('thanksText').textContent = 'Du får fremover korte guides om tandbehandlinger, priser og spørgsmål før tandlægebesøg.';
+        KGAnalytics.trackEvent('newsletter_confirmed_returned', { page: 'tak' });
+        return;
+      }
 
       if (checkout === 'success') {
         document.getElementById('thanksEyebrow').textContent = 'Betaling modtaget';
