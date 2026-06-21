@@ -72,12 +72,12 @@
 
 [[redirects]]
   from = "/privatliv"
-  to = "/privatliv.html"
+  to = "/privatlivspolitik.html"
   status = 200
 
 [[redirects]]
   from = "/privatlivspolitik"
-  to = "/privatliv.html"
+  to = "/privatlivspolitik.html"
   status = 200
 
 [[redirects]]

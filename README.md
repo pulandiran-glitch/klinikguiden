@@ -40,6 +40,22 @@ Samtykketeksten er:
 
 `Jeg accepterer at modtage nyheder og guides fra KlinikGuiden på e-mail. Jeg kan altid afmelde mig igen.`
 
+## Brevo status endpoint
+
+Efter deploy kan opsætningen kontrolleres uden at vise API-nøglen:
+
+`https://klinikguiden.com/.netlify/functions/brevo-newsletter-status`
+
+Endpointet viser:
+
+1. Om `BREVO_API_KEY` findes.
+2. Om `BREVO_LIST_ID` er sat.
+3. Om `BREVO_WELCOME_TEMPLATE_ID` er sat og kan findes i Brevo.
+4. Om `BREVO_DOUBLE_OPTIN_TEMPLATE_ID` er sat og kan findes i Brevo.
+5. Om double opt-in er klar.
+
+Endpointet viser ikke API-nøglen og viser ikke persondata.
+
 ## Netlify environment variables
 
 Sæt disse i Netlify under `Site configuration` -> `Environment variables`:
@@ -58,16 +74,58 @@ Double opt-in aktiveres automatisk i funktionen, når både `BREVO_DOUBLE_OPTIN_
 
 Hvis double opt-in ikke er sat op, oprettes eller opdateres kontakten direkte i Brevo. Velkomstmail sendes kun, hvis `BREVO_WELCOME_TEMPLATE_ID` findes.
 
+Anbefalede værdier:
+
+1. `BREVO_SENDER_EMAIL`: `nyheder@klinikguiden.com` eller en anden verificeret adresse på domænet.
+2. `BREVO_SENDER_NAME`: `KlinikGuiden`
+3. `BREVO_REDIRECT_URL_AFTER_CONFIRMATION`: `https://klinikguiden.com/tak.html?newsletter=confirmed`
+
 ## Manuel Brevo-opsætning
 
-1. Opret en kontaktliste til KlinikGuiden-nyhedsbrevet.
-2. Opret attributterne fra afsnittet `GDPR-felter`.
-3. Opret en double opt-in template i Brevo.
-4. Indsæt Brevos bekræftelseslink i double opt-in templaten.
-5. Opret en velkomstmail-template.
-6. Sørg for, at velkomstmail og nyhedsbreve indeholder Brevos unsubscribe-blok eller standard afmeldingslink.
-7. Sæt miljøvariablerne i Netlify.
-8. Test en rigtig tilmelding med en test-e-mail.
+Fordi `BREVO_API_KEY` ligger sikkert som secret i Netlify, kan koden bruge den ved tilmelding. Den bør ikke læses ud i terminalen eller vises i browseren.
+
+Kontaktliste:
+
+1. Log ind i Brevo.
+2. Gå til `Contacts`.
+3. Opret eller find listen `KlinikGuiden Nyhedsbrev`.
+4. Åbn listen og kopier liste-ID'et fra URL'en eller liste-detaljerne.
+5. Sæt værdien som `BREVO_LIST_ID` i Netlify.
+
+Attributter:
+
+1. Gå til `Contacts` -> `Settings` -> `Contact attributes`.
+2. Opret de manglende attributter fra afsnittet `GDPR-felter`.
+3. Brug boolean til `CONSENT_NEWSLETTER`.
+4. Brug tekst/date-tekst til samtykketekst, tidspunkt, kilde, side og formular.
+
+Double opt-in template:
+
+1. Gå til Brevos templates.
+2. Opret en template til double opt-in.
+3. Brug emne som `Bekræft din tilmelding til KlinikGuiden`.
+4. Indsæt Brevos double opt-in link i knappen/linket. Brevo API-dokumentationen angiver tagget `{{ params.DOIurl }}` til dette link.
+5. Kopier template-ID'et.
+6. Sæt værdien som `BREVO_DOUBLE_OPTIN_TEMPLATE_ID` i Netlify.
+7. Sæt `BREVO_REDIRECT_URL_AFTER_CONFIRMATION` til `https://klinikguiden.com/tak.html?newsletter=confirmed`.
+
+Velkomstmail:
+
+1. Opret en Brevo e-mail-template til velkomstmail.
+2. Emneforslag: `Velkommen til KlinikGuiden`.
+3. Brug en kort velkomsttekst og link til `https://klinikguiden.com/vidensbase.html`.
+4. Indsæt Brevos standard unsubscribe-blok eller standard afmeldingslink.
+5. Kopier template-ID'et.
+6. Sæt værdien som `BREVO_WELCOME_TEMPLATE_ID` i Netlify.
+
+Automation:
+
+1. Opret en Brevo automation, der starter når en kontakt bliver bekræftet eller tilføjet til listen `KlinikGuiden Nyhedsbrev`.
+2. Tilføj et trin der sender velkomstmailen.
+3. Sørg for at automation først kører efter double opt-in bekræftelse.
+4. Aktivér automation.
+
+Hvis double opt-in er aktivt, bør velkomstmailen sendes fra Brevo automation efter bekræftelse. Funktionen sender derfor ikke velkomstmail direkte i double opt-in-flowet.
 
 Anbefalet flow:
 
@@ -90,6 +148,24 @@ Test:
 5. Kontroller i Brevo, at kontakten er afmeldt.
 
 Brevo håndterer afmelding, når standard unsubscribe-blokken bruges korrekt.
+
+## DNS for klinikguiden.com
+
+DNS-værdierne skal kopieres fra Brevo, fordi Brevo genererer konkrete hostnames og værdier til kontoen.
+
+Opret eller kontroller disse records hos DNS-udbyderen for `klinikguiden.com`:
+
+1. Brevo code: normalt en TXT-record med hostname og value fra Brevo.
+2. DKIM: enten to CNAME-records eller en TXT-record, afhængigt af hvad Brevo viser.
+3. DMARC: TXT-record på `_dmarc.klinikguiden.com`.
+
+Anbefalet startværdi for DMARC, hvis Brevo ikke giver en anden:
+
+`v=DMARC1; p=none; rua=mailto:hej@klinikguiden.dk`
+
+Når mailflowet er testet, kan DMARC senere strammes til `quarantine` eller `reject`.
+
+Brevo-domænet skal stå som verificeret/authenticated, før `nyheder@klinikguiden.com` eller en anden domæneadresse bør bruges som afsender.
 
 ## Sletning, eksport og afmelding i Brevo
 
@@ -161,10 +237,11 @@ Brevo kan understøtte åbnings- og kliktracking i e-mails, hvis det aktiveres i
 7. Kontroller at double opt-in virker, hvis det er aktivt.
 8. Kontroller at afmeldingslinket findes i mailen.
 9. Kontroller at Brevo registrerer afmelding.
-10. Kontroller at `privatliv.html` virker.
+10. Kontroller at `privatlivspolitik.html` virker.
 11. Kontroller at footer-linket til privatlivspolitik virker.
 12. Kontroller at ingen API keys vises i frontend.
 13. Kontroller at Netlify logs ikke indeholder unødige persondata.
+14. Åbn `/.netlify/functions/brevo-newsletter-status` og kontroller at opsætningen står klar.
 
 ## Juridisk note
 
