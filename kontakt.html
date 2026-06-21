@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt | KlinikGuiden</title>
+  <meta name="description" content="Kontakt KlinikGuiden om digitale guides, spørgsmål eller samarbejde." />
+  <link rel="canonical" href="https://klinikguiden.com/kontakt.html" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--cream:#F5F0E8;--warm-white:#FDFAF5;--sage-dark:#4E7A62;--charcoal:#2C2C2C;--muted:#7A7A72;--border:#E2DDD4}
+    body{background:var(--warm-white);color:var(--charcoal);font-family:Inter,sans-serif;line-height:1.7}nav{align-items:center;background:rgba(253,250,245,.94);border-bottom:1px solid var(--border);display:flex;gap:1.5rem;justify-content:space-between;padding:1rem 2rem;position:sticky;top:0}nav a{color:var(--muted);font-size:.9rem;text-decoration:none}.brand{color:var(--charcoal);font-family:"Playfair Display",serif;font-size:1.2rem}.brand span{color:var(--sage-dark)}
+    main{margin:0 auto;max-width:760px;padding:5rem 2rem}.eyebrow{color:var(--sage-dark);font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}h1{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.15;margin:1rem 0}.intro{color:var(--muted);margin-bottom:2rem}.panel{background:white;border:1px solid var(--border);border-radius:16px;padding:2rem}.stack{display:grid;gap:1rem}.field{border:1px solid var(--border);border-radius:8px;font:inherit;padding:.85rem;width:100%}textarea.field{min-height:140px}.button{background:var(--sage-dark);border:0;border-radius:100px;color:white;cursor:pointer;font:inherit;font-weight:500;padding:.85rem 1.5rem}.note{color:var(--muted);font-size:.85rem;margin-top:1rem}.honeypot{display:none}@media(max-width:700px){nav{align-items:flex-start;flex-direction:column}main{padding:3rem 1.2rem}.panel{padding:1.3rem}}
+  </style>
+</head>
+<body>
+  <nav><a class="brand" href="/">Klinik<span>Guiden</span></a><div><a href="/vidensbase.html">Vidensbase</a> · <a href="/shop.html">Shop</a> · <a href="/om-os.html">Om os</a></div></nav>
+  <main>
+    <p class="eyebrow">Kontakt</p>
+    <h1>Skriv til KlinikGuiden</h1>
+    <p class="intro">Brug formularen til spørgsmål om guides, venteliste eller samarbejde. Skriv ikke følsomme helbredsoplysninger; kontakt din egen tandlæge ved konkrete symptomer eller behandling.</p>
+    <div class="panel">
+      <form name="contact" class="stack" method="POST" action="/tak.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="honeypot"><label>Udfyld ikke dette felt: <input name="bot-field" /></label></p>
+        <input class="field" type="text" name="name" placeholder="Dit navn" autocomplete="name" required />
+        <input class="field" type="email" name="email" placeholder="Din e-mail" autocomplete="email" required />
+        <select class="field" name="topic" required>
+          <option value="">Vælg emne</option>
+          <option value="komplette">Forstå din tandlæge - den komplette guide (99 kr.)</option>
+          <option value="boern">Børnenes tandplejeguide (79 kr.)</option>
+          <option value="venteliste">Venteliste - Tandplejekurset</option>
+          <option value="andet">Andet spørgsmål</option>
+        </select>
+        <textarea class="field" name="message" placeholder="Din besked"></textarea>
+        <button class="button" type="submit">Send besked</button>
+      </form>
+      <p class="note">Vi gemmer kun de oplysninger, du sender i formularen, så vi kan svare dig.</p>
+    </div>
+  </main>
+</body>
+</html>

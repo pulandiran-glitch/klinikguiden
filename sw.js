@@ -1,4 +1,4 @@
-const CACHE_NAME = 'klinikguiden-v3';
+const CACHE_NAME = 'klinikguiden-v4';
 const PRECACHE_URLS = [
   "/",
   "/index.html",
@@ -58,6 +58,11 @@ const PRECACHE_URLS = [
   "/hvad-er-plak.html",
   "/hvordan-laeser-man-et-tandlaegeoverslag.html",
   "/guide-komplette.html",
+  "/shop.html",
+  "/om-os.html",
+  "/tilskudsberegner.html",
+  "/kontakt.html",
+  "/nyhedsbrev.html",
   "/privatliv.html",
   "/tak.html",
   "/tjekliste_tandlaegebesoeg.pdf",

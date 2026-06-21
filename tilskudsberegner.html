@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tilskudsberegner | KlinikGuiden</title>
+  <meta name="description" content="Beregn et vejledende estimat af pris, offentligt tilskud og egenbetaling ved almindelige tandbehandlinger." />
+  <link rel="canonical" href="https://klinikguiden.com/tilskudsberegner.html" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--cream:#F5F0E8;--warm-white:#FDFAF5;--sage:#7A9E8A;--sage-dark:#4E7A62;--charcoal:#2C2C2C;--muted:#7A7A72;--border:#E2DDD4;--accent-light:#FBF2EA}
+    body{background:var(--warm-white);color:var(--charcoal);font-family:Inter,sans-serif;line-height:1.7}
+    nav{align-items:center;background:rgba(253,250,245,.94);border-bottom:1px solid var(--border);display:flex;gap:1.5rem;justify-content:space-between;padding:1rem 2rem;position:sticky;top:0;z-index:10}
+    nav a{color:var(--muted);font-size:.9rem;text-decoration:none} nav a:hover{color:var(--charcoal)}
+    .brand{color:var(--charcoal);font-family:"Playfair Display",serif;font-size:1.2rem}.brand span{color:var(--sage-dark)}
+    main{margin:0 auto;max-width:980px;padding:5rem 2rem}
+    .eyebrow{color:var(--sage-dark);font-size:.75rem;font-weight:500;letter-spacing:.12em;margin-bottom:1rem;text-transform:uppercase}
+    h1,h2,h3{font-family:"Playfair Display",serif;line-height:1.2} h1{font-size:clamp(2.3rem,6vw,3.8rem);margin-bottom:1rem} h2{font-size:1.7rem;margin:2rem 0 1rem} h3{font-size:1.15rem;margin-bottom:.4rem}
+    .intro{color:var(--muted);font-size:1.05rem;max-width:680px;margin-bottom:2rem}
+    .panel{background:white;border:1px solid var(--border);border-radius:16px;padding:2rem}
+    .field{display:grid;gap:.45rem;margin-bottom:1rem}.field label{font-weight:500}.field input,.field select{border:1px solid var(--border);border-radius:8px;font:inherit;padding:.8rem;width:100%}
+    .note,.explainer{background:var(--cream);border:1px solid var(--border);border-radius:12px;color:var(--muted);font-size:.9rem;margin:1rem 0;padding:1rem}
+    button,.button{background:var(--sage-dark);border:0;border-radius:100px;color:white;cursor:pointer;display:inline-block;font:inherit;font-weight:500;padding:.85rem 1.5rem;text-decoration:none}
+    .result{background:var(--cream);border-radius:12px;display:none;margin-top:1.5rem;padding:1.5rem}.result.show{display:block}
+    .row{border-bottom:1px solid var(--border);display:flex;justify-content:space-between;padding:.75rem 0}.row:last-child{border-bottom:0}.total{background:var(--accent-light);margin:1rem -1.5rem -1.5rem;padding:1rem 1.5rem}
+    details{background:white;border:1px solid var(--border);border-radius:10px;margin:.7rem 0;padding:1rem}summary{cursor:pointer;font-weight:500}details p{color:var(--muted);font-size:.9rem;margin-top:.6rem}
+    @media(max-width:700px){nav{align-items:flex-start;flex-direction:column}main{padding:3rem 1.2rem}.panel{padding:1.3rem}.row{gap:1rem}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/">Klinik<span>Guiden</span></a>
+    <div><a href="/vidensbase.html">Vidensbase</a> · <a href="/shop.html">Shop</a> · <a href="/kontakt.html">Kontakt</a></div>
+  </nav>
+  <main>
+    <p class="eyebrow">Vejledende beregner</p>
+    <h1>Tilskudsberegner til tandbehandling</h1>
+    <p class="intro">Se forskellen mellem samlet pris, estimeret offentligt tilskud og patientens egenbetaling. Beregneren er kun et overblik og erstatter ikke klinikkens prisoverslag.</p>
+    <section class="panel">
+      <div class="field">
+        <label for="treatment">Behandling</label>
+        <select id="treatment" onchange="updateExplainer()">
+          <option value="">Vælg behandling</option>
+          <option value="cleaning">Tandrensning / scaling</option>
+          <option value="filling1">Enkeltfladet fyldning</option>
+          <option value="filling2">Tofladet fyldning</option>
+          <option value="extraction">Tandudtrækning</option>
+          <option value="xray">Røntgenbillede</option>
+          <option value="exam">Undersøgelse</option>
+        </select>
+      </div>
+      <div class="explainer" id="explainer">Vælg en behandling for at se en kort forklaring.</div>
+      <div class="field">
+        <label for="price">Samlet pris hos tandlægen (kr.)</label>
+        <input id="price" type="number" min="0" placeholder="f.eks. 2430" />
+      </div>
+      <button type="button" onclick="calculate()">Beregn vejledende egenbetaling</button>
+      <div class="result" id="result">
+        <h2>Vejledende resultat</h2>
+        <div class="row"><span>Samlet pris</span><strong id="totalPrice">0 kr.</strong></div>
+        <div class="row"><span>Offentligt tilskud</span><strong id="subsidy">0 kr.</strong></div>
+        <div class="row total"><span>Patientens egenbetaling</span><strong id="patientPays">0 kr.</strong></div>
+        <p class="note">Beregneren giver kun et vejledende estimat. Den endelige pris og tilskud afhænger af behandling, alder, aftaler, klinik og gældende regler.</p>
+      </div>
+    </section>
+    <h2>Ofte stillede spørgsmål</h2>
+    <details><summary>Er beregningen officiel?</summary><p>Nej. Den er lavet for at forklare forholdet mellem pris, tilskud og egenbetaling. Brug altid klinikkens prisoverslag som konkret grundlag.</p></details>
+    <details><summary>Hvorfor er sikringsgruppe ikke et valg her?</summary><p>Forenklede gruppevalg kan give et misvisende billede. Tilskud afhænger af ydelse, alder, aftaler og gældende regler, ikke kun et enkelt gruppefelt.</p></details>
+    <details><summary>Hvad betyder egenbetaling?</summary><p>Det er den del af den samlede pris, der er tilbage, når det estimerede tilskud er trukket fra.</p></details>
+  </main>
+  <script>
+    const treatments = {
+      cleaning:{title:'Tandrensning / scaling',text:'Fjerner plak, tandsten og belægninger. Bruges ofte ved kontrol og irriteret tandkød.',rate:.45},
+      filling1:{title:'Enkeltfladet fyldning',text:'En mindre fyldning på én tandflade efter hul eller reparation.',rate:.30},
+      filling2:{title:'Tofladet fyldning',text:'En fyldning på to flader. Prisen afhænger af tand, materiale og kompleksitet.',rate:.30},
+      extraction:{title:'Tandudtrækning',text:'Fjernelse af en tand. Kirurgi, akut tillæg og kontrol kan ændre prisen.',rate:.35},
+      xray:{title:'Røntgenbillede',text:'Et billede tandlægen bruger til at se mellem tænder, omkring rødder eller under fyldninger.',rate:.40},
+      exam:{title:'Undersøgelse',text:'Vurdering af tænder, tandkød, slimhinder, bid og symptomer.',rate:.40}
+    };
+    function kr(amount){return Math.round(amount).toLocaleString('da-DK') + ' kr.'}
+    function updateExplainer(){const info=treatments[document.getElementById('treatment').value];document.getElementById('explainer').textContent=info?info.title+': '+info.text:'Vælg en behandling for at se en kort forklaring.'}
+    function calculate(){const key=document.getElementById('treatment').value;const price=Number(document.getElementById('price').value)||0;if(!key||price<=0){alert('Vælg behandling og indtast en pris.');return}const subsidy=Math.round(price*treatments[key].rate);document.getElementById('totalPrice').textContent=kr(price);document.getElementById('subsidy').textContent=kr(subsidy);document.getElementById('patientPays').textContent=kr(price-subsidy);document.getElementById('result').classList.add('show')}
+  </script>
+</body>
+</html>

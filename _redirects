@@ -60,3 +60,9 @@ http://www.klinikguiden.com/* https://klinikguiden.com/:splat 301!
 /privatliv /privatliv.html 200
 /tak /tak.html 200
 /tjekliste /tjekliste_tandlaegebesoeg.pdf 200
+
+/shop /shop.html 200
+/om-os /om-os.html 200
+/tilskudsberegner /tilskudsberegner.html 200
+/kontakt /kontakt.html 200
+/nyhedsbrev /nyhedsbrev.html 200

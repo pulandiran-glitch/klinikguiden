@@ -26,8 +26,8 @@
   <main>
     <div class="card">
       <p class="eyebrow" id="thanksEyebrow">Modtaget</p>
-      <h1 id="thanksTitle">Tak, vi har modtaget din henvendelse</h1>
-      <p id="thanksText">Hvis du har sendt en bestilling eller skrevet dig op til en guide, vender vi tilbage på email. Du kan roligt lukke siden eller gå tilbage til forsiden.</p>
+      <h1 id="thanksTitle">Tak for din tilmelding</h1>
+      <p id="thanksText">Tak for din tilmelding. Du får snart nyheder og guides fra KlinikGuiden direkte i din indbakke.</p>
       <a href="/">Til forsiden</a>
     </div>
   </main>
@@ -42,9 +42,14 @@
       if (checkout === 'success') {
         document.getElementById('thanksEyebrow').textContent = 'Betaling modtaget';
         document.getElementById('thanksTitle').textContent = 'Tak for dit køb';
-        document.getElementById('thanksText').textContent = 'Din betaling er gennemført. Vi sender guiden og næste trin til den email, du brugte i betalingen.';
+        document.getElementById('thanksText').textContent = 'Din betaling er gennemført. Vi sender guiden og næste trin til den e-mail, du brugte i betalingen.';
         KGAnalytics.trackEvent('checkout_success_returned', { page: 'tak', product, checkoutSessionId: sessionId });
         return;
+      }
+
+      if (document.referrer.includes('kontakt.html')) {
+        document.getElementById('thanksTitle').textContent = 'Tak, vi har modtaget din henvendelse';
+        document.getElementById('thanksText').textContent = 'Hvis du har sendt en bestilling eller skrevet dig op til en guide, vender vi tilbage på e-mail. Du kan roligt lukke siden eller gå tilbage til forsiden.';
       }
 
       KGAnalytics.trackEvent('thank_you_page_view', { page: 'tak' });
