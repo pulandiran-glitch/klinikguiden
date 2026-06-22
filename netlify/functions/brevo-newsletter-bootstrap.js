@@ -155,12 +155,13 @@ exports.handler = async (event) => {
     return response(405, { error: "Metoden er ikke tilladt." });
   }
 
+  const expectedSetupToken = process.env.KG_BREVO_SETUP_TOKEN || process.env.BREVO_SETUP_TOKEN;
   const setupToken = event.headers["x-setup-token"] || event.headers["X-Setup-Token"];
-  if (!process.env.BREVO_SETUP_TOKEN || setupToken !== process.env.BREVO_SETUP_TOKEN) {
+  if (!expectedSetupToken || setupToken !== expectedSetupToken) {
     return response(401, {
       error: "Ikke autoriseret.",
       diagnostics: {
-        setupTokenConfigured: Boolean(process.env.BREVO_SETUP_TOKEN),
+        setupTokenConfigured: Boolean(expectedSetupToken),
         setupTokenHeaderReceived: Boolean(setupToken)
       }
     });
