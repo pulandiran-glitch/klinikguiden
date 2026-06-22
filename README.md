@@ -74,9 +74,10 @@ Double opt-in aktiveres automatisk i funktionen, når både `BREVO_DOUBLE_OPTIN_
 
 Hvis double opt-in ikke er sat op, oprettes eller opdateres kontakten direkte i Brevo. Velkomstmail sendes kun, hvis `BREVO_WELCOME_TEMPLATE_ID` findes.
 
-Aktuelt sat i Netlify:
+Aktuelt bekræftet sat i Netlify:
 
 1. `BREVO_API_KEY`
+2. `BREVO_LIST_ID=5`
 2. `BREVO_SENDER_EMAIL=nyheder@klinikguiden.com`
 3. `BREVO_SENDER_NAME=KlinikGuiden`
 4. `BREVO_REDIRECT_URL_AFTER_CONFIRMATION=https://klinikguiden.com/tak.html?newsletter=confirmed`
@@ -85,9 +86,15 @@ Aktuelt sat i Netlify:
 
 Mangler stadig:
 
-1. `BREVO_LIST_ID`
-2. `BREVO_WELCOME_TEMPLATE_ID`
-3. `BREVO_DOUBLE_OPTIN_TEMPLATE_ID`
+1. `BREVO_WELCOME_TEMPLATE_ID`
+2. `BREVO_DOUBLE_OPTIN_TEMPLATE_ID`
+
+Færdige HTML-templates ligger i:
+
+1. `brevo-templates/klinikguiden-double-opt-in.html`
+2. `brevo-templates/klinikguiden-velkomstmail.html`
+
+Se også `BREVO_MANUEL_OPSAETNING.md` for den korte trin-for-trin opsætning.
 
 ## Manuel Brevo-opsætning
 
