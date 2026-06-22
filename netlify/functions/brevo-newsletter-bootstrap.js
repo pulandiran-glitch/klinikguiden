@@ -155,7 +155,8 @@ exports.handler = async (event) => {
     return response(405, { error: "Metoden er ikke tilladt." });
   }
 
-  if (!process.env.BREVO_SETUP_TOKEN || event.headers["x-setup-token"] !== process.env.BREVO_SETUP_TOKEN) {
+  const setupToken = event.headers["x-setup-token"] || event.headers["X-Setup-Token"];
+  if (!process.env.BREVO_SETUP_TOKEN || setupToken !== process.env.BREVO_SETUP_TOKEN) {
     return response(401, { error: "Ikke autoriseret." });
   }
 
