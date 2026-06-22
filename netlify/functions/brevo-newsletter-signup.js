@@ -94,10 +94,9 @@ async function brevoFetch(path, body) {
   return data;
 }
 
-async function createDoubleOptInContact({ email, attributes, listId }) {
+async function createDoubleOptInContact({ email, listId }) {
   return brevoFetch("/contacts/doubleOptinConfirmation", {
     email,
-    attributes,
     includeListIds: [listId],
     templateId: getTemplateId("BREVO_DOUBLE_OPTIN_TEMPLATE_ID"),
     redirectionUrl: process.env.BREVO_REDIRECT_URL_AFTER_CONFIRMATION
@@ -105,12 +104,21 @@ async function createDoubleOptInContact({ email, attributes, listId }) {
 }
 
 async function createOrUpdateContact({ email, attributes, listId }) {
-  return brevoFetch("/contacts", {
+  const body = {
     email,
     attributes,
-    listIds: [listId],
     updateEnabled: true
-  });
+  };
+
+  if (listId) {
+    body.listIds = [listId];
+  }
+
+  return brevoFetch("/contacts", body);
+}
+
+async function saveConsentAttributes({ email, attributes }) {
+  return createOrUpdateContact({ email, attributes });
 }
 
 async function sendWelcomeTemplate({ email, name }) {
@@ -199,7 +207,8 @@ exports.handler = async (event) => {
 
   try {
     if (doubleOptInEnabled) {
-      await createDoubleOptInContact({ email, attributes, listId });
+      await createDoubleOptInContact({ email, listId });
+      await saveConsentAttributes({ email, attributes });
       return response(200, {
         ok: true,
         doubleOptIn: true,
