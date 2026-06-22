@@ -171,7 +171,7 @@ Opret eller kontroller disse records hos DNS-udbyderen for `klinikguiden.com`:
 
 Anbefalet startværdi for DMARC, hvis Brevo ikke giver en anden:
 
-`v=DMARC1; p=none; rua=mailto:hej@klinikguiden.dk`
+`v=DMARC1; p=none; rua=mailto:klinikguiden@gmail.com`
 
 Når mailflowet er testet, kan DMARC senere strammes til `quarantine` eller `reject`.
 
