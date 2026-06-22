@@ -157,7 +157,13 @@ exports.handler = async (event) => {
 
   const setupToken = event.headers["x-setup-token"] || event.headers["X-Setup-Token"];
   if (!process.env.BREVO_SETUP_TOKEN || setupToken !== process.env.BREVO_SETUP_TOKEN) {
-    return response(401, { error: "Ikke autoriseret." });
+    return response(401, {
+      error: "Ikke autoriseret.",
+      diagnostics: {
+        setupTokenConfigured: Boolean(process.env.BREVO_SETUP_TOKEN),
+        setupTokenHeaderReceived: Boolean(setupToken)
+      }
+    });
   }
 
   if (!process.env.BREVO_API_KEY) {
