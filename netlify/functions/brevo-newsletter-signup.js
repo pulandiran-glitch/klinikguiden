@@ -86,6 +86,8 @@ async function brevoFetch(path, body) {
   if (!brevoResponse.ok) {
     const error = new Error(data.message || "Brevo afviste tilmeldingen.");
     error.statusCode = brevoResponse.status;
+    error.brevoCode = data.code || "";
+    error.brevoMessage = data.message || "";
     throw error;
   }
 
@@ -217,12 +219,17 @@ exports.handler = async (event) => {
   } catch (error) {
     console.error("Brevo newsletter signup failed", {
       statusCode: error.statusCode || 500,
+      brevoCode: error.brevoCode || "",
+      brevoMessage: error.brevoMessage || "",
       signupForm,
       signupPage
     });
 
     return response(error.statusCode || 502, {
-      error: "Tilmeldingen kunne ikke gennemføres lige nu. Prøv igen senere."
+      error: "Tilmeldingen kunne ikke gennemføres lige nu. Prøv igen senere.",
+      brevoStatus: error.statusCode || 500,
+      brevoCode: error.brevoCode || "unknown",
+      brevoMessage: error.brevoMessage || "Brevo afviste forespørgslen uden en offentlig fejlbesked."
     });
   }
 };
