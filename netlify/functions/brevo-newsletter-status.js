@@ -1,4 +1,5 @@
 const BREVO_API_BASE = "https://api.brevo.com/v3";
+const NEWSLETTER_LIST_ID = 5;
 
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -67,7 +68,7 @@ exports.handler = async (event) => {
 
   const env = {
     BREVO_API_KEY: apiKeyConfigured,
-    BREVO_LIST_ID: Boolean(numericEnv("BREVO_LIST_ID")),
+    BREVO_LIST_ID: numericEnv("BREVO_LIST_ID") === NEWSLETTER_LIST_ID,
     BREVO_SENDER_EMAIL: Boolean(process.env.BREVO_SENDER_EMAIL),
     BREVO_SENDER_NAME: Boolean(process.env.BREVO_SENDER_NAME),
     BREVO_WELCOME_TEMPLATE_ID: Boolean(numericEnv("BREVO_WELCOME_TEMPLATE_ID")),
@@ -90,15 +91,18 @@ exports.handler = async (event) => {
   ]);
 
   const doubleOptInReady = env.BREVO_DOUBLE_OPTIN_TEMPLATE_ID && env.BREVO_REDIRECT_URL_AFTER_CONFIRMATION;
-  const ready = env.BREVO_API_KEY && env.BREVO_LIST_ID && env.BREVO_SENDER_EMAIL && env.BREVO_SENDER_NAME && doubleOptInReady;
+  const welcomeAutomationReady = env.BREVO_WELCOME_TEMPLATE_ID;
+  const ready = env.BREVO_API_KEY && env.BREVO_LIST_ID && env.BREVO_SENDER_EMAIL && env.BREVO_SENDER_NAME && doubleOptInReady && welcomeAutomationReady;
 
   return response(200, {
     ok: ready,
     env,
     resources,
+    requiredListId: NEWSLETTER_LIST_ID,
     doubleOptInReady,
+    welcomeAutomationReady,
     message: ready
-      ? "Brevo nyhedsbrev er klar til double opt-in flow."
-      : "Brevo API-nøglen findes, men liste/template/sender-opsætning mangler eller er ikke valideret endnu."
+      ? "Brevo nyhedsbrev er klar til double opt-in og velkomstmail via automation."
+      : "Brevo API-nøglen findes, men liste/template/sender-opsætning eller automation-grundlag mangler endnu."
   });
 };

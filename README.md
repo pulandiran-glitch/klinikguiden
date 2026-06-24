@@ -14,8 +14,6 @@ Formularerne findes på:
 
 Alle formularer bruger stadig Netlify Forms som backup med formularnavnet `newsletter-signup`.
 
-GitHub `main` og Netlify Git-deploy er source of truth for Brevo-funktionen. Brug ikke en gammel manuel upload-mappe eller `outputs/klinikguiden-netlify-upload` som kilde til Brevo-function-kode.
-
 ## GDPR-felter
 
 Nyhedsbrevet indsamler kun:
@@ -51,10 +49,10 @@ Efter deploy kan opsætningen kontrolleres uden at vise API-nøglen:
 Endpointet viser:
 
 1. Om `BREVO_API_KEY` findes.
-2. Om `BREVO_LIST_ID` er sat.
+2. Om `BREVO_LIST_ID=5` er sat.
 3. Om `BREVO_WELCOME_TEMPLATE_ID` er sat og kan findes i Brevo.
 4. Om `BREVO_DOUBLE_OPTIN_TEMPLATE_ID` er sat og kan findes i Brevo.
-5. Om double opt-in er klar.
+5. Om double opt-in og velkomstmail-grundlaget er klar.
 
 Endpointet viser ikke API-nøglen og viser ikke persondata.
 
@@ -63,7 +61,7 @@ Endpointet viser ikke API-nøglen og viser ikke persondata.
 Sæt disse i Netlify under `Site configuration` -> `Environment variables`:
 
 1. `BREVO_API_KEY`
-2. `BREVO_LIST_ID`
+2. `BREVO_LIST_ID=5`
 3. `BREVO_SENDER_EMAIL`
 4. `BREVO_SENDER_NAME`
 5. `BREVO_WELCOME_TEMPLATE_ID`
@@ -72,11 +70,9 @@ Sæt disse i Netlify under `Site configuration` -> `Environment variables`:
 
 `BREVO_API_KEY` og `BREVO_LIST_ID` kræves for at skrive kontakter til Brevo.
 
-Double opt-in aktiveres automatisk i funktionen, når både `BREVO_DOUBLE_OPTIN_TEMPLATE_ID` og `BREVO_REDIRECT_URL_AFTER_CONFIRMATION` findes.
+Double opt-in er et krav. Funktionen afviser tilmeldinger med `503`, hvis `BREVO_DOUBLE_OPTIN_TEMPLATE_ID` eller `BREVO_REDIRECT_URL_AFTER_CONFIRMATION` mangler. Funktionen sender aldrig velkomstmail direkte; velkomstmailen skal sendes fra Brevo automation efter brugerens bekræftelse.
 
-Hvis double opt-in ikke er sat op, oprettes eller opdateres kontakten direkte i Brevo. Velkomstmail sendes kun, hvis `BREVO_WELCOME_TEMPLATE_ID` findes.
-
-Aktuelt bekræftet sat og verificeret via live status-endpoint:
+Krav i Netlify:
 
 1. `BREVO_API_KEY`
 2. `BREVO_LIST_ID=5`
@@ -104,8 +100,8 @@ Kontaktliste:
 1. Log ind i Brevo.
 2. Gå til `Contacts`.
 3. Opret eller find listen `KlinikGuiden Nyhedsbrev`.
-4. Åbn listen og kopier liste-ID'et fra URL'en eller liste-detaljerne.
-5. Sæt værdien som `BREVO_LIST_ID` i Netlify.
+4. Kontroller at liste-ID'et er `5`.
+5. Sæt `BREVO_LIST_ID=5` i Netlify.
 
 Attributter:
 
@@ -134,14 +130,19 @@ Velkomstmail:
 5. Kopier template-ID'et.
 6. Sæt værdien som `BREVO_WELCOME_TEMPLATE_ID` i Netlify.
 
-Automation:
+Automation for velkomstmail:
 
-1. Opret en Brevo automation, der starter når en kontakt bliver bekræftet via double opt-in og er på listen `KlinikGuiden Nyhedsbrev`.
-2. Tilføj et trin der sender velkomstmailen.
-3. Sørg for at automation først kører efter double opt-in bekræftelse.
-4. Aktivér automation.
+1. Gå til `Automation` i Brevo.
+2. Klik `Create an automation` eller `Create workflow`.
+3. Vælg en blank/custom automation, hvis Brevo viser flere skabeloner.
+4. Vælg triggeren `A contact is added to a list` / `Contact added to list`.
+5. Vælg listen `KlinikGuiden Nyhedsbrev` med liste-ID `5`.
+6. Tilføj handlingen `Send an email`.
+7. Vælg templaten `KlinikGuiden Velkomstmail`.
+8. Sørg for at workflowet kun starter for kontakter, der er kommet på listen efter double opt-in. Brevo double opt-in lægger først kontakten på listen efter bekræftelsen, så denne trigger er den rigtige.
+9. Slå automationen til.
 
-Brevo automation for velkomstmail er et krav, når double opt-in er aktivt. Funktionen må ikke sende velkomstmail direkte i double opt-in-flowet, fordi brugeren først skal bekræfte sin e-mailadresse.
+Funktionen sender derfor ikke velkomstmail direkte i double opt-in-flowet. Den gemmer samtykkeoplysninger og beder Brevo sende bekræftelsesmailen. Velkomstmailen kommer først, når Brevo efter bekræftelsen placerer kontakten på liste `5`.
 
 Anbefalet flow:
 
@@ -158,10 +159,15 @@ Afmeldingslinket skal ligge i Brevo-template eller Brevo-nyhedsbrevets standard 
 Test:
 
 1. Tilmeld en test-e-mail.
-2. Modtag double opt-in og/eller velkomstmail.
-3. Kontroller at afmeldingslinket er synligt.
-4. Klik afmeldingslinket.
-5. Kontroller i Brevo, at kontakten er afmeldt.
+2. Modtag double opt-in-mailen.
+3. Kontroller i Brevo, at kontakten endnu ikke er endeligt tilmeldt nyhedsbrevslisten før klik på bekræftelseslinket.
+4. Klik bekræftelseslinket.
+5. Kontroller at du lander på `https://klinikguiden.com/tak.html?newsletter=confirmed`.
+6. Kontroller at kontakten ligger på listen `KlinikGuiden Nyhedsbrev` / ID `5`.
+7. Kontroller at velkomstmailen sendes fra automationen.
+8. Kontroller at afmeldingslinket er synligt.
+9. Klik afmeldingslinket.
+10. Kontroller i Brevo, at kontakten er afmeldt.
 
 Brevo håndterer afmelding, når standard unsubscribe-blokken bruges korrekt.
 
@@ -250,7 +256,7 @@ Brevo kan understøtte åbnings- og kliktracking i e-mails, hvis det aktiveres i
 4. Send en testtilmelding med aktivt samtykke.
 5. Kontroller at kontakten oprettes i Brevo.
 6. Kontroller at samtykkedata gemmes på kontakten.
-7. Kontroller at double opt-in virker, hvis det er aktivt.
+7. Kontroller at double opt-in virker.
 8. Kontroller at afmeldingslinket findes i mailen.
 9. Kontroller at Brevo registrerer afmelding.
 10. Kontroller at `privatlivspolitik.html` virker.

@@ -2,3 +2,10 @@ STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 GOOGLE_SHEET_ENDPOINT=https://script.google.com/macros/s/AKfycbyezQI9c6rX15R9PMnvf5gsSDFo8g_Yv81Yvc88zFiClzOI1iXvYmx1YwOVZMVNbGRbPA/exec
 SITE_URL=https://klinikguiden.com
+BREVO_API_KEY=xkeysib-...
+BREVO_LIST_ID=5
+BREVO_SENDER_EMAIL=nyheder@klinikguiden.com
+BREVO_SENDER_NAME=KlinikGuiden
+BREVO_REDIRECT_URL_AFTER_CONFIRMATION=https://klinikguiden.com/tak.html?newsletter=confirmed
+BREVO_DOUBLE_OPTIN_TEMPLATE_ID=<double-opt-in-template-id>
+BREVO_WELCOME_TEMPLATE_ID=<velkomstmail-template-id>

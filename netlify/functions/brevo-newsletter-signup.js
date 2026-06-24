@@ -1,5 +1,6 @@
 const CONSENT_TEXT = "Jeg accepterer at modtage nyheder og guides fra KlinikGuiden på e-mail. Jeg kan altid afmelde mig igen.";
 const BREVO_API_BASE = "https://api.brevo.com/v3";
+const NEWSLETTER_LIST_ID = 5;
 
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -54,8 +55,8 @@ function getSignupPage(payload, event) {
 }
 
 function getListId() {
-  const id = Number(process.env.BREVO_LIST_ID);
-  return Number.isInteger(id) && id > 0 ? id : null;
+  const id = Number(process.env.BREVO_LIST_ID || NEWSLETTER_LIST_ID);
+  return Number.isInteger(id) && id === NEWSLETTER_LIST_ID ? id : null;
 }
 
 function getTemplateId(name) {
@@ -118,29 +119,7 @@ async function createOrUpdateContact({ email, attributes, listId }) {
 }
 
 async function saveConsentAttributes({ email, attributes }) {
-  // Do not pass listId here. Brevo must handle list membership through
-  // doubleOptinConfirmation after the contact confirms the email address.
   return createOrUpdateContact({ email, attributes });
-}
-
-async function sendWelcomeTemplate({ email, name }) {
-  const templateId = getTemplateId("BREVO_WELCOME_TEMPLATE_ID");
-  if (!templateId) {
-    return { skipped: true, reason: "BREVO_WELCOME_TEMPLATE_ID mangler." };
-  }
-
-  return brevoFetch("/smtp/email", {
-    sender: {
-      name: process.env.BREVO_SENDER_NAME || "KlinikGuiden",
-      email: process.env.BREVO_SENDER_EMAIL || "kontakt@klinikguiden.com"
-    },
-    to: [{ email, name: name || email }],
-    templateId,
-    params: {
-      FIRSTNAME: name || "",
-      SIGNUP_SOURCE: "KlinikGuiden"
-    }
-  });
 }
 
 exports.handler = async (event) => {
@@ -182,14 +161,24 @@ exports.handler = async (event) => {
   const listId = getListId();
   if (!listId) {
     return response(503, {
-      error: "Nyhedsbrevet mangler BREVO_LIST_ID i Netlify."
+      error: "Nyhedsbrevet kræver BREVO_LIST_ID=5 i Netlify."
     });
   }
 
-  const doubleOptInEnabled = Boolean(
-    getTemplateId("BREVO_DOUBLE_OPTIN_TEMPLATE_ID") &&
-    process.env.BREVO_REDIRECT_URL_AFTER_CONFIRMATION
-  );
+  const doubleOptInTemplateId = getTemplateId("BREVO_DOUBLE_OPTIN_TEMPLATE_ID");
+  const redirectAfterConfirmation = cleanText(process.env.BREVO_REDIRECT_URL_AFTER_CONFIRMATION, 500);
+  const doubleOptInReady = Boolean(doubleOptInTemplateId && redirectAfterConfirmation);
+
+  if (!doubleOptInReady) {
+    return response(503, {
+      error: "Nyhedsbrevet kræver aktiv double opt-in, før tilmeldinger kan modtages.",
+      doubleOptInReady: false,
+      missing: {
+        BREVO_DOUBLE_OPTIN_TEMPLATE_ID: !doubleOptInTemplateId,
+        BREVO_REDIRECT_URL_AFTER_CONFIRMATION: !redirectAfterConfirmation
+      }
+    });
+  }
 
   const timestamp = cleanText(payload.consent_timestamp || payload.created_at) || new Date().toISOString();
   const signupPage = getSignupPage(payload, event);
@@ -204,28 +193,19 @@ exports.handler = async (event) => {
     CONSENT_SOURCE: consentSource,
     SIGNUP_PAGE: signupPage,
     SIGNUP_FORM: signupForm,
-    DOUBLE_OPT_IN_STATUS: doubleOptInEnabled ? "pending" : "not_enabled"
+    DOUBLE_OPT_IN_STATUS: "pending"
   };
 
   try {
-    if (doubleOptInEnabled) {
-      await createDoubleOptInContact({ email, listId });
-      await saveConsentAttributes({ email, attributes });
-      return response(200, {
-        ok: true,
-        doubleOptIn: true,
-        message: "Tak. Tjek din e-mail og bekræft tilmeldingen, før nyhedsbrevet starter."
-      });
-    }
-
-    await createOrUpdateContact({ email, attributes, listId });
-    const welcome = await sendWelcomeTemplate({ email, name });
+    await saveConsentAttributes({ email, attributes });
+    await createDoubleOptInContact({ email, listId });
 
     return response(200, {
       ok: true,
-      doubleOptIn: false,
-      welcomeEmail: welcome.skipped ? "template_missing" : "sent",
-      message: "Tak for tilmeldingen. Du er skrevet op til KlinikGuidens nyhedsbrev."
+      listId,
+      doubleOptIn: true,
+      welcomeEmail: "brevo_automation_after_confirmation",
+      message: "Tak. Tjek din e-mail og bekræft tilmeldingen, før nyhedsbrevet starter."
     });
   } catch (error) {
     console.error("Brevo newsletter signup failed", {
