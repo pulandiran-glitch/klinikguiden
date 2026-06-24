@@ -118,6 +118,8 @@ async function createOrUpdateContact({ email, attributes, listId }) {
 }
 
 async function saveConsentAttributes({ email, attributes }) {
+  // Do not pass listId here. Brevo must handle list membership through
+  // doubleOptinConfirmation after the contact confirms the email address.
   return createOrUpdateContact({ email, attributes });
 }
 

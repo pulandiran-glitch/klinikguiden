@@ -14,6 +14,8 @@ Formularerne findes på:
 
 Alle formularer bruger stadig Netlify Forms som backup med formularnavnet `newsletter-signup`.
 
+GitHub `main` og Netlify Git-deploy er source of truth for Brevo-funktionen. Brug ikke en gammel manuel upload-mappe eller `outputs/klinikguiden-netlify-upload` som kilde til Brevo-function-kode.
+
 ## GDPR-felter
 
 Nyhedsbrevet indsamler kun:
@@ -74,20 +76,17 @@ Double opt-in aktiveres automatisk i funktionen, når både `BREVO_DOUBLE_OPTIN_
 
 Hvis double opt-in ikke er sat op, oprettes eller opdateres kontakten direkte i Brevo. Velkomstmail sendes kun, hvis `BREVO_WELCOME_TEMPLATE_ID` findes.
 
-Aktuelt bekræftet sat i Netlify:
+Aktuelt bekræftet sat og verificeret via live status-endpoint:
 
 1. `BREVO_API_KEY`
 2. `BREVO_LIST_ID=5`
-2. `BREVO_SENDER_EMAIL=nyheder@klinikguiden.com`
-3. `BREVO_SENDER_NAME=KlinikGuiden`
-4. `BREVO_REDIRECT_URL_AFTER_CONFIRMATION=https://klinikguiden.com/tak.html?newsletter=confirmed`
+3. `BREVO_SENDER_EMAIL=nyheder@klinikguiden.com`
+4. `BREVO_SENDER_NAME=KlinikGuiden`
+5. `BREVO_REDIRECT_URL_AFTER_CONFIRMATION=https://klinikguiden.com/tak.html?newsletter=confirmed`
+6. `BREVO_DOUBLE_OPTIN_TEMPLATE_ID`
+7. `BREVO_WELCOME_TEMPLATE_ID`
 
 `nyheder@klinikguiden.com` bør først bruges til rigtige udsendelser, når `klinikguiden.com` er verificeret i Brevo. Hvis domænet ikke er verificeret endnu, kan Brevo afvise afsendelse eller give dårlig leverbarhed. Brug kun `kontakt@klinikguiden.com` midlertidigt, hvis den adresse allerede er verificeret i Brevo.
-
-Mangler stadig:
-
-1. `BREVO_WELCOME_TEMPLATE_ID`
-2. `BREVO_DOUBLE_OPTIN_TEMPLATE_ID`
 
 Færdige HTML-templates ligger i:
 
@@ -137,12 +136,12 @@ Velkomstmail:
 
 Automation:
 
-1. Opret en Brevo automation, der starter når en kontakt bliver bekræftet eller tilføjet til listen `KlinikGuiden Nyhedsbrev`.
+1. Opret en Brevo automation, der starter når en kontakt bliver bekræftet via double opt-in og er på listen `KlinikGuiden Nyhedsbrev`.
 2. Tilføj et trin der sender velkomstmailen.
 3. Sørg for at automation først kører efter double opt-in bekræftelse.
 4. Aktivér automation.
 
-Hvis double opt-in er aktivt, bør velkomstmailen sendes fra Brevo automation efter bekræftelse. Funktionen sender derfor ikke velkomstmail direkte i double opt-in-flowet.
+Brevo automation for velkomstmail er et krav, når double opt-in er aktivt. Funktionen må ikke sende velkomstmail direkte i double opt-in-flowet, fordi brugeren først skal bekræfte sin e-mailadresse.
 
 Anbefalet flow:
 

@@ -4,6 +4,8 @@ Denne mappe indeholder en statisk hjemmeside. Den kan uploades gratis til Netlif
 
 Hvis Stripe-betaling skal virke, skal siden deployes med Netlify Functions. Brug derfor Netlify CLI eller Git-deploy med `netlify.toml`.
 
+Vigtigt: GitHub `main` og Netlify Git-deploy er source of truth for Brevo newsletter-funktionen. Brug ikke `outputs/klinikguiden-netlify-upload` eller en gammel zip-upload til at deploye Brevo-function-kode, medmindre pakken foerst er regenereret fra aktuel GitHub-kode og tests er koert.
+
 ## Hurtigste gratis metode uden Stripe
 
 1. Gå til Netlify-dashboardet.

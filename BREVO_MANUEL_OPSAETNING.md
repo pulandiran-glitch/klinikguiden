@@ -2,6 +2,10 @@
 
 Den automatiske bootstrap-function er beskyttet og maa ikke aabnes uden en fungerende server-side setup-token. Hvis Netlify ikke eksponerer `KG_BREVO_SETUP_TOKEN` til function runtime, skal templates oprettes manuelt i Brevo.
 
+Status: live status-endpointet er `ok: true`. `BREVO_LIST_ID=5`, double opt-in template, velkomstmail template og redirect URL er verificeret i Netlify/Brevo.
+
+GitHub `main` og Netlify Git-deploy er source of truth for Brevo-funktionen. Brug ikke `outputs/klinikguiden-netlify-upload` eller en gammel manuel upload-zip som kilde til Brevo-function-kode.
+
 ## 1. Double opt-in template
 
 1. Log ind i Brevo.
@@ -69,5 +73,13 @@ Efter de to template-ID'er er sat, redeploy sitet.
 6. Klik bekraeftelseslinket.
 7. Kontroller at du lander paa `https://klinikguiden.com/tak.html?newsletter=confirmed`.
 8. Kontroller at kontakten ligger paa liste ID 5.
-9. Kontroller at velkomstmailen sendes via Brevo automation eller template-flow.
+9. Kontroller at velkomstmailen sendes via Brevo automation efter bekræftet double opt-in.
 10. Klik afmeldingslinket og kontroller i Brevo, at kontakten afmeldes.
+
+## 5. Velkomstmail automation
+
+Velkomstmail via Brevo automation er et krav i double opt-in-flowet.
+
+1. Automation skal foerst starte, naar kontakten har bekraeftet double opt-in.
+2. Automation skal sende `KlinikGuiden Velkomstmail`.
+3. Netlify-funktionen maa ikke sende velkomstmail direkte foer double opt-in er bekraeftet.
