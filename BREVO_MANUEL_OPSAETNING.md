@@ -5,23 +5,31 @@ Den automatiske bootstrap-function er beskyttet og maa ikke aabnes uden en funge
 ## 1. Double opt-in template
 
 1. Log ind i Brevo.
-2. Gaa til `Transactional` -> `Templates`.
-3. Klik `New template`.
+2. Gaa til `Marketing` -> `Templates`.
+3. Klik `Create Template` -> `Email template`.
 4. Template name: `KlinikGuiden Double Opt-in`.
 5. Subject: `Bekraeft din tilmelding til KlinikGuiden`.
 6. Sender: `KlinikGuiden` og den verificerede afsenderadresse.
-7. Vaelg HTML-editor/source mode.
-8. Indsaet hele indholdet fra:
+7. Klik `Show advanced settings`.
+8. Saet tag til `optin`.
+9. Vaelg HTML-editor/source mode.
+10. Indsaet hele indholdet fra:
 
 `brevo-templates/klinikguiden-double-opt-in.html`
 
-Vigtigt: Knappen skal bruge Brevos double opt-in link:
+Vigtigt: Templaten skal vaere en aktiv Brevo DOI-template. Knappen skal bruge Brevos double opt-in link. I Brevos drag-and-drop editor skal knappen have:
+
+1. Link type: `Double opt-in link`.
+2. Ikke en normal URL.
+
+Hvis du bruger HTML/source mode, skal linket pege paa:
 
 `{{ params.DOIurl }}`
 
-9. Gem og aktiver templaten.
-10. Kopier template-ID'et fra Brevo.
-11. Opret/opdater Netlify environment variable:
+11. Gem og aktiver templaten.
+12. Aabn templaten igen og kontroller at Brevo viser den som double opt-in/DOI-template.
+13. Kopier template-ID'et fra Brevo.
+14. Opret/opdater Netlify environment variable:
 
 `BREVO_DOUBLE_OPTIN_TEMPLATE_ID=<template-id>`
 

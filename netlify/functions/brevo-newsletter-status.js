@@ -36,22 +36,40 @@ async function brevoGet(path) {
     return { exists: false, status: brevoResponse.status };
   }
 
-  return { exists: true };
+  const text = await brevoResponse.text();
+  let data = {};
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = {};
+    }
+  }
+
+  return { exists: true, data };
 }
 
-async function checkBrevoResource(name, envName, pathFactory) {
+async function checkBrevoResource(name, envName, pathFactory, options = {}) {
   const id = numericEnv(envName);
   if (!id) {
     return { name, envName, configured: false, verified: false };
   }
 
   const result = await brevoGet(pathFactory(id));
+  const isDoiTemplate = result.data && result.data.doiTemplate === true;
+  const active = !result.data || result.data.isActive !== false;
+  const verified = Boolean(result.exists) &&
+    active &&
+    (!options.requireDoiTemplate || isDoiTemplate);
+
   return {
     name,
     envName,
     configured: true,
-    verified: Boolean(result.exists),
-    status: result.status || 200
+    verified,
+    status: result.status || 200,
+    active,
+    doiTemplate: options.requireDoiTemplate ? isDoiTemplate : undefined
   };
 }
 
@@ -87,12 +105,24 @@ exports.handler = async (event) => {
   const resources = await Promise.all([
     checkBrevoResource("newsletter list", "BREVO_LIST_ID", (id) => `/contacts/lists/${id}`),
     checkBrevoResource("welcome template", "BREVO_WELCOME_TEMPLATE_ID", (id) => `/smtp/templates/${id}`),
-    checkBrevoResource("double opt-in template", "BREVO_DOUBLE_OPTIN_TEMPLATE_ID", (id) => `/smtp/templates/${id}`)
+    checkBrevoResource("double opt-in template", "BREVO_DOUBLE_OPTIN_TEMPLATE_ID", (id) => `/smtp/templates/${id}`, { requireDoiTemplate: true })
   ]);
 
-  const doubleOptInReady = env.BREVO_DOUBLE_OPTIN_TEMPLATE_ID && env.BREVO_REDIRECT_URL_AFTER_CONFIRMATION;
-  const welcomeAutomationReady = env.BREVO_WELCOME_TEMPLATE_ID;
-  const ready = env.BREVO_API_KEY && env.BREVO_LIST_ID && env.BREVO_SENDER_EMAIL && env.BREVO_SENDER_NAME && doubleOptInReady && welcomeAutomationReady;
+  const newsletterList = resources.find((resource) => resource.envName === "BREVO_LIST_ID");
+  const welcomeTemplate = resources.find((resource) => resource.envName === "BREVO_WELCOME_TEMPLATE_ID");
+  const doubleOptInTemplate = resources.find((resource) => resource.envName === "BREVO_DOUBLE_OPTIN_TEMPLATE_ID");
+  const doubleOptInReady = env.BREVO_DOUBLE_OPTIN_TEMPLATE_ID &&
+    env.BREVO_REDIRECT_URL_AFTER_CONFIRMATION &&
+    Boolean(doubleOptInTemplate && doubleOptInTemplate.verified);
+  const welcomeAutomationReady = env.BREVO_WELCOME_TEMPLATE_ID &&
+    Boolean(welcomeTemplate && welcomeTemplate.verified);
+  const ready = env.BREVO_API_KEY &&
+    env.BREVO_LIST_ID &&
+    Boolean(newsletterList && newsletterList.verified) &&
+    env.BREVO_SENDER_EMAIL &&
+    env.BREVO_SENDER_NAME &&
+    doubleOptInReady &&
+    welcomeAutomationReady;
 
   return response(200, {
     ok: ready,
