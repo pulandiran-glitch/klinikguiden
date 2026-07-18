@@ -98,16 +98,28 @@
     if (value === 'accepted') trackEvent('analytics_consent_accepted');
   }
 
+  function clearConsent() {
+    localStorage.removeItem(consentKey);
+    localStorage.removeItem(sessionKey);
+    localStorage.removeItem(visitorKey);
+  }
+
+  function reopenConsentBanner() {
+    clearConsent();
+    injectConsentBanner();
+  }
+
   function injectConsentBanner() {
     if (getConsent()) return;
 
     const banner = document.createElement('div');
     banner.setAttribute('data-consent-banner', 'true');
     banner.style.cssText = 'position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:9999;max-width:760px;margin:0 auto;background:#FDFAF5;border:1px solid #E2DDD4;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;font-family:Inter,system-ui,sans-serif;color:#2C2C2C;';
-    banner.innerHTML = '<p style="margin:0;max-width:520px;font-size:0.9rem;line-height:1.5;color:#4F4F49;">Vi bruger anonym statistik til at se, hvilke guides og funktioner der hjælper. Formularer virker også, hvis du siger nej.</p><div style="display:flex;gap:0.6rem;flex-wrap:wrap;"><button type="button" data-consent-decline style="border:1px solid #E2DDD4;background:transparent;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Nej tak</button><button type="button" data-consent-accept style="border:0;background:#4E7A62;color:white;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Accepter statistik</button></div>';
+    banner.innerHTML = '<div style="max-width:560px;"><p style="margin:0 0 0.4rem;font-size:0.9rem;line-height:1.5;color:#4F4F49;">Vi bruger besøgsstatistik til at forstå, hvilke sider og funktioner der bliver brugt. Hvis du accepterer, behandler vi sessions-id/UUID, besøgte sider, referrer, tidspunkt, trafikkilde, skærmstørrelse, fejl og IP-adresse. Google Apps Script modtager dataene. Du kan stadig bruge formularer, hvis du siger nej.</p><p style="margin:0;font-size:0.85rem;line-height:1.45;color:#5E5A52;">Du kan senere ændre eller trække dit samtykke tilbage ved at bruge knappen herunder.</p></div><div style="display:flex;gap:0.6rem;flex-wrap:wrap;"><button type="button" data-consent-decline style="border:1px solid #E2DDD4;background:transparent;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Nej tak</button><button type="button" data-consent-accept style="border:0;background:#4E7A62;color:white;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Accepter statistik</button><button type="button" data-consent-manage style="border:1px solid #B8B0A3;background:transparent;border-radius:999px;padding:0.65rem 1rem;cursor:pointer;">Ændr eller træk tilbage senere</button></div>';
     document.body.appendChild(banner);
     banner.querySelector('[data-consent-accept]').addEventListener('click', () => setConsent('accepted'));
     banner.querySelector('[data-consent-decline]').addEventListener('click', () => setConsent('declined'));
+    banner.querySelector('[data-consent-manage]').addEventListener('click', () => reopenConsentBanner());
   }
 
   function initAutoTracking() {
@@ -134,7 +146,8 @@
     hasConsent,
     trackEvent,
     initAutoTracking,
-    injectConsentBanner
+    injectConsentBanner,
+    reopenConsentBanner
   };
 
   window.addEventListener('DOMContentLoaded', () => {

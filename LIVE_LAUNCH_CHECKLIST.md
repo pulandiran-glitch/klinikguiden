@@ -35,7 +35,6 @@ Gør dette på live-siden:
 4. Brug tilskudsberegneren.
 5. Udfyld nyhedsbrev-formularen med en testmail.
 6. Udfyld bestillingsformularen med en testmail og vælg `Forstå din tandlæge - den komplette guide`.
-7. Gennemfør Stripe Checkout med et Stripe testkort, hvis Stripe testnøgler er sat op.
 
 Åbn derefter Google Sheet og bekræft, at der kommer rækker med:
 
@@ -43,10 +42,9 @@ Gør dette på live-siden:
 - `quiz_answer_selected`
 - `subsidy_calculated`
 - `newsletter_signup`
-- `checkout_started`
 - `order_form_submit`
 
-For `order_form_submit` skal kolonnerne `product` og `price` være udfyldt. Når Stripe webhooken er aktiv, skal betalte køb lande som `order_form_submit`.
+For `order_form_submit` skal kolonnerne `product` og `price` være udfyldt.
 
 ## 4. Test dashboard
 
@@ -58,20 +56,10 @@ I Google Sheet skal `Dashboard`-fanen opdatere:
 - Estimeret omsætning
 - Produktfordeling
 
-## 5. Test Stripe
+## 5. Test betaling
 
-Stripe virker først, når disse Netlify environment variables er sat:
-
-- `STRIPE_SECRET_KEY`
-- `STRIPE_WEBHOOK_SECRET`
-- `GOOGLE_SHEET_ENDPOINT`
-- `SITE_URL`
-
-Åbn derefter:
-
-- `https://klinikguiden.com/.netlify/functions/create-checkout-session`
-
-Den bør ikke vise 404. Funktionen accepterer kun POST, så en almindelig browseråbning kan godt give en metode-fejl. Det er fint.
+Der er ikke et aktivt betalingsflow i den nuværende version.
+Kontrollér i stedet, at brugeren ikke sendes videre til checkout.
 
 ## 6. Gem første baseline
 

@@ -4,11 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privatlivspolitik | KlinikGuiden</title>
-  <meta name="description" content="Læs hvordan KlinikGuiden håndterer nyhedsbrev, formularer, samtykke og persondata." />
+  <meta name="description" content="Privatlivspolitik for KlinikGuidens website og app, inklusive lokale appdata, nyhedsbrev, kontaktformular, besøgsstatistik, Brevo og Netlify." />
   <meta name="theme-color" content="#4E7A62" />
   <link rel="canonical" href="https://klinikguiden.com/privatlivspolitik.html" />
   <link rel="manifest" href="/site.webmanifest" />
-  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="mask-icon" href="/icon.svg" color="#4E7A62" />
+  <meta property="og:image" content="https://klinikguiden.com/apple-touch-icon.png" />
+  <meta property="twitter:image" content="https://klinikguiden.com/apple-touch-icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,14 +24,17 @@
     .nav-logo { color: var(--charcoal); font-family: "Playfair Display", serif; font-size: 1.2rem; text-decoration: none; }
     .nav-logo span { color: var(--sage-dark); }
     .back-link { color: var(--sage-dark); font-size: 0.9rem; text-decoration: none; }
-    main { margin: 0 auto; max-width: 820px; padding: 80px 1.5rem; }
-    h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 1.5rem; }
+    main { margin: 0 auto; max-width: 860px; padding: 80px 1.5rem; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 1rem; }
     h2 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin: 2rem 0 0.6rem; }
     p, li { color: var(--muted); font-weight: 300; }
     ul { margin-left: 1.2rem; }
-    .note { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; margin: 2rem 0; padding: 1.3rem; }
+    .note { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; margin: 1.5rem 0 2rem; padding: 1.2rem; }
     .links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
     .links a { color: var(--sage-dark); }
+    .split { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 1rem; }
+    .label { color: var(--sage-dark); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; margin-bottom: 0.35rem; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -35,52 +44,90 @@
   </nav>
   <main>
     <h1>Privatlivspolitik</h1>
-    <p>KlinikGuiden bruger kun de oplysninger, der er nødvendige for at sende nyhedsbrev, svare på henvendelser og drive hjemmesiden. Vi indsamler ikke helbredsoplysninger via nyhedsbrev-formularen.</p>
+    <p>Privatlivspolitikken gælder både KlinikGuidens website og app. Her kan du se, hvilke data der lagres lokalt på din enhed, og hvilke data der sendes videre til vores systemer.</p>
 
     <div class="note">
-      <p><strong>Kort sagt:</strong> Nyhedsbrevet indsamler navn, e-mail og samtykkeoplysninger. Samtykke er frivilligt, og du kan altid trække det tilbage.</p>
+      <p><strong>Kort fortalt:</strong> Appen gemmer nogle oplysninger lokalt på enheden, mens webstedet og udvalgte appfunktioner kan sende data til Brevo, Netlify og Google Apps Script, når du selv bruger funktionerne eller giver samtykke.</p>
     </div>
 
-    <h2>Hvilke oplysninger indsamles?</h2>
+    <h2>Dataansvarlig og kontakt</h2>
+    <p>Dataansvarlig er KlinikGuiden v/ Jonathan Pulandiran. Du kan kontakte os på <a href="mailto:klinikguiden@gmail.com">klinikguiden@gmail.com</a>.</p>
+
+    <h2>Lokale data i appen</h2>
+    <div class="split">
+      <div class="card">
+        <div class="label">Lokal lagring</div>
+        <p>Appen kan gemme profiloplysninger lokalt på enheden, herunder navn, e-mail, fødselsdato, favoritter, læsestatus, søgehistorik, gemte tilskudsberegninger og notifikationsvalg.</p>
+      </div>
+      <div class="card">
+        <div class="label">Lokation</div>
+        <p>Lokation bruges kun, når du selv aktiverer en funktion som Find tandlæge. Oplysningerne bruges til at vise relevante resultater på enheden og gemmes ikke som standard i en ekstern database i appens lokale flow.</p>
+      </div>
+    </div>
+
+    <h2>Oplysninger, der sendes ud af enheden</h2>
+    <div class="split">
+      <div class="card">
+        <div class="label">Besøgsstatistik</div>
+        <p>Når du accepterer statistik, kan vi behandle sessions-id/UUID, besøgte sider, referrer, tidspunkt, trafikkilde, skærmstørrelse, fejl og IP-adresse. Google Apps Script er modtageren af disse data.</p>
+      </div>
+      <div class="card">
+        <div class="label">Nyhedsbrev og kontakt</div>
+        <p>Nyhedsbrev, kontaktformular og eventuelle formularer på webstedet sender navn, e-mail, dit samtykke, formularens kilde og de oplysninger, du selv indtaster, til Brevo og/eller Netlify afhængigt af flowet.</p>
+      </div>
+    </div>
+
+    <h2>Formål</h2>
     <ul>
-      <li>Navn.</li>
-      <li>E-mailadresse.</li>
-      <li>Samtykke til nyhedsbrev.</li>
-      <li>Den samtykketekst, du accepterede.</li>
-      <li>Tidspunkt for samtykke.</li>
-      <li>Hvilken formular og side tilmeldingen kom fra.</li>
-      <li>Status for double opt-in, hvis det er slået til.</li>
+      <li>At levere appens lokale funktioner og gemme dine valg på enheden.</li>
+      <li>At sende nyhedsbrev, håndtere kontaktformularer og besvare henvendelser.</li>
+      <li>At måle besøgsstatistik og forstå, hvilke sider og funktioner der bliver brugt.</li>
+      <li>At kunne dokumentere samtykke og sikre drift, fejlsøgning og sikkerhed.</li>
     </ul>
 
-    <h2>Hvorfor indsamles oplysningerne?</h2>
-    <p>Oplysningerne bruges til at sende nyhedsbreve, guides og information om tandbehandlinger, priser, tilskud og patientforståelse. De bruges også til at kunne dokumentere, at du aktivt har givet samtykke.</p>
-
-    <h2>Retsgrundlag</h2>
-    <p>Retsgrundlaget er dit samtykke. Du giver samtykke ved aktivt at sætte flueben i nyhedsbrev-formularen og sende formularen. Feltet er ikke forhåndsafkrydset.</p>
-
-    <h2>Systemer og databehandlere</h2>
+    <h2>Behandlingsgrundlag</h2>
     <ul>
-      <li>Brevo bruges til nyhedsbrev, kontaktliste, samtykkeoplysninger og e-mailafsendelse.</li>
-      <li>Netlify bruges til hosting, formularer, serverless functions og eventuel backup af tilmeldinger.</li>
+      <li>Appens lokale profiloplysninger, favoritter og læsestatus behandles for at levere den funktion, du selv har valgt at bruge.</li>
+      <li>Lokation behandles på baggrund af dit samtykke, når du selv aktiverer en lokationsfunktion.</li>
+      <li>Nyhedsbrev og kontaktformular behandles på baggrund af samtykke eller din aktive henvendelse.</li>
+      <li>Besøgsstatistik behandles kun efter dit samtykke.</li>
+      <li>Driftsdata og sikkerhedslogs kan behandles på baggrund af legitim interesse i at holde siden og appen teknisk velfungerende.</li>
     </ul>
 
-    <h2>Hvor længe gemmes oplysningerne?</h2>
-    <p>Oplysninger gemmes, indtil du afmelder dig nyhedsbrevet, beder om sletning, eller KlinikGuiden ikke længere har brug for oplysningerne til nyhedsbrev og dokumentation af samtykke.</p>
+    <h2>Modtagere og systemer</h2>
+    <ul>
+      <li>Google Apps Script modtager besøgsstatistik.</li>
+      <li>Brevo bruges til nyhedsbrev, kontaktlister og e-mailafsendelse.</li>
+      <li>Netlify bruges til hosting, formularer, funktioner og teknisk drift af webstedet.</li>
+      <li>Apple-systemtjenester kan behandle lokation, når du bruger relevante appfunktioner.</li>
+    </ul>
 
-    <h2>Sådan trækker du samtykke tilbage</h2>
-    <p>Du kan trække samtykke tilbage via afmeldingslinket i e-mails fra KlinikGuiden eller ved at kontakte os. Når du afmelder dig, skal du ikke længere modtage nyhedsbreve.</p>
+    <h2>Opbevaring og sletning</h2>
+    <ul>
+      <li>Lokale appdata bliver på din enhed, indtil du sletter dem, afinstallerer appen eller nulstiller data i appens lokale funktioner.</li>
+      <li>Nyhedsbrev- og kontaktdata opbevares, så længe det er nødvendigt for formålet, dokumentation og eventuel afmelding eller sletning.</li>
+      <li>Besøgsstatistik opbevares efter de opsætninger, der gælder for Google Sheets eller den tilknyttede løsning.</li>
+    </ul>
 
-    <h2>Indsigt, rettelse og sletning</h2>
-    <p>Du kan bede om at få indsigt i de oplysninger, vi har om dig. Du kan også bede om at få oplysninger rettet, slettet eller få din e-mail afmeldt nyhedsbrevet.</p>
+    <h2>Tredjelandsoverførsler</h2>
+    <p>Brug af Brevo, Netlify, Google og Apple kan indebære overførsel eller behandling uden for EU/EØS afhængigt af den konkrete tjeneste og konfiguration. Hvor det er relevant, sker det på grundlag af de aftaler og beskyttelsesforanstaltninger, som udbyderen stiller til rådighed.</p>
 
-    <h2>Cookie og tracking</h2>
-    <p>KlinikGuidens hjemmeside bruger ikke Brevo tracking i frontend-koden. Brevo kan teknisk understøtte åbnings- og kliktracking i e-mails, hvis det aktiveres i Brevo. Hvis det bruges, skal det fremgå af e-mailopsætningen og denne politik skal opdateres.</p>
+    <h2>Dine rettigheder</h2>
+    <ul>
+      <li>Indsigt.</li>
+      <li>Berigtigelse.</li>
+      <li>Sletning.</li>
+      <li>Begrænsning af behandling.</li>
+      <li>Dataportabilitet, hvor det er relevant.</li>
+      <li>Indsigelse mod behandling, hvor det kan anvendes.</li>
+      <li>Tilbagetrækning af samtykke, uden at det påvirker behandling, der allerede har fundet sted.</li>
+    </ul>
 
-    <h2>Ingen følsomme oplysninger i nyhedsbrev</h2>
-    <p>Nyhedsbrev-formularen beder kun om navn, e-mail og samtykke. Skriv ikke tandproblemer, sygdomme eller andre følsomme oplysninger i formularer på siden. Kontakt altid din egen tandlæge ved konkrete symptomer, smerter eller behandlingsspørgsmål.</p>
+    <h2>Klageadgang</h2>
+    <p>Hvis du er utilfreds med vores behandling af personoplysninger, kan du klage til Datatilsynet.</p>
 
     <h2>Kontakt</h2>
-    <p>Du kan skrive til os på <a href="mailto:klinikguiden@gmail.com">klinikguiden@gmail.com</a>, hvis du har spørgsmål om persondata, vil have indsigt, vil rettes, slettes eller afmeldes.</p>
+    <p>Hvis du vil have indsigt, rettelse, sletning eller vil trække samtykke tilbage, kan du skrive til <a href="mailto:klinikguiden@gmail.com">klinikguiden@gmail.com</a>.</p>
 
     <div class="links">
       <a href="/">Forside</a>

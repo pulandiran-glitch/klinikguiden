@@ -7,10 +7,10 @@
 - Lokal produktside for den komplette guide.
 - Privatlivsside med kort forklaring af data og formularer.
 - Gratis tracking til Google Sheets via Apps Script.
-- Samtykke-banner til anonym statistik.
+- Samtykke-banner til besøgsstatistik.
 - Automatisk dashboard-fane i Google Sheets via `setup`-funktionen.
 - Mere robust formularindsendelse til Google Apps Script med `no-cors`.
-- Tak-side til senere betalingsflow, mailbekræftelser eller redirect efter formular.
+- Tak-side til senere formworkflow, mailbekræftelser eller redirect efter formular.
 - Excel-dashboard til overblik over sidevisninger, leads, bestillinger, quiz, downloads, produktvalg og estimeret omsætning.
 - Produktfordeling i både Excel-dashboard og Google Sheets-dashboard, så bestillinger kan deles op på komplet guide, børneguide og venteliste.
 - PDF-tjekliste til tandlægebesøg.
@@ -22,30 +22,25 @@
 - Render-testet lokalt i browser på desktop og mobilbredde uden konsolfejl eller vandret overflow.
 - Forsiden har fået renere formular-styling, færre inline-styles og mere ærlige tillidssignaler uden udokumenterede tal.
 - Ren Netlify-uploadpakke oprettet som `outputs/klinikguiden-netlify-upload.zip` med kun produktionsfiler.
-- Stripe-klar Netlify-pakke oprettet som `outputs/klinikguiden-stripe-netlify-source.zip` med `netlify.toml` og functions.
 - Dansk uploadvejledning til Netlify tilføjet i `NETLIFY_UPLOAD.md`.
 - Live-checkliste til efter deploy tilføjet i `LIVE_LAUNCH_CHECKLIST.md`.
-- Stripe Checkout-kode tilføjet med Netlify Function og webhook til Google Sheet-registrering af betalte køb.
+- Historisk betalingsmateriale ligger kun som reference og er ikke en aktiv løsning.
 
 ## Stadig vigtigt før live-lancering
 
 - Upload `outputs/klinikguiden-netlify-upload.zip` til det rigtige Netlify-projekt, eller deploy de samme produktionsfiler via CLI.
 - Live-siden viser stadig den gamle version, indtil den nye upload/deploy er gennemført.
 - Bekræft at `endpoint` i `analytics.js` er den rigtige Web App URL fra dit eget Google Sheet.
-- Tilføj Stripe environment variables i Netlify: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `GOOGLE_SHEET_ENDPOINT` og `SITE_URL`.
 - Test formularerne på live-siden efter deploy.
 - Tjek at redirects virker på Netlify: `/rodbehandling`, `/regningen`, `/besoegsfrekvens` og `/guide-komplette`.
 - Test at Google Apps Script modtager formularer på live-siden efter deploy.
 - Gennemgå de hardcodede tilskudssatser i beregneren, før siden markedsføres bredt.
-- Test Stripe Checkout i test mode og skift først til live key, når flowet virker.
 
 ## Live-status
 
 Netlify-projektet `klinikguiden` er fundet med URL `https://klinikguiden.com/`.
 Den nuværende live-side er ikke opdateret med de seneste lokale ændringer endnu.
 Efter upload skal `LIVE_LAUNCH_CHECKLIST.md` bruges til at bekræfte den nye version og Google Sheet-dataflowet.
-
-Stripe-koden er klar lokalt, men kan ikke tage rigtige betalinger før Stripe-nøgler og webhook secret er sat i Netlify.
 Netlify CLI kunne ikke køres i dette lokale miljø, fordi `npx`, `npm` og `netlify` ikke findes i shellen.
 
 ## Gratis dataflow

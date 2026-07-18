@@ -33,7 +33,7 @@ const sampleRows = [
   ["'2026-06-18T12:01:10.000Z", "event", "hero_free_guides", "forside", "/", "", "", "", "", "", "", "demo-session", "", "direkte", "tilbagevendende", "TRUE", "1440x900", "", '{"href":"#guides"}'],
   ["'2026-06-18T12:02:42.000Z", "event", "quiz_answer_selected", "forside", "/", "", "", "Forstå din tandlægeregning", "", "", "price", "demo-session", "", "direkte", "tilbagevendende", "TRUE", "1440x900", "", '{"value":"price"}'],
   ["'2026-06-18T12:03:20.000Z", "lead", "newsletter_signup", "forside", "/", "Eksempel", "eksempel@email.dk", "Nyhedsbrev - Tjekliste", "", "", "", "demo-session", "", "direkte", "tilbagevendende", "TRUE", "1440x900", "", "{}"],
-  ["'2026-06-18T12:04:00.000Z", "event", "checkout_started", "forside", "/", "Eksempel", "eksempel@email.dk", "komplette", "komplette", "99", "", "demo-session", "", "direkte", "tilbagevendende", "TRUE", "1440x900", "", '{"provider":"stripe"}'],
+  ["'2026-06-18T12:04:00.000Z", "event", "order_form_submit", "forside", "/", "Eksempel", "eksempel@email.dk", "komplette", "komplette", "99", "", "demo-session", "", "direkte", "tilbagevendende", "TRUE", "1440x900", "", '{"provider":"manual"}'],
   ["'2026-06-18T12:04:30.000Z", "order", "order_form_submit", "forside", "/", "Eksempel", "eksempel@email.dk", "komplette", "komplette", "99", "", "demo-session", "", "direkte", "tilbagevendende", "TRUE", "1440x900", "", "{}"]
 ];
 
@@ -67,12 +67,11 @@ dashboard.getRange("D3:F16").values = [
   ["hero_products", '=COUNTIF(Events!C:C,D8)', "Klik på produkt-knap i toppen"],
   ["quiz_answer_selected", '=COUNTIF(Events!C:C,D9)', "Hvor mange bruger quizzen"],
   ["subsidy_calculated", '=COUNTIF(Events!C:C,D10)', "Hvor mange bruger beregneren"],
-  ["newsletter_signup", '=COUNTIF(Events!C:C,D11)', "Gratis leadmagnet-signups"],
-  ["checkout_started", '=COUNTIF(Events!C:C,D12)', "Stripe-betaling er startet"],
-  ["order_form_submit", '=COUNTIF(Events!C:C,D13)', "Betalt ordre registreret"],
-  ["waitlist_signup", '=COUNTIF(Events!C:C,D14)', "Venteliste-tilmeldinger"],
-  ["pdf_download_started", '=COUNTIF(Events!C:C,D15)', "Tjekliste-downloads"],
-  ["thank_you_page_view", '=COUNTIF(Events!C:C,D16)', "Tak-side visninger"]
+  ["newsletter_signup", '=COUNTIF(Events!C:C,D11)', "Nyhedsbrevstilmeldinger"],
+  ["order_form_submit", '=COUNTIF(Events!C:C,D12)', "Bestilling er registreret"],
+  ["waitlist_signup", '=COUNTIF(Events!C:C,D13)', "Venteliste-tilmeldinger"],
+  ["pdf_download_started", '=COUNTIF(Events!C:C,D14)', "Tjekliste-downloads"],
+  ["thank_you_page_view", '=COUNTIF(Events!C:C,D15)', "Tak-side visninger"]
 ];
 
 dashboard.getRange("A18:C24").values = [

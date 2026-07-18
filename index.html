@@ -4,17 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KlinikGuiden – Forstå din tandlæge før du sætter dig i stolen</title>
-  <meta name="description" content="Klare forklaringer på tandbehandlinger, regninger og tandlægeangst. Skrevet af tandklinikassistenter. Gratis guides og betalte PDF-guides for danske patienter." />
+  <meta name="description" content="Klare forklaringer på tandbehandlinger, regninger og tandlægeangst. Skrevet af tandklinikassistenter. Gratis guides og digitale PDF-guides for danske patienter." />
   <meta name="keywords" content="tandlæge, tandbehandling, tandlægeregning, tandlægeangst, tandpleje, patient guide" />
   <meta name="author" content="KlinikGuiden" />
   <meta property="og:title" content="KlinikGuiden – Forstå din tandlæge" />
   <meta property="og:description" content="Klare forklaringer på tandbehandlinger, regninger og tandlægeangst. Skrevet af tandklinikassistenter." />
+  <meta property="og:site_name" content="KlinikGuiden" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://klinikguiden.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="application-name" content="KlinikGuiden" />
   <meta name="theme-color" content="#4E7A62" />
   <link rel="canonical" href="https://klinikguiden.com/" />
   <link rel="manifest" href="/site.webmanifest" />
-  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="mask-icon" href="/icon.svg" color="#4E7A62" />
+  <meta property="og:image" content="https://klinikguiden.com/apple-touch-icon.png" />
+  <meta property="twitter:image" content="https://klinikguiden.com/apple-touch-icon.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://klinikguiden.com/#organization",
+          "name": "KlinikGuiden",
+          "url": "https://klinikguiden.com/",
+          "logo": "https://klinikguiden.com/icon.svg"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://klinikguiden.com/#website",
+          "url": "https://klinikguiden.com/",
+          "name": "KlinikGuiden",
+          "publisher": {
+            "@id": "https://klinikguiden.com/#organization"
+          }
+        }
+      ]
+    }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +65,7 @@
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid rgba(78,122,98,0.42); outline-offset: 3px; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(253,250,245,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { align-items: center; color: var(--charcoal); display: inline-flex; font-family: 'Playfair Display', serif; font-size: 1.2rem; gap: 0.55rem; text-decoration: none; }
-    .brand-mark { align-items: center; background: var(--cream); border: 1px solid var(--sage-dark); border-radius: 9px; color: var(--sage-dark); display: inline-flex; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; height: 32px; justify-content: center; letter-spacing: 0.02em; width: 32px; }
+    .brand-icon { display: block; height: 32px; width: 32px; }
     .brand-word span { color: var(--sage-dark); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--muted); transition: color 0.2s; }
@@ -112,7 +145,7 @@
     .profile-info p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
     footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 3rem 2rem; text-align: center; }
     .footer-logo { align-items: center; color: white; display: inline-flex; font-family: 'Playfair Display', serif; font-size: 1.3rem; gap: 0.55rem; justify-content: center; margin-bottom: 0.5rem; }
-    .footer-logo .brand-mark { background: rgba(255,255,255,0.08); border-color: var(--sage-light); color: var(--sage-light); }
+    .footer-logo .brand-icon { filter: brightness(0) invert(1) saturate(0.9); opacity: 0.9; }
     .footer-logo span span { color: var(--sage-light); }
     .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
     footer a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; }
@@ -213,7 +246,7 @@
 <body>
   <a class="skip-link" href="#main-content">Spring til indhold</a>
   <nav>
-    <a class='nav-logo' href='/' aria-label="KlinikGuiden forside"><span class="brand-mark">KG</span><span class="brand-word">Klinik<span>Guiden</span></span></a>
+    <a class='nav-logo' href='/' aria-label="KlinikGuiden forside"><img class="brand-icon" src="icon.svg" alt="" aria-hidden="true" /><span class="brand-word">Klinik<span>Guiden</span></span></a>
     <ul class="nav-links">
       <li><a href="#guides">Guides</a></li>
       <li><a href="vidensbase.html">Vidensbase</a></li>
@@ -362,7 +395,7 @@
         </div>
       </div>
       <div class="proof-strip">
-        <div class="proof-item"><strong>Gratis først</strong><span>De vigtigste grundforklaringer kan læses uden betaling.</span></div>
+        <div class="proof-item"><strong>Gratis først</strong><span>De vigtigste grundforklaringer kan læses uden krav om betaling.</span></div>
         <div class="proof-item"><strong>Faglig hverdag</strong><span>Indholdet skrives af mennesker, der kender klinikken indefra.</span></div>
         <div class="proof-item"><strong>Ingen diagnose</strong><span>Siden hjælper dig med forståelse, men erstatter ikke din tandlæge.</span></div>
       </div>
@@ -439,7 +472,7 @@
   </main>
 
   <footer>
-    <div class="footer-logo"><span class="brand-mark">KG</span><span>Klinik<span>Guiden</span></span></div>
+    <div class="footer-logo"><img class="brand-icon" src="icon.svg" alt="" aria-hidden="true" /><span>Klinik<span>Guiden</span></span></div>
     <p>Tandpleje forklaret af dem der kender den.</p>
     <div class="footer-links">
       <a href="#guides">Guides</a>
@@ -724,26 +757,8 @@
       });
     }
 
-    async function startStripeCheckout({ product, email, name }) {
-      const response = await fetch('/.netlify/functions/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product, email, name })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok || !data.url) {
-        throw new Error(data.error || data.stripeError || 'Stripe kunne ikke startes.');
-      }
-
-      KGAnalytics.trackEvent('checkout_started', {
-        product: product,
-        price: product === 'komplette' ? '99' : product === 'boern' ? '79' : '',
-        provider: 'stripe'
-      });
-
-      window.location.href = data.url;
+    async function startStripeCheckout() {
+      throw new Error('Betaling er ikke åbent endnu.');
     }
 
     document.querySelectorAll('.created-at-field').forEach((field) => {
@@ -795,6 +810,7 @@
       };
 
       try {
+        await submitNetlifyBackup(form).catch(() => {});
         const response = await fetch('/.netlify/functions/brevo-newsletter-signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -806,16 +822,20 @@
           throw new Error(data.error || 'Tilmeldingen kunne ikke gennemføres.');
         }
 
-        submitNetlifyBackup(form).catch(() => {});
-
         if (form.id === 'newsletterForm') {
-          const link = document.createElement('a');
-          link.href = 'tjekliste_tandlaegebesoeg.pdf';
-          link.download = 'tjekliste_tandlaegebesoeg.pdf';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          KGAnalytics.trackEvent('pdf_download_started', { guide: 'Tjekliste til tandlægebesøg' });
+          try {
+            const link = document.createElement('a');
+            link.href = 'tjekliste_tandlaegebesoeg.pdf';
+            link.download = 'tjekliste_tandlaegebesoeg.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            if (window.KGAnalytics && typeof KGAnalytics.trackEvent === 'function') {
+              KGAnalytics.trackEvent('pdf_download_started', { guide: 'Tjekliste til tandlægebesøg' });
+            }
+          } catch (downloadError) {
+            console.warn('PDF download could not be started automatically', downloadError);
+          }
         }
 
         form.reset();
@@ -851,8 +871,7 @@
         };
 
         if (guide === 'komplette' || guide === 'boern') {
-          setStatus('orderStatus', 'Sender dig videre til sikker betaling...', 'info');
-          await startStripeCheckout({ product: guide, email, name });
+          setStatus('orderStatus', 'Betaling er ikke åbent endnu. Kontakt os i stedet.', 'info');
           return;
         }
 
@@ -876,7 +895,7 @@
         setStatus('orderStatus', 'Tak, du er skrevet på listen. Vi giver besked, når kurset er klar.', 'success');
       } catch (error) {
         console.error('Fejl:', error);
-        setStatus('orderStatus', 'Stripe er ikke helt sat op endnu. Prøv igen om lidt, eller skriv til os direkte.', 'error');
+        setStatus('orderStatus', 'Betaling er ikke åbent endnu. Skriv til os direkte, hvis du vil høre mere.', 'error');
       } finally {
         setSubmitting(event.target, false);
       }

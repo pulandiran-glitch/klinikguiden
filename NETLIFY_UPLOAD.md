@@ -1,12 +1,9 @@
 # KlinikGuiden - upload til Netlify
 
-Denne mappe indeholder en statisk hjemmeside. Den kan uploades gratis til Netlify uden build-step.
+Denne mappe indeholder den statiske hjemmeside.
+Den kan uploades gratis til Netlify uden et aktivt betalingsflow.
 
-Hvis Stripe-betaling skal virke, skal siden deployes med Netlify Functions. Brug derfor Netlify CLI eller Git-deploy med `netlify.toml`.
-
-Vigtigt: GitHub `main` og Netlify Git-deploy er source of truth for Brevo newsletter-funktionen. Brug ikke `outputs/klinikguiden-netlify-upload` eller en gammel zip-upload til at deploye Brevo-function-kode, medmindre pakken foerst er regenereret fra aktuel GitHub-kode og tests er koert.
-
-## Hurtigste gratis metode uden Stripe
+## Hurtigste metode
 
 1. Gå til Netlify-dashboardet.
 2. Vælg din KlinikGuiden-side.
@@ -14,20 +11,9 @@ Vigtigt: GitHub `main` og Netlify Git-deploy er source of truth for Brevo newsle
 4. Upload filen `outputs/klinikguiden-netlify-upload.zip`.
 5. Åbn siden og test:
    - Forsiden loader.
-   - `/rodbehandling`, `/regningen`, `/besoegsfrekvens` og `/guide-komplette` virker.
+   - Undersiderne virker.
    - Nyhedsbrev-formularen sender data til Google Sheet.
-   - Bestillings-formularen sender produkt, pris og email til Google Sheet.
-
-## Metode med Stripe
-
-Stripe kræver Netlify Functions, så brug denne metode:
-
-1. Tilføj Stripe-miljøvariabler i Netlify, som beskrevet i `STRIPE_SETUP.md`.
-2. Deploy projektet med Netlify CLI eller Git.
-3. Netlify bruger `netlify.toml`, hvor:
-   - Publish directory er `outputs/klinikguiden-netlify-upload`
-   - Functions directory er `netlify/functions`
-4. Test checkout-flowet på live-siden.
+   - Bestillings-/ventelisteformularen sender data som forventet.
 
 ## Filer der skal med i upload
 
@@ -41,33 +27,10 @@ Stripe kræver Netlify Functions, så brug denne metode:
 - `_headers`
 - `_redirects`
 - `tjekliste_tandlaegebesoeg.pdf`
-- `netlify/functions/create-checkout-session.js` hvis Stripe bruges
-- `netlify/functions/stripe-webhook.js` hvis Stripe bruges
-- `netlify.toml` hvis Stripe/Git/CLI-deploy bruges
-
-## Filer der ikke skal med i upload
-
-- `build_analytics_dashboard.mjs`
-- `verify_analytics_dashboard.mjs`
-- `generate_checklist_pdf.py`
-- `DATAOPSÆTNING.md`
-- `STATUS_80_PROCENT.md`
-- `analytics-template.csv`
-- `google-apps-script.js`
-- `outputs/rendered/`
-- `tmp_pdf_render/`
+- `netlify/functions/create-checkout-session.js` som deaktiveret svar
+- `netlify/functions/stripe-webhook.js` kun hvis historisk reference ønskes bevaret
 
 ## Efter upload
 
-Det vigtigste efter deploy er at teste formularerne på live-siden og se, om nye rækker lander i Google Sheet. Hvis formularerne virker, har du gratis tracking af:
-
-- Sidevisninger
-- Guideklik
-- Quizbrug
-- Beregnerbrug
-- PDF-downloads
-- Nyhedsbrev-leads
-- Bestillinger
-- Produktvalg og estimeret omsætning
-
-Hvis Stripe er aktivt, registreres betalte køb via webhooken som `order_form_submit`.
+Test formularerne på live-siden og se, om nye rækker lander i Google Sheet.
+Den nuværende version har ikke et aktivt betalingsflow.

@@ -4,7 +4,7 @@ Denne opsætning koster ikke noget og bruger Google Sheets + Google Apps Script.
 
 ## Hvad bliver målt?
 
-Hjemmesiden sender events til et Google Sheet, når brugere har accepteret statistik og for eksempel:
+Hjemmesiden sender besøgsstatistik til et Google Sheet via Google Apps Script, når brugere har accepteret statistik. Der kan blandt andet behandles:
 
 - besøger siden
 - besøger som ny eller tilbagevendende bruger
@@ -18,6 +18,13 @@ Hjemmesiden sender events til et Google Sheet, når brugere har accepteret stati
 - sender nyhedsbrev-formularen
 - sender bestillingsformularen
 - oplever JavaScript-fejl på siden
+- sessions-id/UUID
+- referrer
+- tidspunkt
+- skærmstørrelse
+- IP-adresse
+
+Google Apps Script er modtageren af dataene.
 
 ## Opret Google Sheet
 
@@ -76,7 +83,6 @@ De vigtigste eventnavne er:
 - `product_page_view`
 - `pdf_download_started`
 - `order_form_submit`
-- `checkout_started`
 - `waitlist_signup`
 - `thank_you_page_view`
 
@@ -130,13 +136,13 @@ Ugentlig rapport viser:
 
 Statistik-events sendes kun efter brugeren har trykket `Accepter statistik`.
 Hvis brugeren vælger `Nej tak`, fungerer formularer stadig, men klik og sidevisninger sendes ikke som analytics-events.
+Brugeren kan senere ændre eller trække samtykket tilbage via statistikbanneret.
 
 ## Køb og omsætning
 
-Når Stripe webhooken er aktiv, registreres betalte køb som `order_form_submit`.
-Stripe-start registreres som `checkout_started`, og ventelisten registreres som `waitlist_signup`.
-Dashboardet viser derfor `Estimeret omsætning` ud fra de priser, formularen sender med.
-Når et rigtigt betalingsflow tilføjes senere, bør eventet ændres eller suppleres med et bekræftet betalings-event.
+Der er ikke et aktivt betalingsflow i den nuværende opsætning. `create-checkout-session` returnerer derfor et deaktiveret svar, og sitet bør ikke præsentere checkout som en aktiv funktion.
+
+Hvis der senere indføres et rigtigt betalingsflow, skal eventnavne, tak-sider og dokumentation opdateres samtidig, så brugerfladen og backend beskriver den samme virkelighed.
 
 ## GA4, Search Console og Netlify Analytics
 
