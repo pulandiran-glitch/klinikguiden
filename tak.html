@@ -49,10 +49,10 @@
       }
 
       if (checkout === 'success') {
-        document.getElementById('thanksEyebrow').textContent = 'Betaling modtaget';
-        document.getElementById('thanksTitle').textContent = 'Tak for dit køb';
-        document.getElementById('thanksText').textContent = 'Din betaling er gennemført. Vi sender guiden og næste trin til den e-mail, du brugte i betalingen.';
-        KGAnalytics.trackEvent('checkout_success_returned', { page: 'tak', product, checkoutSessionId: sessionId });
+        document.getElementById('thanksEyebrow').textContent = 'Betaling ikke aktiv';
+        document.getElementById('thanksTitle').textContent = 'Betaling og checkout er midlertidigt deaktiveret';
+        document.getElementById('thanksText').textContent = 'KlinikGuiden sælger ikke digitalt indhold endnu. Brug i stedet kontakt- eller nyhedsbrevsformularen, hvis du vil have besked, når salg åbner.';
+        KGAnalytics.trackEvent('checkout_disabled_returned', { page: 'tak', product, checkoutSessionId: sessionId });
         return;
       }
 

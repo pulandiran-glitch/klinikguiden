@@ -122,6 +122,18 @@
     banner.querySelector('[data-consent-manage]').addEventListener('click', () => reopenConsentBanner());
   }
 
+  function injectMedicalDisclaimer() {
+    if (document.querySelector('[data-medical-disclaimer]')) return;
+
+    const disclaimer = document.createElement('aside');
+    disclaimer.setAttribute('data-medical-disclaimer', 'true');
+    disclaimer.style.cssText = 'max-width:1100px;margin:1rem auto 0;padding:0 1.2rem;';
+    disclaimer.innerHTML = '<div style="background:#F5F0E8;border:1px solid #E2DDD4;border-radius:12px;padding:0.9rem 1rem;color:#4F4F49;font-family:Inter,system-ui,sans-serif;font-size:0.88rem;line-height:1.55;">KlinikGuiden giver kun generel information og kan ikke erstatte undersøgelse, diagnose eller konkret vurdering hos en tandlæge eller anden sundhedsfaglig person. Tilskudsberegneren er vejledende, og akut information skal altid vurderes ud fra dine symptomer og den kliniske situation.</div>';
+
+    const target = document.querySelector('main') || document.body.firstElementChild || document.body;
+    target.parentNode.insertBefore(disclaimer, target);
+  }
+
   function initAutoTracking() {
     document.querySelectorAll('[data-track]').forEach((element) => {
       element.addEventListener('click', () => {
@@ -152,6 +164,7 @@
 
   window.addEventListener('DOMContentLoaded', () => {
     injectConsentBanner();
+    injectMedicalDisclaimer();
     initAutoTracking();
   });
 
