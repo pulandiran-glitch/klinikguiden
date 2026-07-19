@@ -134,6 +134,38 @@
     target.parentNode.insertBefore(disclaimer, target);
   }
 
+  function injectCompanyFooter() {
+    if (document.querySelector('[data-kg-company-footer]')) return;
+
+    let footer = document.querySelector('footer');
+    if (!footer) {
+      footer = document.createElement('footer');
+      footer.setAttribute('data-kg-site-footer', 'true');
+      document.body.appendChild(footer);
+    }
+
+    const companyBlock = document.createElement('section');
+    companyBlock.setAttribute('data-kg-company-footer', 'true');
+    companyBlock.style.cssText = 'max-width:1100px;margin:0 auto 1.8rem;padding:1.1rem 1.2rem;border:1px solid rgba(255,255,255,0.12);border-radius:16px;background:rgba(255,255,255,0.04);text-align:left;';
+    companyBlock.innerHTML = [
+      '<h2 style="color:#fff;font-family:\'Playfair Display\',serif;font-size:1.1rem;margin:0 0 0.65rem;">Virksomhedsoplysninger</h2>',
+      '<p style="margin:0;color:rgba(255,255,255,0.8);font-size:0.9rem;line-height:1.7;">KlinikGuiden v/Jonathan Pulandiran<br />E-mail: <a href="mailto:klinikguiden@gmail.com" style="color:#fff;text-decoration:none;">klinikguiden@gmail.com</a></p>',
+      '<nav aria-label="Footer links" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;">',
+      '<a href="/privatlivspolitik.html">Privatlivspolitik</a>',
+      '<a href="/cookiepolitik.html">Cookiepolitik</a>',
+      '<a href="/handelsbetingelser.html">Handelsbetingelser</a>',
+      '<a href="/kontakt.html">Kontakt</a>',
+      '<a href="/om-os.html">Om os</a>',
+      '</nav>'
+    ].join('');
+
+    if (footer.firstChild) {
+      footer.insertBefore(companyBlock, footer.firstChild);
+    } else {
+      footer.appendChild(companyBlock);
+    }
+  }
+
   function initAutoTracking() {
     document.querySelectorAll('[data-track]').forEach((element) => {
       element.addEventListener('click', () => {
@@ -165,6 +197,7 @@
   window.addEventListener('DOMContentLoaded', () => {
     injectConsentBanner();
     injectMedicalDisclaimer();
+    injectCompanyFooter();
     initAutoTracking();
   });
 

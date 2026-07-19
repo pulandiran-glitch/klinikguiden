@@ -83,5 +83,6 @@
     function updateExplainer(){const info=treatments[document.getElementById('treatment').value];document.getElementById('explainer').textContent=info?info.title+': '+info.text:'Vælg en behandling for at se en kort forklaring.'}
     function calculate(){const key=document.getElementById('treatment').value;const price=Number(document.getElementById('price').value)||0;if(!key||price<=0){alert('Vælg behandling og indtast en pris.');return}const subsidy=Math.round(price*treatments[key].rate);document.getElementById('totalPrice').textContent=kr(price);document.getElementById('subsidy').textContent=kr(subsidy);document.getElementById('patientPays').textContent=kr(price-subsidy);document.getElementById('result').classList.add('show')}
   </script>
+  <script src="analytics.js"></script>
 </body>
 </html>
