@@ -17,7 +17,6 @@ const sourceSets = {
   emergency: [
   ],
   price: [
-    ["NICE", "Dental recall: recall interval between routine dental examinations", "https://www.nice.org.uk/guidance/cg19"],
     ["KlinikGuiden", "Forstå din tandlægeregning", "https://klinikguiden.com/regningen.html"]
   ],
   children: [

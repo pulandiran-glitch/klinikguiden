@@ -12,7 +12,6 @@ const sourceSets = {
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
   ],
   price: [
-    ["NICE", "Dental recall: recall interval between routine dental examinations", "https://www.nice.org.uk/guidance/cg19"],
     ["KlinikGuiden", "Forstå din tandlægeregning", "https://klinikguiden.com/regningen.html"]
   ],
   anxiety: [

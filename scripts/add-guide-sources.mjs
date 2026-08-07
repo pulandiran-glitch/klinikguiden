@@ -2,7 +2,6 @@ import fs from "node:fs";
 
 const guideSources = {
   "hvor-ofte-skal-man-ga-til-tandlaege.html": [
-    ["NICE", "Dental recall: recall interval between routine dental examinations", "https://www.nice.org.uk/guidance/cg19"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
   ],
   "hvorfor-far-man-huller.html": [
@@ -17,7 +16,6 @@ const guideSources = {
     ["KlinikGuiden", "Forstå din tandlægeregning", "https://klinikguiden.com/regningen.html"]
   ],
   "er-tandtrad-nodvendigt.html": [
-    ["Cochrane", "Home use of interdental cleaning devices, in addition to toothbrushing", "https://www.cochrane.org/CD012018/ORAL_home-use-interdental-cleaning-devices-addition-toothbrushing-preventing-and-controlling-periodontal"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
   ],
   "hvorfor-bloder-tandkodet.html": [
@@ -26,7 +24,6 @@ const guideSources = {
   ],
   "hvad-er-tandsten.html": [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["Cochrane", "Home use of interdental cleaning devices, in addition to toothbrushing", "https://www.cochrane.org/CD012018/ORAL_home-use-interdental-cleaning-devices-addition-toothbrushing-preventing-and-controlling-periodontal"]
   ],
   "hvor-ofte-skal-man-borste-taender.html": [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
