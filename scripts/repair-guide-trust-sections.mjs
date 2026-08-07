@@ -3,33 +3,23 @@ import fs from "node:fs";
 const sourceSets = {
   prevention: [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["NHS", "Take care of your teeth and gums", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/take-care-of-your-teeth-and-gums/"],
-    ["Cochrane", "Fluoride toothpastes of different concentrations for preventing tooth decay", "https://www.cochrane.org/CD007868/ORAL_fluoride-toothpastes-different-concentrations-preventing-tooth-decay-children-adolescents-and-adults"]
   ],
   gum: [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["NHS", "Gum disease", "https://www.nhs.uk/conditions/gum-disease/"],
     ["European Federation of Periodontology", "Patient resources on gum health", "https://www.efp.org/for-patients/"]
   ],
   treatment: [
-    ["NHS", "Dental treatments", "https://www.nhs.uk/nhs-services/dentists/dental-treatments/"],
-    ["NHS", "Tooth decay", "https://www.nhs.uk/conditions/tooth-decay/"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
   ],
   price: [
-    ["NHS", "Dental treatments", "https://www.nhs.uk/nhs-services/dentists/dental-treatments/"],
     ["NICE", "Dental recall: recall interval between routine dental examinations", "https://www.nice.org.uk/guidance/cg19"],
     ["KlinikGuiden", "Forstå din tandlægeregning", "https://klinikguiden.com/regningen.html"]
   ],
   anxiety: [
-    ["NHS", "Fear of the dentist", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/fear-of-the-dentist/"],
-    ["NICE", "Patient experience in adult NHS services", "https://www.nice.org.uk/guidance/cg138"],
     ["KlinikGuiden", "Tandlægeangst - hvad hjælper faktisk?", "https://klinikguiden.com/tandlaegeangst.html"]
   ],
   children: [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["NHS", "Children's teeth", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/taking-care-of-childrens-teeth/"],
-    ["NHS", "Take care of your teeth and gums", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/take-care-of-your-teeth-and-gums/"]
   ]
 };
 

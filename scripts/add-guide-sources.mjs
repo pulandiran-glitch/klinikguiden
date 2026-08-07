@@ -4,52 +4,38 @@ const guideSources = {
   "hvor-ofte-skal-man-ga-til-tandlaege.html": [
     ["NICE", "Dental recall: recall interval between routine dental examinations", "https://www.nice.org.uk/guidance/cg19"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["NHS", "Dental check-ups", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/dental-check-ups/"]
   ],
   "hvorfor-far-man-huller.html": [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
     ["WHO", "Sugars and dental caries", "https://www.who.int/news/item/04-03-2015-who-calls-on-countries-to-reduce-sugars-intake-among-adults-and-children"],
-    ["NHS", "Tooth decay", "https://www.nhs.uk/conditions/tooth-decay/"]
   ],
   "kan-paradentose-helbredes.html": [
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["NHS", "Gum disease", "https://www.nhs.uk/conditions/gum-disease/"],
     ["European Federation of Periodontology", "S3-level clinical practice guideline for periodontitis treatment", "https://www.efp.org/publications/projects/s3-level-clinical-practice-guideline/"]
   ],
   "hvad-koster-en-rodbehandling.html": [
-    ["NHS", "Root canal treatment", "https://www.nhs.uk/conditions/root-canal-treatment/"],
-    ["NHS", "Tooth decay", "https://www.nhs.uk/conditions/tooth-decay/"],
     ["KlinikGuiden", "Forstå din tandlægeregning", "https://klinikguiden.com/regningen.html"]
   ],
   "er-tandtrad-nodvendigt.html": [
     ["Cochrane", "Home use of interdental cleaning devices, in addition to toothbrushing", "https://www.cochrane.org/CD012018/ORAL_home-use-interdental-cleaning-devices-addition-toothbrushing-preventing-and-controlling-periodontal"],
-    ["NHS", "Gum disease", "https://www.nhs.uk/conditions/gum-disease/"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
   ],
   "hvorfor-bloder-tandkodet.html": [
-    ["NHS", "Gum disease", "https://www.nhs.uk/conditions/gum-disease/"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
     ["European Federation of Periodontology", "Patient resources on gum health", "https://www.efp.org/for-patients/"]
   ],
   "hvad-er-tandsten.html": [
-    ["NHS", "Gum disease", "https://www.nhs.uk/conditions/gum-disease/"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
     ["Cochrane", "Home use of interdental cleaning devices, in addition to toothbrushing", "https://www.cochrane.org/CD012018/ORAL_home-use-interdental-cleaning-devices-addition-toothbrushing-preventing-and-controlling-periodontal"]
   ],
   "hvor-ofte-skal-man-borste-taender.html": [
-    ["NHS", "Take care of your teeth and gums", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/take-care-of-your-teeth-and-gums/"],
-    ["Cochrane", "Fluoride toothpastes of different concentrations for preventing tooth decay", "https://www.cochrane.org/CD007868/ORAL_fluoride-toothpastes-different-concentrations-preventing-tooth-decay-children-adolescents-and-adults"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
   ],
   "hvilken-tandpasta-er-bedst.html": [
-    ["Cochrane", "Fluoride toothpastes of different concentrations for preventing tooth decay", "https://www.cochrane.org/CD007868/ORAL_fluoride-toothpastes-different-concentrations-preventing-tooth-decay-children-adolescents-and-adults"],
-    ["NHS", "Take care of your teeth and gums", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/take-care-of-your-teeth-and-gums/"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"]
   ],
   "hvad-er-fluor.html": [
-    ["Cochrane", "Fluoride toothpastes of different concentrations for preventing tooth decay", "https://www.cochrane.org/CD007868/ORAL_fluoride-toothpastes-different-concentrations-preventing-tooth-decay-children-adolescents-and-adults"],
     ["WHO", "Oral health fact sheet", "https://www.who.int/news-room/fact-sheets/detail/oral-health"],
-    ["NHS", "Take care of your teeth and gums", "https://www.nhs.uk/live-well/healthy-teeth-and-gums/take-care-of-your-teeth-and-gums/"]
   ]
 };
 
